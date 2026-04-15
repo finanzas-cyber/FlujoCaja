@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Flujo de Caja</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 10px;
+            color: #1e293b;
+            background: #eef1f5;
+        }
+
+        h1, h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .bloque {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        .encabezado {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .boton-actualizar {
+            background: #1e40af;
+            color: #fff;
+            border: 0;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .boton-actualizar:hover {
+            background: #1e3a8a;
+        }
+
+        .mensaje {
+            padding: 8px 10px;
+            margin-top: 8px;
+            border: 1px solid #d0d0d0;
+            background: #f8f9fa;
+            font-size: 12px;
+        }
+
+        .mensaje.success {
+            background: #e8f5e9;
+            border-color: #b7dfb9;
+        }
+
+        .mensaje.error {
+            background: #ffebee;
+            border-color: #f0b7bd;
+        }
+
+        .tabla-contenedor {
+            overflow: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            table-layout: fixed;
+        }
+
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 4px 5px;
+            font-size: 11px;
+        }
+
+        th {
+            background: #e5e7eb;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .texto {
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .numero {
+            text-align: right;
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .col-concepto {
+            width: 210px;
+        }
+
+        .col-total {
+            width: 90px;
+        }
+
+        .col-mes {
+            width: 64px;
+        }
+
+        .seccion td {
+            background: #cbd5e1;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .total td {
+            background: #e2e8f0;
+            font-weight: bold;
+        }
+
+        .resultado td {
+            background: #dbe7df;
+            font-weight: bold;
+        }
+
+        .saldo td {
+            background: #f1f5f9;
+            font-weight: bold;
+        }
+
+        .saldo-final td {
+            background: #cbd5e1;
+            font-weight: bold;
+        }
+
+        .money-market td {
+            background: #e0f2fe;
+            font-weight: bold;
+        }
+
+        .saldo-total td {
+            background: #dbeafe;
+            font-weight: bold;
+        }
+
+        .real {
+            background: #dbeafe;
+        }
+
+        .proyectado {
+            background: #e5e7eb;
+        }
+
+        th.real, td.real {
+            border-color: #93c5fd;
+        }
+
+        th.proyectado, td.proyectado {
+            border-color: #9ca3af;
+        }
+
+        .abril-bloque {
+            background: #cfd8e3 !important;
+        }
+
+        .abril-inicio {
+            border-left: 3px solid #334155 !important;
+        }
+
+        .abril-fin {
+            border-right: 3px solid #334155 !important;
+        }
+
+        .abril-superior {
+            border-top: 3px solid #334155 !important;
+        }
+
+        .abril-inferior {
+            border-bottom: 3px solid #334155 !important;
+        }
+
+        .franja-estado {
+            background: #e2e8f0;
+            border: 1px solid #94a3b8;
+            color: #1e293b;
+            padding: 8px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .franja-estado span {
+            display: block;
+            font-size: 11px;
+            font-weight: normal;
+            margin-top: 3px;
+            color: #475569;
+        }
+
+        .negativo {
+            color: #b91c1c;
+            font-weight: bold;
+        }
+
+        .filtro-columna {
+            width: 100%;
+            margin-top: 2px;
+            box-sizing: border-box;
+            font-size: 11px;
+            padding: 2px 4px;
+        }
+
+        .muted {
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .input-proyectado {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #94a3b8;
+            background: #ffffff;
+            text-align: right;
+            font-size: 11px;
+            padding: 2px 4px;
+            min-width: 0;
+        }
+
+        .input-proyectado:focus {
+            outline: none;
+            border-color: #1d4ed8;
+            background: #eff6ff;
+        }
+
+        .input-proyectado.negativo {
+            color: #b91c1c;
+            font-weight: bold;
+        }
+
+        .guardado-ok {
+            border-color: #15803d !important;
+            background: #f0fdf4 !important;
+        }
+
+        .guardado-error {
+            border-color: #b91c1c !important;
+            background: #fef2f2 !important;
+        }
+
+        .boton-grupo {
+            width: 18px;
+            height: 18px;
+            padding: 0;
+            margin-right: 6px;
+            border: 1px solid #64748b;
+            background: #ffffff;
+            color: #0f172a;
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 16px;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        .boton-grupo:hover {
+            background: #f8fafc;
+        }
+
+        .detalle-oculto {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="bloque">
+    <div class="encabezado">
+        <h1>Flujo de Caja {{ anio_actual }}</h1>
+
+        <form method="post" action="{% url 'actualizar_softland' %}" onsubmit="return confirm('¿Seguro que deseas actualizar desde Softland?');">
+            {% csrf_token %}
+            <button type="submit" class="boton-actualizar">
+                Actualizar desde Softland
+            </button>
+        </form>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="mensaje {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<div class="bloque">
+    <div class="franja-estado">
+        REAL / PROYECTADO
+        <span>
+            Meses anteriores: REAL | Abril: REAL + PROYECTADO | Meses futuros: PROYECTADO
+        </span>
+    </div>
+
+    <div class="tabla-contenedor">
+        <table>
+            <tr>
+                <th class="texto col-concepto">Concepto</th>
+                {% for col in columnas_flujo %}
+                    <th class="col-mes
+                        {% if col.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if col.mes_numero == mes_actual %}abril-bloque abril-superior{% endif %}
+                        {% if col.mes_numero == mes_actual and col.etiqueta == 'REAL' %}abril-inicio{% endif %}
+                        {% if col.mes_numero == mes_actual and col.etiqueta == 'PROY.' %}abril-fin{% endif %}
+                    ">
+                        {{ col.mes_nombre }}<br>
+                        <small>{{ col.etiqueta }}</small>
+                    </th>
+                {% endfor %}
+                <th class="col-total">Total</th>
+            </tr>
+
+            <tr class="saldo">
+                <td class="texto">{{ saldo_inicial_fila.nombre }}</td>
+                {% for m in saldo_inicial_fila.columnas %}
+                    <td class="numero
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.mes_numero == mes_actual %}abril-bloque{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
+                    " data-value="{{ m.monto }}">
+                        {% if m.origen == 'REAL' %}
+                            <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                        {% else %}
+                            <input
+                                type="text"
+                                class="input-proyectado"
+                                data-concepto-id=""
+                                value="{{ m.monto }}"
+                                readonly
+                            >
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                <td></td>
+            </tr>
+
+            <tr class="seccion">
+                <td colspan="{{ columnas_flujo|length|add:'2' }}">
+                    <button type="button" class="boton-grupo" data-group="ingresos" aria-expanded="true">−</button>
+                    Ingresos
+                </td>
+            </tr>
+
+            {% for fila in filas_ingresos %}
+            <tr class="detalle-grupo" data-group="ingresos">
+                <td class="texto">{{ fila.codigo }} - {{ fila.nombre }}</td>
+                {% for m in fila.columnas %}
+                    <td class="numero
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.mes_numero == mes_actual %}abril-bloque{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
+                    ">
+                        {% if m.origen == 'REAL' %}
+                            <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                        {% else %}
+                            <input
+                                type="text"
+                                class="input-proyectado"
+                                data-concepto-id="{{ fila.id }}"
+                                data-mes="{{ m.mes_numero }}"
+                                value="{{ m.monto }}"
+                            >
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ fila.total }}">{{ fila.total }}</td>
+            </tr>
+            {% endfor %}
+
+            <tr class="total">
+                <td class="texto">{{ total_ingresos_fila.nombre }}</td>
+                {% for m in total_ingresos_fila.columnas %}
+                    <td class="numero
+                        {% if m.mes_numero == mes_actual %}abril-bloque{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
+                    ">
+                        <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ total_ingresos_fila.total }}">{{ total_ingresos_fila.total }}</td>
+            </tr>
+
+            <tr class="seccion">
+                <td colspan="{{ columnas_flujo|length|add:'2' }}">
+                    <button type="button" class="boton-grupo" data-group="egresos" aria-expanded="true">−</button>
+                    Egresos
+                </td>
+            </tr>
+
+            {% for fila in filas_egresos %}
+            <tr class="detalle-grupo" data-group="egresos">
+                <td class="texto">{{ fila.codigo }} - {{ fila.nombre }}</td>
+                {% for m in fila.columnas %}
+                    <td class="numero
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.mes_numero == mes_actual %}abril-bloque{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
+                    ">
+                        {% if m.origen == 'REAL' %}
+                            <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                        {% else %}
+                            <input
+                                type="text"
+                                class="input-proyectado"
+                                data-concepto-id="{{ fila.id }}"
+                                data-mes="{{ m.mes_numero }}"
+                                value="{{ m.monto }}"
+                            >
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ fila.total }}">{{ fila.total }}</td>
+            </tr>
+            {% endfor %}
+
+            <tr class="total">
+                <td class="texto">{{ total_egresos_fila.nombre }}</td>
+                {% for m in total_egresos_fila.columnas %}
+                    <td class="numero
+                        {% if m.mes_numero == mes_actual %}abril-bloque{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
+                    ">
+                        <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ total_egresos_fila.total }}">{{ total_egresos_fila.total }}</td>
+            </tr>
+
+            <tr class="resultado">
+                <td class="texto">{{ flujo_operacional_fila.nombre }}</td>
+                {% for m in flujo_operacional_fila.columnas %}
+                    <td class="numero
+                        {% if m.mes_numero == mes_actual %}abril-bloque{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
+                    ">
+                        <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ flujo_operacional_fila.total }}">{{ flujo_operacional_fila.total }}</td>
+            </tr>
+
+            <tr class="seccion">
+                <td colspan="{{ columnas_flujo|length|add:'2' }}">
+                    <button type="button" class="boton-grupo" data-group="financiamiento" aria-expanded="true">−</button>
+                    Financiamiento
+                </td>
+            </tr>
+
+            {% for fila in filas_financiamiento %}
+            <tr class="detalle-grupo" data-group="financiamiento">
+                <td class="texto">{{ fila.codigo }} - {{ fila.nombre }}</td>
+                {% for m in fila.columnas %}
+                    <td class="numero
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.mes_numero == mes_actual %}abril-bloque{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
+                    ">
+                        {% if m.origen == 'REAL' %}
+                            <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                        {% else %}
+                            <input
+                                type="text"
+                                class="input-proyectado"
+                                data-concepto-id="{{ fila.id }}"
+                                data-mes="{{ m.mes_numero }}"
+                                value="{{ m.monto }}"
+                            >
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ fila.total }}">{{ fila.total }}</td>
+            </tr>
+            {% endfor %}
+
+            <tr class="total">
+                <td class="texto">{{ flujo_financiamiento_fila.nombre }}</td>
+                {% for m in flujo_financiamiento_fila.columnas %}
+                    <td class="numero
+                        {% if m.mes_numero == mes_actual %}abril-bloque{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
+                    ">
+                        <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ flujo_financiamiento_fila.total }}">{{ flujo_financiamiento_fila.total }}</td>
+            </tr>
+
+            <tr class="resultado">
+                <td class="texto">{{ total_mes_fila.nombre }}</td>
+                {% for m in total_mes_fila.columnas %}
+                    <td class="numero
+                        {% if m.mes_numero == mes_actual %}abril-bloque{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
+                    ">
+                        <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ total_mes_fila.total }}">{{ total_mes_fila.total }}</td>
+            </tr>
+
+            <tr class="saldo-final">
+                <td class="texto">{{ saldo_disponible_banco_fila.nombre }}</td>
+                {% for m in saldo_disponible_banco_fila.columnas %}
+                    <td class="numero
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.mes_numero == mes_actual %}abril-bloque{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
+                    ">
+                        {% if m.origen == 'REAL' %}
+                            <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                        {% else %}
+                            <input
+                                type="text"
+                                class="input-proyectado"
+                                data-concepto-id=""
+                                value="{{ m.monto }}"
+                                readonly
+                            >
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                <td></td>
+            </tr>
+
+            <tr class="money-market">
+                <td class="texto">{{ money_market_acumulado_fila.nombre }}</td>
+                {% for m in money_market_acumulado_fila.columnas %}
+                    <td class="numero
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.mes_numero == mes_actual %}abril-bloque{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
+                    ">
+                        {% if m.origen == 'REAL' %}
+                            <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                        {% else %}
+                            <input
+                                type="text"
+                                class="input-proyectado"
+                                data-concepto-id=""
+                                value="{{ m.monto }}"
+                                readonly
+                            >
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                <td></td>
+            </tr>
+
+            <tr class="saldo-total">
+                <td class="texto">{{ saldo_total_tesoreria_fila.nombre }}</td>
+                {% for m in saldo_total_tesoreria_fila.columnas %}
+                    <td class="numero
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.mes_numero == mes_actual %}abril-bloque abril-inferior{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
+                    ">
+                        {% if m.origen == 'REAL' %}
+                            <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                        {% else %}
+                            <input
+                                type="text"
+                                class="input-proyectado"
+                                data-concepto-id=""
+                                value="{{ m.monto }}"
+                                readonly
+                            >
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                <td></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="bloque">
+    <h2>Movimientos</h2>
+
+    <div class="tabla-contenedor">
+        <table class="tabla-movimientos">
+            <thead>
+                <tr>
+                    <th>Fecha<br><input class="filtro-columna" data-col="0"></th>
+                    <th>Comprobante<br><input class="filtro-columna" data-col="1"></th>
+                    <th>Cuenta<br><input class="filtro-columna" data-col="2"></th>
+                    <th>Concepto<br><input class="filtro-columna" data-col="3"></th>
+                    <th>Descripción<br><input class="filtro-columna" data-col="4"></th>
+                    <th>Monto<br><input class="filtro-columna" data-col="5"></th>
+                </tr>
+            </thead>
+
+            <tbody id="tbody-movimientos">
+                {% for m in movimientos %}
+                <tr>
+                    <td>{{ m.fecha }}</td>
+                    <td>{{ m.cpbnum }}</td>
+                    <td>{{ m.cuenta_banco.codigo }}</td>
+                    <td>
+                        {% if m.concepto %}
+                            {{ m.concepto.codigo }}
+                        {% else %}
+                            <span class="muted">sin concepto</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ m.descripcion }}</td>
+                    <td class="numero js-numero" data-value="{{ m.monto }}">{{ m.monto }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    function limpiarNumero(v) {
+        return Number(String(v).replace(/\./g, "").replace(",", ".")) || 0;
+    }
+
+    function formatear(n) {
+        return new Intl.NumberFormat("es-CL", {
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0
+        }).format(n);
+    }
+
+    function obtenerCsrf() {
+        var tokenInput = document.querySelector('[name=csrfmiddlewaretoken]');
+        return tokenInput ? tokenInput.value : "";
+    }
+
+    document.querySelectorAll(".js-numero").forEach(function (c) {
+        var v = limpiarNumero(c.dataset.value);
+
+        if (v === 0) {
+            c.textContent = "";
+            return;
+        }
+
+        c.textContent = formatear(v);
+
+        if (v < 0) {
+            c.classList.add("negativo");
+        }
+    });
+
+    document.querySelectorAll(".input-proyectado").forEach(function (input) {
+        if (input.hasAttribute("readonly")) {
+            var vReadonly = limpiarNumero(input.value);
+            input.value = vReadonly === 0 ? "" : formatear(vReadonly);
+            return;
+        }
+
+        var v = limpiarNumero(input.value);
+
+        if (v === 0) {
+            input.value = "";
+        } else {
+            input.value = formatear(v);
+            if (v < 0) {
+                input.classList.add("negativo");
+            }
+        }
+
+        input.addEventListener("focus", function () {
+            input.classList.remove("guardado-ok", "guardado-error");
+            var valor = limpiarNumero(input.value);
+            input.value = valor === 0 ? "" : String(valor);
+            input.select();
+        });
+
+        input.addEventListener("blur", function () {
+            var conceptoId = input.dataset.conceptoId;
+            var mes = input.dataset.mes;
+
+            if (!conceptoId || !mes) {
+                return;
+            }
+
+            var valorTexto = input.value.trim();
+            var valorNumerico = limpiarNumero(valorTexto);
+
+            if (valorTexto === "" || valorTexto === "-" || valorTexto === "--") {
+                valorNumerico = 0;
+            }
+
+            var montoEnviar = String(valorNumerico);
+
+            fetch("{% url 'guardar_proyeccion' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                    "X-CSRFToken": obtenerCsrf(),
+                },
+                body: new URLSearchParams({
+                    concepto_id: conceptoId,
+                    mes: mes,
+                    monto: montoEnviar,
+                }),
+            })
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error("Error al guardar");
+                }
+                return response.json();
+            })
+            .then(function (data) {
+                if (!data.ok) {
+                    throw new Error(data.error || "No se pudo guardar");
+                }
+
+                input.classList.remove("guardado-error");
+                input.classList.add("guardado-ok");
+
+                if (valorNumerico === 0) {
+                    input.value = "";
+                    input.classList.remove("negativo");
+                } else {
+                    input.value = formatear(valorNumerico);
+                    if (valorNumerico < 0) {
+                        input.classList.add("negativo");
+                    } else {
+                        input.classList.remove("negativo");
+                    }
+                }
+
+                setTimeout(function () {
+                    input.classList.remove("guardado-ok");
+                }, 1200);
+            })
+            .catch(function () {
+                input.classList.remove("guardado-ok");
+                input.classList.add("guardado-error");
+            });
+        });
+    });
+
+    document.querySelectorAll(".boton-grupo").forEach(function (boton) {
+        boton.addEventListener("click", function () {
+            var group = boton.dataset.group;
+            var expandido = boton.getAttribute("aria-expanded") === "true";
+            var filas = document.querySelectorAll('.detalle-grupo[data-group="' + group + '"]');
+
+            filas.forEach(function (fila) {
+                if (expandido) {
+                    fila.classList.add("detalle-oculto");
+                } else {
+                    fila.classList.remove("detalle-oculto");
+                }
+            });
+
+            boton.setAttribute("aria-expanded", expandido ? "false" : "true");
+            boton.textContent = expandido ? "+" : "−";
+        });
+    });
+
+    var inputsFiltro = document.querySelectorAll(".filtro-columna");
+
+    function filtrar() {
+        document.querySelectorAll("#tbody-movimientos tr").forEach(function (fila) {
+            var visible = true;
+
+            inputsFiltro.forEach(function (input) {
+                var col = input.dataset.col;
+                var val = input.value.toLowerCase().trim();
+
+                if (!val) {
+                    return;
+                }
+
+                var texto = fila.children[col].textContent.toLowerCase();
+
+                if (!texto.includes(val)) {
+                    visible = false;
+                }
+            });
+
+            fila.style.display = visible ? "" : "none";
+        });
+    }
+
+    inputsFiltro.forEach(function (input) {
+        input.addEventListener("input", filtrar);
+    });
+});
+</script>
+
+</body>
+</html>
