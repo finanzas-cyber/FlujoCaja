@@ -1,0 +1,173 @@
+[
+{
+  "model": "flujo.cuentabanco",
+  "pk": 1,
+  "fields": {
+    "codigo": "1-1-01-10",
+    "nombre": "BANCO CHILE",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 2,
+  "fields": {
+    "codigo": "1-1-01-11",
+    "nombre": "BANCO CHILE USD",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 3,
+  "fields": {
+    "codigo": "1-1-01-12",
+    "nombre": "BANCO SECURITY",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 4,
+  "fields": {
+    "codigo": "1-1-01-13",
+    "nombre": "BANCO BCI",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 5,
+  "fields": {
+    "codigo": "1-1-01-14",
+    "nombre": "BANCO BCI USD",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 6,
+  "fields": {
+    "codigo": "1-1-01-15",
+    "nombre": "BANCO BCI EURO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 7,
+  "fields": {
+    "codigo": "1-1-01-16",
+    "nombre": "BANCO SCOTIABANK",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 8,
+  "fields": {
+    "codigo": "1-1-01-17",
+    "nombre": "BANCO SCOTIABANK USD",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 9,
+  "fields": {
+    "codigo": "1-1-01-18",
+    "nombre": "BANCO SCOTIABANK EURO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 10,
+  "fields": {
+    "codigo": "1-1-01-19",
+    "nombre": "BANCO ITAU",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 11,
+  "fields": {
+    "codigo": "1-1-01-20",
+    "nombre": "BANCO ITAU USD",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 12,
+  "fields": {
+    "codigo": "1-1-01-21",
+    "nombre": "BANCO ESTADO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 13,
+  "fields": {
+    "codigo": "2-1-05-21",
+    "nombre": "NOMINA BANCO CHILE",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 14,
+  "fields": {
+    "codigo": "2-1-05-22",
+    "nombre": "NOMINA BANCO BCI",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 15,
+  "fields": {
+    "codigo": "2-1-05-23",
+    "nombre": "NOMINA SCOTIABANK",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 16,
+  "fields": {
+    "codigo": "2-1-05-24",
+    "nombre": "NOMINA ITAU",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 17,
+  "fields": {
+    "codigo": "001",
+    "nombre": "BANCO PRINCIPAL",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 18,
+  "fields": {
+    "codigo": "1-1-01-01",
+    "nombre": "1-1-01-01",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.cuentabanco",
+  "pk": 19,
+  "fields": {
+    "codigo": "1-1-02-01",
+    "nombre": "1-1-02-01",
+    "activo": true
+  }
+}
+]
