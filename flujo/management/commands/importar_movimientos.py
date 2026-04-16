@@ -54,7 +54,7 @@ class Command(BaseCommand):
         ignorados = 0
         procesados = 0
 
-        ultimo_cpbnum = None  # 🔥 clave
+        ultimo_cpbnum = None
 
         for row in cursor.fetchall():
             procesados += 1
@@ -67,11 +67,10 @@ class Command(BaseCommand):
             pctcod = (row.PctCod or "").strip()
             cpbnum = (row.CpbNum or "").strip()
 
-            # 🔥 ARRASTRE DE COMPROBANTE
             if cpbnum:
                 ultimo_cpbnum = cpbnum
             else:
-                cpbnum = ultimo_cpbnum
+                cpbnum = ultimo_cpbnum or ""
 
             fecha = row.CpbFec
             anio = int(str(row.CpbAno).strip()) if row.CpbAno else 0
@@ -86,7 +85,19 @@ class Command(BaseCommand):
                 ignorados += 1
                 continue
 
+            # Regla del sistema: excluir completamente aperturas y cajcod 0000000000
+            if cajcod == "0000000000":
+                ignorados += 1
+                continue
+
+            if descripcion.upper() == "MOVIMIENTO DE APERTURA":
+                ignorados += 1
+                continue
+
             concepto = conceptos.get(cajcod)
+            if not concepto:
+                ignorados += 1
+                continue
 
             fecha_guardar = fecha.date() if hasattr(fecha, "date") else fecha
 

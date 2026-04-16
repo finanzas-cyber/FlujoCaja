@@ -1,388 +1,4 @@
-[
-{
-  "model": "flujo.movimiento",
-  "pk": 15951,
-  "fields": {
-    "cuenta_banco": 1,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "0.00",
-    "mov_haber": "1127548.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15952,
-  "fields": {
-    "cuenta_banco": 1,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "0.00",
-    "mov_haber": "26558331.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15953,
-  "fields": {
-    "cuenta_banco": 1,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "0.00",
-    "mov_haber": "85804.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15954,
-  "fields": {
-    "cuenta_banco": 1,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "0.00",
-    "mov_haber": "2678057.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15955,
-  "fields": {
-    "cuenta_banco": 1,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "100251160.00",
-    "mov_haber": "0.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15956,
-  "fields": {
-    "cuenta_banco": 2,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "52079126.00",
-    "mov_haber": "0.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15957,
-  "fields": {
-    "cuenta_banco": 2,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "0.00",
-    "mov_haber": "3858291.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15958,
-  "fields": {
-    "cuenta_banco": 4,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "825213.00",
-    "mov_haber": "0.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15959,
-  "fields": {
-    "cuenta_banco": 5,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "79097.00",
-    "mov_haber": "0.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15960,
-  "fields": {
-    "cuenta_banco": 6,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "0.00",
-    "mov_haber": "0.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15961,
-  "fields": {
-    "cuenta_banco": 7,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "1257603.00",
-    "mov_haber": "0.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15962,
-  "fields": {
-    "cuenta_banco": 7,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "0.00",
-    "mov_haber": "322702.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15963,
-  "fields": {
-    "cuenta_banco": 8,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "0.00",
-    "mov_haber": "0.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15964,
-  "fields": {
-    "cuenta_banco": 9,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "0.00",
-    "mov_haber": "0.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15965,
-  "fields": {
-    "cuenta_banco": 10,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "35579101.00",
-    "mov_haber": "0.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15966,
-  "fields": {
-    "cuenta_banco": 11,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "433.00",
-    "mov_haber": "0.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15967,
-  "fields": {
-    "cuenta_banco": 13,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "9087078.00",
-    "mov_haber": "0.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15968,
-  "fields": {
-    "cuenta_banco": 13,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "0.00",
-    "mov_haber": "43000.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15969,
-  "fields": {
-    "cuenta_banco": 13,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "0.00",
-    "mov_haber": "8330000.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15970,
-  "fields": {
-    "cuenta_banco": 13,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "0.00",
-    "mov_haber": "304783.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15971,
-  "fields": {
-    "cuenta_banco": 13,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "0.00",
-    "mov_haber": "12864.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15972,
-  "fields": {
-    "cuenta_banco": 13,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "0.00",
-    "mov_haber": "396431.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15973,
-  "fields": {
-    "cuenta_banco": 16,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "1955250.00",
-    "mov_haber": "0.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 15974,
-  "fields": {
-    "cuenta_banco": 16,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "0.00",
-    "mov_haber": "1955250.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
+Ôªø[
 {
   "model": "flujo.movimiento",
   "pk": 15975,
@@ -443,7 +59,7 @@
     "cpbnum": "00000002",
     "mov_debe": "0.00",
     "mov_haber": "1800000.00",
-    "descripcion": "BH/677, CLAUDIA LORENA MU—OZ PALMA",
+    "descripcion": "BH/677, CLAUDIA LORENA MU√êOZ PALMA",
     "cajcod": "200112"
   }
 },
@@ -523,7 +139,7 @@
     "cpbnum": "00000007",
     "mov_debe": "0.00",
     "mov_haber": "6877248.00",
-    "descripcion": "F/39-41, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/39-41, SERVICIOS AGRICOLAS √êUBLE SPA",
     "cajcod": "200101"
   }
 },
@@ -603,7 +219,7 @@
     "cpbnum": "00000148",
     "mov_debe": "0.00",
     "mov_haber": "5279329.00",
-    "descripcion": "F/42, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/42, SERVICIOS AGRICOLAS √êUBLE SPA",
     "cajcod": "200101"
   }
 },
@@ -2203,7 +1819,7 @@
     "cpbnum": "00000244",
     "mov_debe": "0.00",
     "mov_haber": "4358406.00",
-    "descripcion": "F/43-44, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/43-44, SERVICIOS AGRICOLAS √êUBLE SPA",
     "cajcod": "200101"
   }
 },
@@ -2875,7 +2491,7 @@
     "cpbnum": "00000282",
     "mov_debe": "0.00",
     "mov_haber": "19104.00",
-    "descripcion": "CANCELA FINIQUITO, FABIOLA AURORA ACU—A RIQUELME",
+    "descripcion": "CANCELA FINIQUITO, FABIOLA AURORA ACU√êA RIQUELME",
     "cajcod": "200103"
   }
 },
@@ -3115,7 +2731,7 @@
     "cpbnum": "00000308",
     "mov_debe": "0.00",
     "mov_haber": "407608.00",
-    "descripcion": "BH/492, MIGUEL LUIS GUI—EZ SAAVEDRA",
+    "descripcion": "BH/492, MIGUEL LUIS GUI√êEZ SAAVEDRA",
     "cajcod": "200113"
   }
 },
@@ -3147,7 +2763,7 @@
     "cpbnum": "00000380",
     "mov_debe": "0.00",
     "mov_haber": "3960723.00",
-    "descripcion": "F/45, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/45, SERVICIOS AGRICOLAS √êUBLE SPA",
     "cajcod": "200101"
   }
 },
@@ -4267,7 +3883,7 @@
     "cpbnum": "00000485",
     "mov_debe": "0.00",
     "mov_haber": "194000.00",
-    "descripcion": "F/32926, ROBINSON HERALDO CERDA MU—OZ",
+    "descripcion": "F/32926, ROBINSON HERALDO CERDA MU√êOZ",
     "cajcod": "200108"
   }
 },
@@ -4507,7 +4123,7 @@
     "cpbnum": "00000500",
     "mov_debe": "0.00",
     "mov_haber": "8330000.00",
-    "descripcion": "CANCELA ARRIENDO FUNDO, ENERO 2026, DO—A GILDA",
+    "descripcion": "CANCELA ARRIENDO FUNDO, ENERO 2026, DO√êA GILDA",
     "cajcod": "200109"
   }
 },
@@ -5083,7 +4699,7 @@
     "cpbnum": "00000516",
     "mov_debe": "0.00",
     "mov_haber": "3869115.00",
-    "descripcion": "F/49, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/49, SERVICIOS AGRICOLAS √êUBLE SPA",
     "cajcod": "200101"
   }
 },
@@ -5771,7 +5387,7 @@
     "cpbnum": "00000652",
     "mov_debe": "0.00",
     "mov_haber": "403785.00",
-    "descripcion": "BH/493, MIGUEL LUIS GUI—EZ SAAVEDRA",
+    "descripcion": "BH/493, MIGUEL LUIS GUI√êEZ SAAVEDRA",
     "cajcod": "200113"
   }
 },
@@ -5851,7 +5467,7 @@
     "cpbnum": "00000657",
     "mov_debe": "0.00",
     "mov_haber": "448050.00",
-    "descripcion": "F/33041, ROBINSON CERDA MU—OZ",
+    "descripcion": "F/33041, ROBINSON CERDA MU√êOZ",
     "cajcod": "200108"
   }
 },
@@ -6427,7 +6043,7 @@
     "cpbnum": "00000728",
     "mov_debe": "0.00",
     "mov_haber": "198697.00",
-    "descripcion": "CANCELA FINIQUITO SOLANGE LISSETTE MU—OZ CAMPOS",
+    "descripcion": "CANCELA FINIQUITO SOLANGE LISSETTE MU√êOZ CAMPOS",
     "cajcod": "200103"
   }
 },
@@ -6907,7 +6523,7 @@
     "cpbnum": "00000751",
     "mov_debe": "0.00",
     "mov_haber": "185799.00",
-    "descripcion": "F/1288, MANUEL ALDRIN MU—OZ JIMENEZ",
+    "descripcion": "F/1288, MANUEL ALDRIN MU√êOZ JIMENEZ",
     "cajcod": "200108"
   }
 },
@@ -7067,7 +6683,7 @@
     "cpbnum": "00000760",
     "mov_debe": "0.00",
     "mov_haber": "8678137.00",
-    "descripcion": "F/50-51, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/50-51, SERVICIOS AGRICOLAS √êUBLE SPA",
     "cajcod": "200101"
   }
 },
@@ -7387,7 +7003,7 @@
     "cpbnum": "00000815",
     "mov_debe": "0.00",
     "mov_haber": "134700.00",
-    "descripcion": "F/32874, ROBINSON CERDA MU—OZ",
+    "descripcion": "F/32874, ROBINSON CERDA MU√êOZ",
     "cajcod": "200108"
   }
 },
@@ -10555,7 +10171,7 @@
     "cpbnum": "00001253",
     "mov_debe": "0.00",
     "mov_haber": "404768.00",
-    "descripcion": "BH/494, MIGUEL LUIS GUI—EZ SAAVEDRA.",
+    "descripcion": "BH/494, MIGUEL LUIS GUI√êEZ SAAVEDRA.",
     "cajcod": "200113"
   }
 },
@@ -10603,7 +10219,7 @@
     "cpbnum": "00001260",
     "mov_debe": "0.00",
     "mov_haber": "360000.00",
-    "descripcion": "BH/682, CLAUDIA MU—OZ PALMA.",
+    "descripcion": "BH/682, CLAUDIA MU√êOZ PALMA.",
     "cajcod": "200112"
   }
 },
@@ -11163,7 +10779,7 @@
     "cpbnum": "00001291",
     "mov_debe": "0.00",
     "mov_haber": "8557731.00",
-    "descripcion": "F/55-56-57, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/55-56-57, SERVICIOS AGRICOLAS √êUBLE SPA",
     "cajcod": "200101"
   }
 },
@@ -11675,7 +11291,7 @@
     "cpbnum": "00001569",
     "mov_debe": "0.00",
     "mov_haber": "215000.00",
-    "descripcion": "F/33669, ROBINSON HERALDO CERDA MU—OZ",
+    "descripcion": "F/33669, ROBINSON HERALDO CERDA MU√êOZ",
     "cajcod": "200108"
   }
 },
@@ -12059,7 +11675,7 @@
     "cpbnum": "00001599",
     "mov_debe": "0.00",
     "mov_haber": "215000.00",
-    "descripcion": "F/1618, MANUEL MU—OZ JIMENEZ",
+    "descripcion": "F/1618, MANUEL MU√êOZ JIMENEZ",
     "cajcod": "200108"
   }
 },
@@ -12699,7 +12315,7 @@
     "cpbnum": "00001644",
     "mov_debe": "0.00",
     "mov_haber": "5516783.00",
-    "descripcion": "NETO F/575, FRIGORIFICO —UBLE ORGANICO SPA",
+    "descripcion": "NETO F/575, FRIGORIFICO √êUBLE ORGANICO SPA",
     "cajcod": "200109"
   }
 },
@@ -12955,7 +12571,7 @@
     "cpbnum": "00001930",
     "mov_debe": "348233.00",
     "mov_haber": "0.00",
-    "descripcion": "DEVOLUCI”N DE DUCASSE",
+    "descripcion": "DEVOLUCI√ãN DE DUCASSE",
     "cajcod": "200108"
   }
 },
@@ -13179,7 +12795,7 @@
     "cpbnum": "00001719",
     "mov_debe": "0.00",
     "mov_haber": "195001.00",
-    "descripcion": "F/1657, MANUEL ALDRIN MU—OZ JIMENEZ",
+    "descripcion": "F/1657, MANUEL ALDRIN MU√êOZ JIMENEZ",
     "cajcod": "200108"
   }
 },
@@ -13243,7 +12859,7 @@
     "cpbnum": "00001723",
     "mov_debe": "0.00",
     "mov_haber": "309400.00",
-    "descripcion": "F/27, INFORMATICA Y TEC. VICTOR ALARCON ACU—A",
+    "descripcion": "F/27, INFORMATICA Y TEC. VICTOR ALARCON ACU√êA",
     "cajcod": "200116"
   }
 },
@@ -14331,7 +13947,7 @@
     "cpbnum": "00001881",
     "mov_debe": "0.00",
     "mov_haber": "987647.00",
-    "descripcion": "IVA, F/575, FRIGORIFICO  —UBLE ORGANICO SPA",
+    "descripcion": "IVA, F/575, FRIGORIFICO  √êUBLE ORGANICO SPA",
     "cajcod": "200109"
   }
 },
@@ -15083,7 +14699,7 @@
     "cpbnum": "00002044",
     "mov_debe": "0.00",
     "mov_haber": "1800000.00",
-    "descripcion": "BH/684, CLAUDIA MU—OZ PALMA.",
+    "descripcion": "BH/684, CLAUDIA MU√êOZ PALMA.",
     "cajcod": "200112"
   }
 },
@@ -15387,7 +15003,7 @@
     "cpbnum": "00002063",
     "mov_debe": "0.00",
     "mov_haber": "345000.00",
-    "descripcion": "F/1637, MANUEL ALDRIN MU—OZ JIMENEZ",
+    "descripcion": "F/1637, MANUEL ALDRIN MU√êOZ JIMENEZ",
     "cajcod": "200108"
   }
 },
@@ -15643,7 +15259,7 @@
     "cpbnum": "00002080",
     "mov_debe": "0.00",
     "mov_haber": "405190.00",
-    "descripcion": "BH/495, MIGUEL LUIS GUI—EZ SAAVEDRA",
+    "descripcion": "BH/495, MIGUEL LUIS GUI√êEZ SAAVEDRA",
     "cajcod": "200113"
   }
 },
@@ -15835,7 +15451,7 @@
     "cpbnum": "00002180",
     "mov_debe": "0.00",
     "mov_haber": "1773156.00",
-    "descripcion": "F/900737, COPELEC LTDA. DO—A GILDA PIVOTE SUR",
+    "descripcion": "F/900737, COPELEC LTDA. DO√êA GILDA PIVOTE SUR",
     "cajcod": "200107"
   }
 },
@@ -16027,7 +15643,7 @@
     "cpbnum": "00002192",
     "mov_debe": "0.00",
     "mov_haber": "1212600.00",
-    "descripcion": "F/578, FRIGORIFICO —UBLE ORGANICO SPA",
+    "descripcion": "F/578, FRIGORIFICO √êUBLE ORGANICO SPA",
     "cajcod": "200109"
   }
 },
@@ -16123,7 +15739,7 @@
     "cpbnum": "00002199",
     "mov_debe": "0.00",
     "mov_haber": "8330000.00",
-    "descripcion": "CANCELA ARRIENDO FUNDO MARZO 2026. DO—A GILDA SPA.",
+    "descripcion": "CANCELA ARRIENDO FUNDO MARZO 2026. DO√êA GILDA SPA.",
     "cajcod": "200109"
   }
 },
@@ -17757,86 +17373,6 @@
     "mov_haber": "3967540.00",
     "descripcion": "F/24, ELISA VALENZUELA PALAVECINO.",
     "cajcod": "200101"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 17061,
-  "fields": {
-    "cuenta_banco": 18,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "0.00",
-    "mov_haber": "538164.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 17062,
-  "fields": {
-    "cuenta_banco": 18,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "2075000.00",
-    "mov_haber": "0.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 17063,
-  "fields": {
-    "cuenta_banco": 18,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "0.00",
-    "mov_haber": "1536836.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 17064,
-  "fields": {
-    "cuenta_banco": 19,
-    "concepto": null,
-    "fecha": "2026-01-01",
-    "anio": 2026,
-    "mes": 0,
-    "cpbnum": "00000000",
-    "mov_debe": "125391.00",
-    "mov_haber": "0.00",
-    "descripcion": "Movimiento de Apertura",
-    "cajcod": "0000000000"
-  }
-},
-{
-  "model": "flujo.movimiento",
-  "pk": 17065,
-  "fields": {
-    "cuenta_banco": 19,
-    "concepto": null,
-    "fecha": "2026-03-27",
-    "anio": 2026,
-    "mes": 3,
-    "cpbnum": "00001933",
-    "mov_debe": "184650000.00",
-    "mov_haber": "0.00",
-    "descripcion": "TRASPASO DE FONDOS, CUENTAS TORREON. LVIAL FONDOS MUTUOS.",
-    "cajcod": "0000000000"
   }
 }
 ]
