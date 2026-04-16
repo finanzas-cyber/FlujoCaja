@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "🔥 BUILD NUEVO EJECUTANDOSE 🔥"
+
 python manage.py migrate
 python manage.py flush --no-input
 
