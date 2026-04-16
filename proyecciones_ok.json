@@ -1,0 +1,1178 @@
+[
+{
+  "model": "flujo.proyeccion",
+  "pk": 1,
+  "fields": {
+    "concepto": 1,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "556140000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 2,
+  "fields": {
+    "concepto": 4,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "558180000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 3,
+  "fields": {
+    "concepto": 4,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "9900000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 4,
+  "fields": {
+    "concepto": 3,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "87132000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 5,
+  "fields": {
+    "concepto": 3,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "246200000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 6,
+  "fields": {
+    "concepto": 3,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "60000000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 7,
+  "fields": {
+    "concepto": 3,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "45000000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 8,
+  "fields": {
+    "concepto": 5,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "863196803.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 9,
+  "fields": {
+    "concepto": 5,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "679537908.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 10,
+  "fields": {
+    "concepto": 5,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "661172019.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 11,
+  "fields": {
+    "concepto": 5,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "298156562.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 12,
+  "fields": {
+    "concepto": 7,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-105752852.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 13,
+  "fields": {
+    "concepto": 7,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-105752852.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 14,
+  "fields": {
+    "concepto": 7,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-70582017.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 15,
+  "fields": {
+    "concepto": 7,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "-76877433.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 16,
+  "fields": {
+    "concepto": 8,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-43200000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 17,
+  "fields": {
+    "concepto": 8,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-29610798.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 18,
+  "fields": {
+    "concepto": 8,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-29610798.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 19,
+  "fields": {
+    "concepto": 8,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "-19762965.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 20,
+  "fields": {
+    "concepto": 9,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-5501017.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 21,
+  "fields": {
+    "concepto": 9,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "-22061820.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 22,
+  "fields": {
+    "concepto": 10,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-8393996.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 23,
+  "fields": {
+    "concepto": 10,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-6189467.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 24,
+  "fields": {
+    "concepto": 11,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-38945091.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 25,
+  "fields": {
+    "concepto": 11,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-203392657.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 26,
+  "fields": {
+    "concepto": 11,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-76414166.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 27,
+  "fields": {
+    "concepto": 11,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "-220193177.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 28,
+  "fields": {
+    "concepto": 12,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-50344212.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 29,
+  "fields": {
+    "concepto": 12,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-17640622.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 30,
+  "fields": {
+    "concepto": 12,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-6296185.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 31,
+  "fields": {
+    "concepto": 12,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "-17252175.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 32,
+  "fields": {
+    "concepto": 13,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-27838978.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 33,
+  "fields": {
+    "concepto": 13,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-16082737.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 34,
+  "fields": {
+    "concepto": 13,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-9871481.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 35,
+  "fields": {
+    "concepto": 13,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "-9871481.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 36,
+  "fields": {
+    "concepto": 14,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-14935104.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 37,
+  "fields": {
+    "concepto": 14,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-13561238.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 38,
+  "fields": {
+    "concepto": 14,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-19100000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 39,
+  "fields": {
+    "concepto": 14,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "-13776971.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 40,
+  "fields": {
+    "concepto": 15,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-19897272.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 41,
+  "fields": {
+    "concepto": 15,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-7000000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 42,
+  "fields": {
+    "concepto": 15,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-7000000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 43,
+  "fields": {
+    "concepto": 15,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "-7000000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 44,
+  "fields": {
+    "concepto": 16,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-43290000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 45,
+  "fields": {
+    "concepto": 16,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-53820000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 46,
+  "fields": {
+    "concepto": 16,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-44460000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 47,
+  "fields": {
+    "concepto": 17,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-990000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 48,
+  "fields": {
+    "concepto": 17,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-21943915.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 49,
+  "fields": {
+    "concepto": 17,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-14625541.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 50,
+  "fields": {
+    "concepto": 17,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "-14685538.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 51,
+  "fields": {
+    "concepto": 18,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-23355000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 52,
+  "fields": {
+    "concepto": 18,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-34490000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 53,
+  "fields": {
+    "concepto": 18,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-22370000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 54,
+  "fields": {
+    "concepto": 19,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-2534110.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 55,
+  "fields": {
+    "concepto": 19,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-2534110.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 56,
+  "fields": {
+    "concepto": 19,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-2534110.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 57,
+  "fields": {
+    "concepto": 19,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "-2534110.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 58,
+  "fields": {
+    "concepto": 20,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-47084808.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 59,
+  "fields": {
+    "concepto": 20,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-164818221.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 60,
+  "fields": {
+    "concepto": 20,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-10860661.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 61,
+  "fields": {
+    "concepto": 21,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-88000000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 62,
+  "fields": {
+    "concepto": 22,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-6662754.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 63,
+  "fields": {
+    "concepto": 22,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-6662754.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 64,
+  "fields": {
+    "concepto": 22,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-6662754.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 65,
+  "fields": {
+    "concepto": 22,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "-6662754.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 66,
+  "fields": {
+    "concepto": 24,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-60407125.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 67,
+  "fields": {
+    "concepto": 24,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-81045183.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 68,
+  "fields": {
+    "concepto": 24,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-27318339.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 69,
+  "fields": {
+    "concepto": 24,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "-13638775.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 70,
+  "fields": {
+    "concepto": 25,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-8000000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 71,
+  "fields": {
+    "concepto": 25,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-27153158.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 72,
+  "fields": {
+    "concepto": 25,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-18281482.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 73,
+  "fields": {
+    "concepto": 25,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "-56130841.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 74,
+  "fields": {
+    "concepto": 30,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-8000000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 75,
+  "fields": {
+    "concepto": 30,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-8000000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 76,
+  "fields": {
+    "concepto": 30,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-8000000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 77,
+  "fields": {
+    "concepto": 30,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "-8000000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 78,
+  "fields": {
+    "concepto": 36,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-1000000000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 79,
+  "fields": {
+    "concepto": 36,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-500000000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 80,
+  "fields": {
+    "concepto": 36,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-1000000000.00",
+    "descripcion": "Presupuesto abril-julio 2026",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 81,
+  "fields": {
+    "concepto": 9,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "0.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 82,
+  "fields": {
+    "concepto": 16,
+    "anio": 2026,
+    "mes": 8,
+    "monto": "0.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 83,
+  "fields": {
+    "concepto": 15,
+    "anio": 2026,
+    "mes": 8,
+    "monto": "-7000000.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 84,
+  "fields": {
+    "concepto": 15,
+    "anio": 2026,
+    "mes": 9,
+    "monto": "-7000000.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 85,
+  "fields": {
+    "concepto": 15,
+    "anio": 2026,
+    "mes": 10,
+    "monto": "-7000000.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 86,
+  "fields": {
+    "concepto": 15,
+    "anio": 2026,
+    "mes": 11,
+    "monto": "-7000000.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 87,
+  "fields": {
+    "concepto": 15,
+    "anio": 2026,
+    "mes": 12,
+    "monto": "-7000000.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 88,
+  "fields": {
+    "concepto": 13,
+    "anio": 2026,
+    "mes": 9,
+    "monto": "0.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 89,
+  "fields": {
+    "concepto": 16,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "0.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 90,
+  "fields": {
+    "concepto": 20,
+    "anio": 2026,
+    "mes": 8,
+    "monto": "0.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 91,
+  "fields": {
+    "concepto": 30,
+    "anio": 2026,
+    "mes": 8,
+    "monto": "-8000000.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 92,
+  "fields": {
+    "concepto": 30,
+    "anio": 2026,
+    "mes": 9,
+    "monto": "-8000000.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 93,
+  "fields": {
+    "concepto": 30,
+    "anio": 2026,
+    "mes": 10,
+    "monto": "-8000000.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 94,
+  "fields": {
+    "concepto": 30,
+    "anio": 2026,
+    "mes": 11,
+    "monto": "-8000000.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 95,
+  "fields": {
+    "concepto": 30,
+    "anio": 2026,
+    "mes": 12,
+    "monto": "-8000000.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 96,
+  "fields": {
+    "concepto": 32,
+    "anio": 2026,
+    "mes": 11,
+    "monto": "0.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 97,
+  "fields": {
+    "concepto": 32,
+    "anio": 2026,
+    "mes": 10,
+    "monto": "0.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 98,
+  "fields": {
+    "concepto": 2,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "0.00",
+    "descripcion": "",
+    "activo": true
+  }
+}
+]
