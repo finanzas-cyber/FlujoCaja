@@ -11,7 +11,7 @@
             background: #eef1f5;
         }
 
-        h1, h2 {
+        h1, h2, h3 {
             margin-top: 0;
             margin-bottom: 8px;
         }
@@ -299,6 +299,120 @@
         .detalle-oculto {
             display: none;
         }
+
+        .celda-real-detalle {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .celda-real-detalle:hover {
+            background: #bfdbfe !important;
+        }
+
+        .celda-real-detalle::after {
+            content: "👁";
+            position: absolute;
+            top: 2px;
+            left: 4px;
+            font-size: 10px;
+            opacity: 0.7;
+        }
+
+        .modal-detalle {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            z-index: 9999;
+            padding: 12px;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+
+        .modal-detalle.abierto {
+            display: block;
+        }
+
+        .modal-detalle-contenido {
+            background: #ffffff;
+            width: min(1100px, 98vw);
+            max-height: calc(100vh - 24px);
+            margin: 0 auto;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .modal-detalle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border-bottom: 1px solid #cbd5e1;
+            background: #eff6ff;
+        }
+
+        .modal-detalle-subtitulo {
+            font-size: 12px;
+            color: #475569;
+        }
+
+        .modal-detalle-cerrar {
+            border: 0;
+            background: #dc2626;
+            color: #ffffff;
+            font-weight: bold;
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+
+        .modal-detalle-cerrar:hover {
+            background: #b91c1c;
+        }
+
+        .modal-detalle-body {
+            padding: 12px 14px;
+            overflow: auto;
+        }
+
+        .modal-detalle-estado {
+            font-size: 12px;
+            margin-bottom: 10px;
+            color: #334155;
+        }
+
+        .modal-detalle-total {
+            margin-top: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .tabla-modal {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: auto;
+        }
+
+        .tabla-modal th,
+        .tabla-modal td {
+            border: 1px solid #cbd5e1;
+            padding: 6px;
+            font-size: 12px;
+        }
+
+        .tabla-modal th {
+            background: #e2e8f0;
+            text-align: center;
+        }
+
+        .tabla-modal td {
+            background: #ffffff;
+        }
     </style>
 </head>
 <body>
@@ -401,11 +515,21 @@
                 <td class="texto">{{ fila.codigo }} - {{ fila.nombre }}</td>
                 {% for m in fila.columnas %}
                     <td class="numero
-                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.origen == 'REAL' %}real celda-real-detalle{% else %}proyectado{% endif %}
                         {% if m.mes_numero == mes_actual %}abril-bloque{% endif %}
                         {% if m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
                         {% if m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
-                    ">
+                    "
+                    {% if m.origen == 'REAL' %}
+                        data-detalle-real="1"
+                        data-concepto-id="{{ fila.id }}"
+                        data-concepto-codigo="{{ fila.codigo }}"
+                        data-concepto-nombre="{{ fila.nombre }}"
+                        data-mes="{{ m.mes_numero }}"
+                        data-mes-nombre="{{ m.mes_nombre }}"
+                        data-anio="{{ anio_actual }}"
+                    {% endif %}
+                    >
                         {% if m.origen == 'REAL' %}
                             <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
                         {% else %}
@@ -449,11 +573,21 @@
                 <td class="texto">{{ fila.codigo }} - {{ fila.nombre }}</td>
                 {% for m in fila.columnas %}
                     <td class="numero
-                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.origen == 'REAL' %}real celda-real-detalle{% else %}proyectado{% endif %}
                         {% if m.mes_numero == mes_actual %}abril-bloque{% endif %}
                         {% if m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
                         {% if m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
-                    ">
+                    "
+                    {% if m.origen == 'REAL' %}
+                        data-detalle-real="1"
+                        data-concepto-id="{{ fila.id }}"
+                        data-concepto-codigo="{{ fila.codigo }}"
+                        data-concepto-nombre="{{ fila.nombre }}"
+                        data-mes="{{ m.mes_numero }}"
+                        data-mes-nombre="{{ m.mes_nombre }}"
+                        data-anio="{{ anio_actual }}"
+                    {% endif %}
+                    >
                         {% if m.origen == 'REAL' %}
                             <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
                         {% else %}
@@ -511,11 +645,21 @@
                 <td class="texto">{{ fila.codigo }} - {{ fila.nombre }}</td>
                 {% for m in fila.columnas %}
                     <td class="numero
-                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.origen == 'REAL' %}real celda-real-detalle{% else %}proyectado{% endif %}
                         {% if m.mes_numero == mes_actual %}abril-bloque{% endif %}
                         {% if m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
                         {% if m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
-                    ">
+                    "
+                    {% if m.origen == 'REAL' %}
+                        data-detalle-real="1"
+                        data-concepto-id="{{ fila.id }}"
+                        data-concepto-codigo="{{ fila.codigo }}"
+                        data-concepto-nombre="{{ fila.nombre }}"
+                        data-mes="{{ m.mes_numero }}"
+                        data-mes-nombre="{{ m.mes_nombre }}"
+                        data-anio="{{ anio_actual }}"
+                    {% endif %}
+                    >
                         {% if m.origen == 'REAL' %}
                             <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
                         {% else %}
@@ -677,10 +821,48 @@
     </div>
 </div>
 
+<div id="modal-detalle-real" class="modal-detalle">
+    <div class="modal-detalle-contenido">
+        <div class="modal-detalle-header">
+            <div>
+                <h3 id="modal-detalle-titulo">Detalle movimientos</h3>
+                <div id="modal-detalle-subtitulo" class="modal-detalle-subtitulo"></div>
+            </div>
+            <button type="button" id="cerrar-modal-detalle" class="modal-detalle-cerrar">Cerrar</button>
+        </div>
+
+        <div class="modal-detalle-body">
+            <div id="modal-detalle-estado" class="modal-detalle-estado"></div>
+
+            <div class="tabla-contenedor">
+                <table class="tabla-modal">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Comprobante</th>
+                            <th>Cuenta</th>
+                            <th>Descripción</th>
+                            <th>Monto</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modal-detalle-tbody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="modal-detalle-total" class="modal-detalle-total"></div>
+        </div>
+    </div>
+</div>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     function limpiarNumero(v) {
         return Number(String(v).replace(/\./g, "").replace(",", ".")) || 0;
+    }
+
+    function numeroDesdeServidor(v) {
+        return Number(v) || 0;
     }
 
     function formatear(n) {
@@ -847,6 +1029,108 @@ document.addEventListener("DOMContentLoaded", function () {
 
     inputsFiltro.forEach(function (input) {
         input.addEventListener("input", filtrar);
+    });
+
+    var modal = document.getElementById("modal-detalle-real");
+    var modalTitulo = document.getElementById("modal-detalle-titulo");
+    var modalSubtitulo = document.getElementById("modal-detalle-subtitulo");
+    var modalEstado = document.getElementById("modal-detalle-estado");
+    var modalTbody = document.getElementById("modal-detalle-tbody");
+    var modalTotal = document.getElementById("modal-detalle-total");
+    var botonCerrarModal = document.getElementById("cerrar-modal-detalle");
+
+    function abrirModal() {
+        modal.classList.add("abierto");
+    }
+
+    function cerrarModal() {
+        modal.classList.remove("abierto");
+    }
+
+    function escapeHtml(texto) {
+        return String(texto || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    function cargarDetalleReal(celda) {
+        var conceptoId = celda.dataset.conceptoId;
+        var conceptoCodigo = celda.dataset.conceptoCodigo || "";
+        var conceptoNombre = celda.dataset.conceptoNombre || "";
+        var mes = celda.dataset.mes;
+        var mesNombre = celda.dataset.mesNombre || "";
+        var anio = celda.dataset.anio || "{{ anio_actual }}";
+
+        modalTitulo.textContent = "Detalle movimientos reales";
+        modalSubtitulo.textContent = conceptoCodigo + " - " + conceptoNombre + " | " + mesNombre + " | " + anio;
+        modalEstado.textContent = "Cargando movimientos...";
+        modalTbody.innerHTML = "";
+        modalTotal.textContent = "";
+        abrirModal();
+
+        fetch("{% url 'detalle_movimientos_real' %}?concepto_id=" + encodeURIComponent(conceptoId) + "&mes=" + encodeURIComponent(mes) + "&anio=" + encodeURIComponent(anio))
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error("No se pudo obtener el detalle");
+                }
+                return response.json();
+            })
+            .then(function (data) {
+                if (!data.ok) {
+                    throw new Error(data.error || "No se pudo obtener el detalle");
+                }
+
+                if (!data.movimientos || data.movimientos.length === 0) {
+                    modalEstado.textContent = "No hay movimientos para este concepto en este mes.";
+                    modalTbody.innerHTML = "";
+                    modalTotal.textContent = "Total: 0";
+                    return;
+                }
+
+                modalEstado.textContent = "Movimientos encontrados: " + data.movimientos.length;
+
+                modalTbody.innerHTML = data.movimientos.map(function (m) {
+                    var monto = numeroDesdeServidor(m.monto);
+                    return ""
+                        + "<tr>"
+                        + "<td>" + escapeHtml(m.fecha) + "</td>"
+                        + "<td>" + escapeHtml(m.cpbnum) + "</td>"
+                        + "<td>" + escapeHtml(m.cuenta) + "</td>"
+                        + "<td>" + escapeHtml(m.descripcion) + "</td>"
+                        + "<td class='numero" + (monto < 0 ? " negativo" : "") + "'>" + (monto === 0 ? "" : formatear(monto)) + "</td>"
+                        + "</tr>";
+                }).join("");
+
+                modalTotal.textContent = "Total: " + formatear(numeroDesdeServidor(data.total));
+            })
+            .catch(function (error) {
+                modalEstado.textContent = error.message || "Error al cargar movimientos.";
+                modalTbody.innerHTML = "";
+                modalTotal.textContent = "";
+            });
+    }
+
+    document.querySelectorAll("[data-detalle-real='1']").forEach(function (celda) {
+        celda.addEventListener("click", function () {
+            cargarDetalleReal(celda);
+        });
+    });
+
+    botonCerrarModal.addEventListener("click", cerrarModal);
+
+    modal.addEventListener("click", function (e) {
+        if (e.target === modal) {
+            cerrarModal();
+        }
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && modal.classList.contains("abierto")) {
+            cerrarModal();
+        }
     });
 });
 </script>
