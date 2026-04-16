@@ -1578,6 +1578,18 @@
     "concepto": 3,
     "anio": 2026,
     "mes": 10,
+    "monto": "20000000000.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 133,
+  "fields": {
+    "concepto": 3,
+    "anio": 2026,
+    "mes": 11,
     "monto": "0.00",
     "descripcion": "",
     "activo": true
