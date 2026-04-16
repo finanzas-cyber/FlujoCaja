@@ -31,12 +31,30 @@ class Command(BaseCommand):
 
         self.stdout.write("Cargando cuentas banco...")
 
-        CuentaBanco.objects.get_or_create(
-            codigo="001",
-            defaults={
-                "nombre": "BANCO PRINCIPAL",
-                "activo": True,
-            },
-        )
+        cuentas_banco = [
+            ("1-1-01-10", "1-1-01-10"),
+            ("1-1-01-11", "1-1-01-11"),
+            ("1-1-01-13", "1-1-01-13"),
+            ("1-1-01-16", "1-1-01-16"),
+            ("1-1-01-19", "1-1-01-19"),
+            ("2-1-05-21", "2-1-05-21"),
+            ("1-1-01-17", "1-1-01-17"),
+            ("1-1-01-20", "1-1-01-20"),
+            ("1-1-01-14", "1-1-01-14"),
+            ("2-1-05-24", "2-1-05-24"),
+        ]
+
+        for codigo, nombre in cuentas_banco:
+            obj, created = CuentaBanco.objects.get_or_create(
+                codigo=codigo,
+                defaults={
+                    "nombre": nombre,
+                    "activo": True,
+                },
+            )
+            if created:
+                self.stdout.write(f"✔ Cuenta banco creada: {codigo}")
+            else:
+                self.stdout.write(f"- Ya existe cuenta banco: {codigo}")
 
         self.stdout.write(self.style.SUCCESS("✔ Datos maestros cargados"))
