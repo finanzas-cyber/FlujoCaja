@@ -54,10 +54,12 @@ class Command(BaseCommand):
         actualizados = 0
         repetidos = 0
         ignorados = 0
+        eliminados = 0
         procesados = 0
 
         ultimo_cpbnum = None
         secuencia_por_grupo = {}
+        origenes_vigentes = set()
 
         for row in cursor.fetchall():
             procesados += 1
@@ -115,6 +117,7 @@ class Command(BaseCommand):
             nro_linea = secuencia_por_grupo[grupo]
 
             origen_clave = f"{pctcod}|{cpbnum}|{fecha_guardar}|{nro_linea}"
+            origenes_vigentes.add(origen_clave)
 
             texto_hash = "|".join([
                 str(pctcod),
@@ -184,11 +187,21 @@ class Command(BaseCommand):
 
         conn.close()
 
+        movimientos_a_eliminar = Movimiento.objects.exclude(
+            origen_clave__in=origenes_vigentes
+        ).exclude(
+            origen_clave=""
+        )
+        eliminados = movimientos_a_eliminar.count()
+        if eliminados:
+            movimientos_a_eliminar.delete()
+
         self.stdout.write(self.style.SUCCESS(
             "Importacion terminada. "
             f"Procesados: {procesados}, "
             f"Importados: {importados}, "
             f"Actualizados: {actualizados}, "
             f"Repetidos: {repetidos}, "
-            f"Ignorados: {ignorados}"
+            f"Ignorados: {ignorados}, "
+            f"Eliminados: {eliminados}"
         ))
