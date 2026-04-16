@@ -1774,5 +1774,17 @@
     "descripcion": "",
     "activo": true
   }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 149,
+  "fields": {
+    "concepto": 31,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "0.00",
+    "descripcion": "",
+    "activo": true
+  }
 }
 ]
