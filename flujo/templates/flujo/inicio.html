@@ -32,6 +32,12 @@
             flex-wrap: wrap;
         }
 
+        .acciones-encabezado {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
         .boton-actualizar {
             background: #1e40af;
             color: #fff;
@@ -44,6 +50,14 @@
 
         .boton-actualizar:hover {
             background: #1e3a8a;
+        }
+
+        .boton-json {
+            background: #047857;
+        }
+
+        .boton-json:hover {
+            background: #065f46;
         }
 
         .mensaje {
@@ -285,12 +299,21 @@
     <div class="encabezado">
         <h1>Flujo de Caja {{ anio_actual }}</h1>
 
-        <form method="post" action="{% url 'actualizar_softland' %}" onsubmit="return confirm('¿Seguro que deseas actualizar desde Softland?');">
-            {% csrf_token %}
-            <button type="submit" class="boton-actualizar">
-                Actualizar desde Softland
-            </button>
-        </form>
+        <div class="acciones-encabezado">
+            <form method="post" action="{% url 'actualizar_softland' %}" onsubmit="return confirm('¿Seguro que deseas actualizar desde Softland?');">
+                {% csrf_token %}
+                <button type="submit" class="boton-actualizar">
+                    Actualizar Softland
+                </button>
+            </form>
+
+            <form method="post" action="{% url 'generar_proyecciones_json' %}" onsubmit="return confirm('¿Generar archivo de proyecciones para online?');">
+                {% csrf_token %}
+                <button type="submit" class="boton-actualizar boton-json">
+                    Generar JSON Proyecciones
+                </button>
+            </form>
+        </div>
     </div>
 
     {% if messages %}

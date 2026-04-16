@@ -1,8 +1,10 @@
 from collections import OrderedDict
 from decimal import Decimal
 from io import StringIO
+from pathlib import Path
 
 from django.contrib import messages
+from django.core import serializers
 from django.core.management import call_command
 from django.db.models import F, Q
 from django.http import JsonResponse
@@ -26,6 +28,30 @@ def actualizar_softland(request):
         )
     except Exception as e:
         messages.error(request, f"Error al actualizar desde Softland: {e}")
+
+    return redirect("inicio")
+
+
+def generar_proyecciones_json(request):
+    if request.method != "POST":
+        return redirect("inicio")
+
+    try:
+        proyecciones = Proyeccion.objects.all().order_by("id")
+
+        data = serializers.serialize(
+            "json",
+            proyecciones,
+            indent=2,
+            use_natural_foreign_keys=False,
+        )
+
+        ruta = Path("proyecciones_ok.json")
+        ruta.write_text(data, encoding="utf-8")
+
+        messages.success(request, "Archivo proyecciones_ok.json generado correctamente.")
+    except Exception as e:
+        messages.error(request, f"Error al generar JSON: {e}")
 
     return redirect("inicio")
 

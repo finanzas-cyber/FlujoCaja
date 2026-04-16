@@ -1,4 +1,5 @@
 from decimal import Decimal
+import hashlib
 
 import pyodbc
 from django.core.management.base import BaseCommand
@@ -50,18 +51,23 @@ class Command(BaseCommand):
         """)
 
         importados = 0
+        actualizados = 0
         repetidos = 0
         ignorados = 0
         procesados = 0
 
         ultimo_cpbnum = None
+        secuencia_por_grupo = {}
 
         for row in cursor.fetchall():
             procesados += 1
 
             if procesados % 500 == 0:
                 self.stdout.write(
-                    f"Procesados: {procesados} | Importados: {importados} | Repetidos: {repetidos} | Ignorados: {ignorados}"
+                    "Procesados: "
+                    f"{procesados} | Importados: {importados} | "
+                    f"Actualizados: {actualizados} | Repetidos: {repetidos} | "
+                    f"Ignorados: {ignorados}"
                 )
 
             pctcod = (row.PctCod or "").strip()
@@ -85,7 +91,6 @@ class Command(BaseCommand):
                 ignorados += 1
                 continue
 
-            # Regla del sistema: excluir completamente aperturas y cajcod 0000000000
             if cajcod == "0000000000":
                 ignorados += 1
                 continue
@@ -101,21 +106,64 @@ class Command(BaseCommand):
 
             fecha_guardar = fecha.date() if hasattr(fecha, "date") else fecha
 
-            existe = Movimiento.objects.filter(
-                cuenta_banco=cuenta_banco,
-                concepto=concepto,
-                fecha=fecha_guardar,
-                anio=anio,
-                mes=mes,
-                cpbnum=cpbnum,
-                mov_debe=mov_debe,
-                mov_haber=mov_haber,
-                descripcion=descripcion,
-                cajcod=cajcod,
-            ).exists()
+            grupo = (
+                pctcod,
+                cpbnum,
+                fecha_guardar.isoformat() if fecha_guardar else "",
+            )
+            secuencia_por_grupo[grupo] = secuencia_por_grupo.get(grupo, 0) + 1
+            nro_linea = secuencia_por_grupo[grupo]
 
-            if existe:
-                repetidos += 1
+            origen_clave = f"{pctcod}|{cpbnum}|{fecha_guardar}|{nro_linea}"
+
+            texto_hash = "|".join([
+                str(pctcod),
+                str(cpbnum),
+                str(fecha_guardar),
+                str(anio),
+                str(mes),
+                str(mov_debe),
+                str(mov_haber),
+                descripcion,
+                cajcod,
+                str(concepto.id),
+            ])
+            origen_hash = hashlib.sha256(texto_hash.encode("utf-8")).hexdigest()
+
+            movimiento = Movimiento.objects.filter(
+                origen_clave=origen_clave
+            ).first()
+
+            if movimiento:
+                if movimiento.origen_hash == origen_hash:
+                    repetidos += 1
+                    continue
+
+                movimiento.cuenta_banco = cuenta_banco
+                movimiento.concepto = concepto
+                movimiento.fecha = fecha_guardar
+                movimiento.anio = anio
+                movimiento.mes = mes
+                movimiento.cpbnum = cpbnum
+                movimiento.mov_debe = mov_debe
+                movimiento.mov_haber = mov_haber
+                movimiento.descripcion = descripcion
+                movimiento.cajcod = cajcod
+                movimiento.origen_hash = origen_hash
+                movimiento.save(update_fields=[
+                    "cuenta_banco",
+                    "concepto",
+                    "fecha",
+                    "anio",
+                    "mes",
+                    "cpbnum",
+                    "mov_debe",
+                    "mov_haber",
+                    "descripcion",
+                    "cajcod",
+                    "origen_hash",
+                ])
+                actualizados += 1
                 continue
 
             Movimiento.objects.create(
@@ -129,11 +177,18 @@ class Command(BaseCommand):
                 mov_haber=mov_haber,
                 descripcion=descripcion,
                 cajcod=cajcod,
+                origen_clave=origen_clave,
+                origen_hash=origen_hash,
             )
             importados += 1
 
         conn.close()
 
         self.stdout.write(self.style.SUCCESS(
-            f"Importacion terminada. Procesados: {procesados}, Importados: {importados}, Repetidos: {repetidos}, Ignorados: {ignorados}"
+            "Importacion terminada. "
+            f"Procesados: {procesados}, "
+            f"Importados: {importados}, "
+            f"Actualizados: {actualizados}, "
+            f"Repetidos: {repetidos}, "
+            f"Ignorados: {ignorados}"
         ))

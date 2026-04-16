@@ -1174,5 +1174,413 @@
     "descripcion": "",
     "activo": true
   }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 99,
+  "fields": {
+    "concepto": 28,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "0.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 100,
+  "fields": {
+    "concepto": 26,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-6216961.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 101,
+  "fields": {
+    "concepto": 26,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-6216961.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 102,
+  "fields": {
+    "concepto": 26,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-6216961.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 103,
+  "fields": {
+    "concepto": 26,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "-6216961.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 104,
+  "fields": {
+    "concepto": 26,
+    "anio": 2026,
+    "mes": 8,
+    "monto": "-6216961.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 105,
+  "fields": {
+    "concepto": 26,
+    "anio": 2026,
+    "mes": 9,
+    "monto": "-6216961.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 106,
+  "fields": {
+    "concepto": 26,
+    "anio": 2026,
+    "mes": 10,
+    "monto": "-6216961.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 107,
+  "fields": {
+    "concepto": 26,
+    "anio": 2026,
+    "mes": 11,
+    "monto": "-6216961.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 108,
+  "fields": {
+    "concepto": 26,
+    "anio": 2026,
+    "mes": 12,
+    "monto": "-6216961.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 109,
+  "fields": {
+    "concepto": 27,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-4997897.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 110,
+  "fields": {
+    "concepto": 27,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-4997897.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 111,
+  "fields": {
+    "concepto": 27,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-4997897.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 112,
+  "fields": {
+    "concepto": 27,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "-4997897.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 113,
+  "fields": {
+    "concepto": 27,
+    "anio": 2026,
+    "mes": 8,
+    "monto": "-4997897.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 114,
+  "fields": {
+    "concepto": 27,
+    "anio": 2026,
+    "mes": 9,
+    "monto": "-4997897.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 115,
+  "fields": {
+    "concepto": 27,
+    "anio": 2026,
+    "mes": 10,
+    "monto": "-4997897.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 116,
+  "fields": {
+    "concepto": 27,
+    "anio": 2026,
+    "mes": 11,
+    "monto": "-4997897.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 117,
+  "fields": {
+    "concepto": 27,
+    "anio": 2026,
+    "mes": 12,
+    "monto": "-4997897.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 118,
+  "fields": {
+    "concepto": 29,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "-2475253.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 119,
+  "fields": {
+    "concepto": 29,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "-2475253.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 120,
+  "fields": {
+    "concepto": 29,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "-2475253.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 121,
+  "fields": {
+    "concepto": 29,
+    "anio": 2026,
+    "mes": 7,
+    "monto": "-2475253.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 122,
+  "fields": {
+    "concepto": 29,
+    "anio": 2026,
+    "mes": 8,
+    "monto": "-2475253.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 123,
+  "fields": {
+    "concepto": 29,
+    "anio": 2026,
+    "mes": 9,
+    "monto": "-2475253.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 124,
+  "fields": {
+    "concepto": 29,
+    "anio": 2026,
+    "mes": 10,
+    "monto": "-2475253.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 125,
+  "fields": {
+    "concepto": 29,
+    "anio": 2026,
+    "mes": 11,
+    "monto": "-2475253.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 126,
+  "fields": {
+    "concepto": 29,
+    "anio": 2026,
+    "mes": 12,
+    "monto": "-2475253.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 127,
+  "fields": {
+    "concepto": 28,
+    "anio": 2026,
+    "mes": 10,
+    "monto": "0.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 128,
+  "fields": {
+    "concepto": 2,
+    "anio": 2026,
+    "mes": 4,
+    "monto": "9900000.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 129,
+  "fields": {
+    "concepto": 2,
+    "anio": 2026,
+    "mes": 5,
+    "monto": "9900000.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 130,
+  "fields": {
+    "concepto": 4,
+    "anio": 2026,
+    "mes": 6,
+    "monto": "0.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 131,
+  "fields": {
+    "concepto": 3,
+    "anio": 2026,
+    "mes": 9,
+    "monto": "10000000000.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 132,
+  "fields": {
+    "concepto": 3,
+    "anio": 2026,
+    "mes": 10,
+    "monto": "0.00",
+    "descripcion": "",
+    "activo": true
+  }
 }
 ]

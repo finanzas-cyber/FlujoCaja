@@ -68,6 +68,9 @@ class Movimiento(models.Model):
     descripcion = models.CharField(max_length=500, blank=True, default="")
     cajcod = models.CharField(max_length=20, blank=True, default="")
 
+    origen_clave = models.CharField(max_length=255, blank=True, default="", db_index=True)
+    origen_hash = models.CharField(max_length=64, blank=True, default="")
+
     class Meta:
         ordering = ["fecha", "id"]
 
