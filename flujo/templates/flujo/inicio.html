@@ -60,6 +60,14 @@
             background: #065f46;
         }
 
+        .boton-publicar {
+            background: #7c3aed;
+        }
+
+        .boton-publicar:hover {
+            background: #6d28d9;
+        }
+
         .mensaje {
             padding: 8px 10px;
             margin-top: 8px;
@@ -307,10 +315,17 @@
                 </button>
             </form>
 
-            <form method="post" action="{% url 'generar_proyecciones_json' %}" onsubmit="return confirm('¿Generar archivo de proyecciones para online?');">
+            <form method="post" action="{% url 'generar_proyecciones_json' %}" onsubmit="return confirm('¿Generar archivo de proyecciones para local?');">
                 {% csrf_token %}
                 <button type="submit" class="boton-actualizar boton-json">
                     Generar JSON Proyecciones
+                </button>
+            </form>
+
+            <form method="post" action="{% url 'publicar_proyecciones' %}" onsubmit="return confirm('¿Publicar automáticamente las proyecciones a GitHub?');">
+                {% csrf_token %}
+                <button type="submit" class="boton-actualizar boton-publicar">
+                    Publicar Proyecciones Online
                 </button>
             </form>
         </div>

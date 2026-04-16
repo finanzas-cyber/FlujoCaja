@@ -2,6 +2,8 @@ from collections import OrderedDict
 from decimal import Decimal
 from io import StringIO
 from pathlib import Path
+from datetime import datetime
+import subprocess
 
 from django.contrib import messages
 from django.core import serializers
@@ -52,6 +54,77 @@ def generar_proyecciones_json(request):
         messages.success(request, "Archivo proyecciones_ok.json generado correctamente.")
     except Exception as e:
         messages.error(request, f"Error al generar JSON: {e}")
+
+    return redirect("inicio")
+
+
+def publicar_proyecciones(request):
+    if request.method != "POST":
+        return redirect("inicio")
+
+    try:
+        repo_root = Path(__file__).resolve().parent.parent
+        ruta_json = repo_root / "proyecciones_ok.json"
+
+        proyecciones = Proyeccion.objects.all().order_by("id")
+        data = serializers.serialize(
+            "json",
+            proyecciones,
+            indent=2,
+            use_natural_foreign_keys=False,
+        )
+        ruta_json.write_text(data, encoding="utf-8")
+
+        subprocess.run(
+            ["git", "add", "proyecciones_ok.json"],
+            cwd=repo_root,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+        diff = subprocess.run(
+            ["git", "diff", "--cached", "--quiet", "--", "proyecciones_ok.json"],
+            cwd=repo_root,
+            capture_output=True,
+            text=True,
+        )
+
+        if diff.returncode == 0:
+            messages.success(
+                request,
+                "No había cambios nuevos en proyecciones_ok.json. No fue necesario publicar."
+            )
+            return redirect("inicio")
+
+        commit_msg = "Publicar proyecciones " + datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        subprocess.run(
+            ["git", "commit", "-m", commit_msg, "--", "proyecciones_ok.json"],
+            cwd=repo_root,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+        push = subprocess.run(
+            ["git", "push"],
+            cwd=repo_root,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+        messages.success(
+            request,
+            "Proyecciones publicadas correctamente en GitHub. " + push.stdout.strip()
+        )
+
+    except subprocess.CalledProcessError as e:
+        detalle = (e.stderr or e.stdout or str(e)).strip()
+        messages.error(request, f"Error al publicar proyecciones: {detalle}")
+    except Exception as e:
+        messages.error(request, f"Error al publicar proyecciones: {e}")
 
     return redirect("inicio")
 
