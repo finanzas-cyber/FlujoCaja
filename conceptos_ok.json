@@ -254,7 +254,7 @@
   "pk": 26,
   "fields": {
     "codigo": "300101",
-    "nombre": "CUOTAS CDTO PIVOTE",
+    "nombre": "PANEL SOLAR",
     "tipo": "FINANCIAMIENTO",
     "activo": true
   }
@@ -264,7 +264,7 @@
   "pk": 27,
   "fields": {
     "codigo": "300102",
-    "nombre": "CUOTAS LEASING",
+    "nombre": "CONTROL DE HELADA",
     "tipo": "FINANCIAMIENTO",
     "activo": true
   }
@@ -274,7 +274,7 @@
   "pk": 28,
   "fields": {
     "codigo": "300103",
-    "nombre": "CUOTAS BCI (Fogape) 1 + 2",
+    "nombre": "(Fogape)// RIEGO COBERTURA",
     "tipo": "FINANCIAMIENTO",
     "activo": true
   }
@@ -284,7 +284,7 @@
   "pk": 29,
   "fields": {
     "codigo": "300104",
-    "nombre": "CUOTAS LEASEBACK MAQ OPTICA",
+    "nombre": "TRACTOR",
     "tipo": "FINANCIAMIENTO",
     "activo": true
   }

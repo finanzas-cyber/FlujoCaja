@@ -38,10 +38,10 @@ class Command(BaseCommand):
             ("200119", "PAGO IMPUESTOS", Concepto.TIPO_EGRESO),
 
             # FINANCIAMIENTO
-            ("300101", "CUOTAS CDTO PIVOTE", Concepto.TIPO_FINANCIAMIENTO),
-            ("300102", "CUOTAS LEASING", Concepto.TIPO_FINANCIAMIENTO),
-            ("300103", "CUOTAS BCI (Fogape) 1 + 2", Concepto.TIPO_FINANCIAMIENTO),
-            ("300104", "CUOTAS LEASEBACK MAQ OPTICA", Concepto.TIPO_FINANCIAMIENTO),
+            ("300101", "PANEL SOLAR", Concepto.TIPO_FINANCIAMIENTO),
+            ("300102", "CONTROL DE HELADA", Concepto.TIPO_FINANCIAMIENTO),
+            ("300103", "(Fogape)// RIEGO COBERTURA", Concepto.TIPO_FINANCIAMIENTO),
+            ("300104", "TRACTOR", Concepto.TIPO_FINANCIAMIENTO),
             ("300105", "DEV. MAURO", Concepto.TIPO_FINANCIAMIENTO),
             ("300106", "PAE", Concepto.TIPO_FINANCIAMIENTO),
             ("300107", "NUEVO PAE", Concepto.TIPO_FINANCIAMIENTO),
