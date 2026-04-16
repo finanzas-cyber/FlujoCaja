@@ -1594,5 +1594,41 @@
     "descripcion": "",
     "activo": true
   }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 134,
+  "fields": {
+    "concepto": 4,
+    "anio": 2026,
+    "mes": 9,
+    "monto": "30000000.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 135,
+  "fields": {
+    "concepto": 4,
+    "anio": 2026,
+    "mes": 10,
+    "monto": "30000000000.00",
+    "descripcion": "",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.proyeccion",
+  "pk": 136,
+  "fields": {
+    "concepto": 4,
+    "anio": 2026,
+    "mes": 11,
+    "monto": "0.00",
+    "descripcion": "",
+    "activo": true
+  }
 }
 ]
