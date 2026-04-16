@@ -1566,7 +1566,7 @@
     "concepto": 3,
     "anio": 2026,
     "mes": 9,
-    "monto": "10000000000.00",
+    "monto": "0.00",
     "descripcion": "",
     "activo": true
   }
@@ -1578,7 +1578,7 @@
     "concepto": 3,
     "anio": 2026,
     "mes": 10,
-    "monto": "20000000000.00",
+    "monto": "0.00",
     "descripcion": "",
     "activo": true
   }
@@ -1602,7 +1602,7 @@
     "concepto": 4,
     "anio": 2026,
     "mes": 9,
-    "monto": "30000000.00",
+    "monto": "0.00",
     "descripcion": "",
     "activo": true
   }
@@ -1614,7 +1614,7 @@
     "concepto": 4,
     "anio": 2026,
     "mes": 10,
-    "monto": "30000000000.00",
+    "monto": "0.00",
     "descripcion": "",
     "activo": true
   }
