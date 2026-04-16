@@ -166,6 +166,64 @@ def guardar_proyeccion(request):
         return JsonResponse({"ok": False, "error": str(e)}, status=500)
 
 
+def detalle_movimientos_real(request):
+    if request.method != "GET":
+        return JsonResponse({"ok": False, "error": "Método no permitido"}, status=405)
+
+    try:
+        concepto_id = int((request.GET.get("concepto_id") or "").strip())
+        mes = int((request.GET.get("mes") or "").strip())
+        anio = int((request.GET.get("anio") or "2026").strip())
+
+        concepto = Concepto.objects.get(id=concepto_id)
+
+        movimientos = Movimiento.objects.select_related(
+            "cuenta_banco",
+            "concepto",
+        ).filter(
+            anio=anio,
+            mes=mes,
+            concepto_id=concepto_id,
+        ).exclude(
+            cajcod="0000000000"
+        ).order_by(
+            "fecha",
+            "id",
+        )
+
+        data = []
+        total = Decimal("0")
+
+        for m in movimientos:
+            monto = m.monto
+            total += monto
+            data.append({
+                "fecha": m.fecha.strftime("%d-%m-%Y") if m.fecha else "",
+                "cpbnum": m.cpbnum or "",
+                "cuenta": m.cuenta_banco.codigo if m.cuenta_banco else "",
+                "descripcion": m.descripcion or "",
+                "monto": str(monto),
+            })
+
+        return JsonResponse({
+            "ok": True,
+            "concepto_id": concepto.id,
+            "concepto_codigo": concepto.codigo,
+            "concepto_nombre": concepto.nombre,
+            "anio": anio,
+            "mes": mes,
+            "total": str(total),
+            "movimientos": data,
+        })
+
+    except ValueError:
+        return JsonResponse({"ok": False, "error": "Parámetros inválidos"}, status=400)
+    except Concepto.DoesNotExist:
+        return JsonResponse({"ok": False, "error": "Concepto no existe"}, status=404)
+    except Exception as e:
+        return JsonResponse({"ok": False, "error": str(e)}, status=500)
+
+
 def inicio(request):
     saldo_inicial_enero = Decimal("143498696")
     hoy = timezone.localdate()
