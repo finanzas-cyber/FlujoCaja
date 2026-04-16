@@ -9,10 +9,45 @@ class Command(BaseCommand):
         self.stdout.write("Cargando conceptos...")
 
         conceptos = [
-            ("ING", "INGRESO", Concepto.TIPO_INGRESO),
-            ("EGR", "EGRESO", Concepto.TIPO_EGRESO),
-            ("FIN", "FINANCIAMIENTO", Concepto.TIPO_FINANCIAMIENTO),
-            ("EXC", "EXCLUIR", Concepto.TIPO_EXCLUIR),
+            ("100101", "CULTIVOS ANUALES", Concepto.TIPO_INGRESO),
+            ("100102", "ARANDANO NACIONAL", Concepto.TIPO_INGRESO),
+            ("100103", "MANZANA NACIONAL", Concepto.TIPO_INGRESO),
+            ("100104", "EXPORTACION ARANDANOS", Concepto.TIPO_INGRESO),
+            ("100105", "PACKING MANZANOS", Concepto.TIPO_INGRESO),
+            ("100106", "SERVICIOS", Concepto.TIPO_INGRESO),
+
+            ("200101", "MANO DE OBRA", Concepto.TIPO_EGRESO),
+            ("200102", "IMPOSICIONES", Concepto.TIPO_EGRESO),
+            ("200103", "FINIQUITOS", Concepto.TIPO_EGRESO),
+            ("200104", "TRASLADOS", Concepto.TIPO_EGRESO),
+            ("200105", "MAQUINARIA", Concepto.TIPO_EGRESO),
+            ("200106", "COMBUSTIBLES Y LUBRICANTES", Concepto.TIPO_EGRESO),
+            ("200107", "MANTENCION Y REPARACION", Concepto.TIPO_EGRESO),
+            ("200108", "MATERIALES DE EMBALAJE", Concepto.TIPO_EGRESO),
+            ("200109", "AGROQUIMICOS", Concepto.TIPO_EGRESO),
+            ("200110", "FERTILIZANTES", Concepto.TIPO_EGRESO),
+            ("200111", "RIEGO", Concepto.TIPO_EGRESO),
+            ("200112", "GASTOS GENERALES", Concepto.TIPO_EGRESO),
+            ("200113", "HONORARIOS", Concepto.TIPO_EGRESO),
+            ("200114", "SERVICIOS BASICOS", Concepto.TIPO_EGRESO),
+            ("200115", "SEGUROS", Concepto.TIPO_EGRESO),
+            ("200116", "ARRIENDOS", Concepto.TIPO_EGRESO),
+            ("200117", "CONTRIBUCIONES", Concepto.TIPO_EGRESO),
+            ("200118", "PATENTES Y PERMISOS", Concepto.TIPO_EGRESO),
+            ("200119", "GASTOS BANCARIOS", Concepto.TIPO_EGRESO),
+            ("200120", "INTERESES", Concepto.TIPO_EGRESO),
+            ("200121", "IMPUESTOS", Concepto.TIPO_EGRESO),
+            ("200122", "IVA NO RECUPERABLE", Concepto.TIPO_EGRESO),
+            ("200123", "OTROS EGRESOS", Concepto.TIPO_EGRESO),
+
+            ("800010", "MONEY MARKET", Concepto.TIPO_FINANCIAMIENTO),
+            ("800020", "PRESTAMOS", Concepto.TIPO_FINANCIAMIENTO),
+            ("800030", "APORTES", Concepto.TIPO_FINANCIAMIENTO),
+            ("800040", "RETIROS", Concepto.TIPO_FINANCIAMIENTO),
+            ("800050", "TRASPASOS", Concepto.TIPO_FINANCIAMIENTO),
+            ("800100", "RECUPERACION IVA EXP", Concepto.TIPO_INGRESO),
+
+            ("0000000000", "EXCLUIR", Concepto.TIPO_EXCLUIR),
         ]
 
         for codigo, nombre, tipo in conceptos:
@@ -25,9 +60,23 @@ class Command(BaseCommand):
                 },
             )
             if created:
-                self.stdout.write(f"✔ Concepto creado: {codigo}")
+                self.stdout.write(f"Concepto creado: {codigo}")
             else:
-                self.stdout.write(f"- Ya existe: {codigo}")
+                actualizado = False
+                if obj.nombre != nombre:
+                    obj.nombre = nombre
+                    actualizado = True
+                if obj.tipo != tipo:
+                    obj.tipo = tipo
+                    actualizado = True
+                if obj.activo is not True:
+                    obj.activo = True
+                    actualizado = True
+                if actualizado:
+                    obj.save()
+                    self.stdout.write(f"Concepto actualizado: {codigo}")
+                else:
+                    self.stdout.write(f"- Ya existe: {codigo}")
 
         self.stdout.write("Cargando cuentas banco...")
 
@@ -53,8 +102,19 @@ class Command(BaseCommand):
                 },
             )
             if created:
-                self.stdout.write(f"✔ Cuenta banco creada: {codigo}")
+                self.stdout.write(f"Cuenta banco creada: {codigo}")
             else:
-                self.stdout.write(f"- Ya existe cuenta banco: {codigo}")
+                actualizado = False
+                if obj.nombre != nombre:
+                    obj.nombre = nombre
+                    actualizado = True
+                if obj.activo is not True:
+                    obj.activo = True
+                    actualizado = True
+                if actualizado:
+                    obj.save()
+                    self.stdout.write(f"Cuenta banco actualizada: {codigo}")
+                else:
+                    self.stdout.write(f"- Ya existe cuenta banco: {codigo}")
 
-        self.stdout.write(self.style.SUCCESS("✔ Datos maestros cargados"))
+        self.stdout.write(self.style.SUCCESS("Datos maestros cargados"))
