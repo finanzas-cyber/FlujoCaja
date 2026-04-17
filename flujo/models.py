@@ -101,3 +101,16 @@ class Proyeccion(models.Model):
 
     def __str__(self):
         return f"{self.anio}-{self.mes:02d} | {self.concepto.codigo} | {self.monto}"
+
+
+class ConfiguracionFlujo(models.Model):
+    saldo_inicial_base = models.DecimalField(max_digits=18, decimal_places=2, default=0)
+    money_market_inicial_base = models.DecimalField(max_digits=18, decimal_places=2, default=0)
+    actualizado_en = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Configuración flujo"
+        verbose_name_plural = "Configuración flujo"
+
+    def __str__(self):
+        return "Configuración flujo"

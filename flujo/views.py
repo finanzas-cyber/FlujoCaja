@@ -13,7 +13,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.utils import timezone
 
-from .models import Movimiento, Concepto, Proyeccion
+from .models import Movimiento, Concepto, Proyeccion, ConfiguracionFlujo
 
 
 def actualizar_softland(request):
@@ -215,6 +215,34 @@ def guardar_movimiento_real(request):
         return JsonResponse({"ok": False, "error": str(e)}, status=500)
 
 
+def guardar_configuracion_flujo(request):
+    if request.method != "POST":
+        return JsonResponse({"ok": False, "error": "Método no permitido"}, status=405)
+
+    try:
+        campo = (request.POST.get("campo") or "").strip()
+        monto = Decimal((request.POST.get("monto") or "0").strip())
+
+        if campo not in ["saldo_inicial_base", "money_market_inicial_base"]:
+            return JsonResponse({"ok": False, "error": "Campo inválido"}, status=400)
+
+        config, _ = ConfiguracionFlujo.objects.get_or_create(
+            id=1,
+            defaults={
+                "saldo_inicial_base": Decimal("143498696"),
+                "money_market_inicial_base": Decimal("0"),
+            },
+        )
+
+        setattr(config, campo, monto)
+        config.save()
+
+        return JsonResponse({"ok": True})
+
+    except Exception as e:
+        return JsonResponse({"ok": False, "error": str(e)}, status=500)
+
+
 def detalle_movimientos_real(request):
     if request.method != "GET":
         return JsonResponse({"ok": False, "error": "Método no permitido"}, status=405)
@@ -274,7 +302,17 @@ def detalle_movimientos_real(request):
 
 
 def inicio(request):
-    saldo_inicial_enero = Decimal("143498696")
+    config, _ = ConfiguracionFlujo.objects.get_or_create(
+        id=1,
+        defaults={
+            "saldo_inicial_base": Decimal("143498696"),
+            "money_market_inicial_base": Decimal("0"),
+        },
+    )
+
+    saldo_inicial_base = config.saldo_inicial_base
+    money_market_inicial_base = config.money_market_inicial_base
+
     hoy = timezone.localdate()
     anio_actual = 2026
     mes_actual = hoy.month if hoy.year == anio_actual else 4
@@ -574,8 +612,10 @@ def inicio(request):
     saldo_total_tesoreria_fila = {"nombre": "SALDO TOTAL TESORERÍA", "tipo_fila": "saldo_total", "columnas": [], "total": Decimal("0")}
     fila_diferencia_tc = {"nombre": "DIFERENCIA T/C", "tipo_fila": "saldo", "columnas": [], "total": Decimal("0")}
 
-    saldo_actual = saldo_inicial_enero
-    money_market_acumulado_actual = Decimal("0")
+    saldo_actual = saldo_inicial_base
+    money_market_acumulado_actual = money_market_inicial_base
+
+    primer_periodo = meses_base[0][:2]
 
     for columna in columnas_flujo:
         clave_periodo = (columna["anio"], columna["mes_numero"])
@@ -601,8 +641,9 @@ def inicio(request):
         saldo_disponible_banco_mes = saldo_inicial_mes + neto_total_mes
         saldo_actual = saldo_disponible_banco_mes
 
-        money_market_acumulado_actual += (money_market_mes * Decimal("-1"))
-        saldo_total_tesoreria_mes = saldo_disponible_banco_mes + money_market_acumulado_actual
+        money_market_acumulado_mes = money_market_acumulado_actual + (money_market_mes * Decimal("-1"))
+        money_market_acumulado_actual = money_market_acumulado_mes
+        saldo_total_tesoreria_mes = saldo_disponible_banco_mes + money_market_acumulado_mes
 
         fila_diferencia_tc["columnas"].append({
             "clave": columna["clave"],
@@ -692,6 +733,7 @@ def inicio(request):
             "es_mes_actual": columna["es_mes_actual"],
             "monto": saldo_inicial_mes,
             "tipo_fila": "saldo_inicial",
+            "es_base_editable": clave_periodo == primer_periodo,
         })
 
         saldo_disponible_banco_fila["columnas"].append({
@@ -714,8 +756,9 @@ def inicio(request):
             "etiqueta": columna["etiqueta"],
             "origen": columna["origen"],
             "es_mes_actual": columna["es_mes_actual"],
-            "monto": money_market_acumulado_actual,
+            "monto": money_market_acumulado_mes,
             "tipo_fila": "money_market",
+            "es_base_editable": clave_periodo == primer_periodo,
         })
 
         saldo_total_tesoreria_fila["columnas"].append({
@@ -752,7 +795,8 @@ def inicio(request):
         "saldo_disponible_banco_fila": saldo_disponible_banco_fila,
         "money_market_acumulado_fila": money_market_acumulado_fila,
         "saldo_total_tesoreria_fila": saldo_total_tesoreria_fila,
-        "saldo_inicial_enero": saldo_inicial_enero,
+        "saldo_inicial_base": saldo_inicial_base,
+        "money_market_inicial_base": money_market_inicial_base,
         "mes_actual_nombre": "abr-26" if mes_actual == 4 else f"{mes_actual:02d}-26",
         "diferencia_tc_concepto_id": diferencia_tc_concepto_id,
         "fila_diferencia_tc": fila_diferencia_tc,

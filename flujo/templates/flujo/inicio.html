@@ -636,7 +636,14 @@
                         data-anio="{{ m.anio }}"
                         data-value="{{ m.monto }}"
                     >
-                        {% if m.origen == 'REAL' %}
+                        {% if m.es_base_editable %}
+                            <input
+                                type="text"
+                                class="input-proyectado input-comodin"
+                                data-config-campo="saldo_inicial_base"
+                                value="{{ m.monto }}"
+                            >
+                        {% elif m.origen == 'REAL' %}
                             <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
                         {% else %}
                             <input
@@ -929,7 +936,14 @@
                         data-mes="{{ m.mes_numero }}"
                         data-anio="{{ m.anio }}"
                     >
-                        {% if m.origen == 'REAL' %}
+                        {% if m.es_base_editable %}
+                            <input
+                                type="text"
+                                class="input-proyectado input-comodin"
+                                data-config-campo="money_market_inicial_base"
+                                value="{{ m.monto }}"
+                            >
+                        {% elif m.origen == 'REAL' %}
                             <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
                         {% else %}
                             <input
@@ -1099,10 +1113,49 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         input.addEventListener("blur", function () {
+            var configCampo = input.dataset.configCampo;
             var conceptoId = input.dataset.conceptoId;
             var mes = input.dataset.mes;
             var anio = input.dataset.anio;
             var origen = input.dataset.origen;
+            var valor = limpiarNumero(input.value);
+
+            if (configCampo) {
+                fetch("{% url 'guardar_configuracion_flujo' %}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "X-CSRFToken": obtenerCsrf(),
+                    },
+                    body: new URLSearchParams({
+                        campo: configCampo,
+                        monto: valor
+                    }),
+                })
+                .then(function (r) { return r.json(); })
+                .then(function (data) {
+                    if (!data.ok) {
+                        throw new Error(data.error || "Error al guardar");
+                    }
+
+                    input.classList.add("guardado-ok");
+                    input.value = valor === 0 ? "" : formatear(valor);
+                    marcarNegativoElemento(input, valor);
+
+                    setTimeout(function () {
+                        input.classList.remove("guardado-ok");
+                    }, 800);
+
+                    location.reload();
+                })
+                .catch(function () {
+                    input.classList.add("guardado-error");
+                    input.value = valor === 0 ? "" : formatear(valor);
+                    marcarNegativoElemento(input, valor);
+                });
+
+                return;
+            }
 
             if (!conceptoId || !mes || !anio) {
                 var valorLocal = limpiarNumero(input.value);
@@ -1110,8 +1163,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 marcarNegativoElemento(input, valorLocal);
                 return;
             }
-
-            var valor = limpiarNumero(input.value);
 
             var url = origen === "REAL"
                 ? "{% url 'guardar_movimiento_real' %}"
