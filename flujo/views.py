@@ -175,6 +175,46 @@ def guardar_proyeccion(request):
         return JsonResponse({"ok": False, "error": str(e)}, status=500)
 
 
+def guardar_movimiento_real(request):
+    if request.method != "POST":
+        return JsonResponse({"ok": False, "error": "Método no permitido"}, status=405)
+
+    try:
+        concepto_id = int((request.POST.get("concepto_id") or "").strip())
+        mes = int((request.POST.get("mes") or "").strip())
+        anio = int((request.POST.get("anio") or "").strip())
+        monto = Decimal((request.POST.get("monto") or "0").strip())
+
+        movimientos = Movimiento.objects.filter(
+            concepto_id=concepto_id,
+            mes=mes,
+            anio=anio,
+        ).exclude(cajcod="0000000000").order_by("fecha", "id")
+
+        if not movimientos.exists():
+            return JsonResponse({"ok": False, "error": "No hay movimientos para editar"}, status=404)
+
+        total_actual = sum((m.monto for m in movimientos), Decimal("0"))
+        diferencia = monto - total_actual
+
+        if diferencia == 0:
+            return JsonResponse({"ok": True})
+
+        movimiento = movimientos.first()
+
+        if diferencia > 0:
+            movimiento.mov_debe += diferencia
+        else:
+            movimiento.mov_haber += abs(diferencia)
+
+        movimiento.save()
+
+        return JsonResponse({"ok": True})
+
+    except Exception as e:
+        return JsonResponse({"ok": False, "error": str(e)}, status=500)
+
+
 def detalle_movimientos_real(request):
     if request.method != "GET":
         return JsonResponse({"ok": False, "error": "Método no permitido"}, status=405)
