@@ -579,28 +579,37 @@
             </tr>
 
             <tr class="saldo">
-    <td class="texto">DIFERENCIA T/C</td>
-    {% for col in columnas_flujo %}
-        <td
-            class="numero semestre-col proyectado
-            {% if col.anio == anio_actual and col.mes_numero == mes_actual %}abril-bloque{% endif %}
-            "
-            data-mes="{{ col.mes_numero }}"
-            data-anio="{{ col.anio }}"
-        >
-            <input
-                type="text"
-                class="input-proyectado"
-                data-concepto-id="999999"
-                data-mes="{{ col.mes_numero }}"
-                data-anio="{{ col.anio }}"
-                value="0"
-                style="border:none;background:transparent;text-align:right;width:100%;"
-            >
-        </td>
-    {% endfor %}
-    <td></td>
-</tr>
+                <td class="texto">{{ fila_diferencia_tc.nombre }}</td>
+                {% for m in fila_diferencia_tc.columnas %}
+                    <td
+                        class="numero semestre-col
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.anio == anio_actual and m.mes_numero == mes_actual %}abril-bloque{% endif %}
+                        {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
+                        "
+                        data-mes="{{ m.mes_numero }}"
+                        data-anio="{{ m.anio }}"
+                    >
+                        {% if m.origen == 'REAL' %}
+                            <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                        {% else %}
+                            <input
+                                type="text"
+                                class="input-proyectado"
+                                data-concepto-id="{{ diferencia_tc_concepto_id }}"
+                                data-mes="{{ m.mes_numero }}"
+                                data-anio="{{ m.anio }}"
+                                value="{{ m.monto }}"
+                                style="border:none;background:transparent;text-align:right;width:100%;"
+                            >
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ fila_diferencia_tc.total }}">{{ fila_diferencia_tc.total }}</td>
+            </tr>
+
+            <tr class="saldo">
+                <td class="texto">{{ saldo_inicial_fila.nombre }}</td>
                 {% for m in saldo_inicial_fila.columnas %}
                     <td
                         class="numero semestre-col
@@ -1198,6 +1207,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 setTimeout(function () {
                     input.classList.remove("guardado-ok");
                 }, 1200);
+
+                window.location.reload();
             })
             .catch(function () {
                 input.classList.remove("guardado-ok");

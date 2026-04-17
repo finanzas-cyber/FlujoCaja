@@ -400,13 +400,13 @@ def inicio(request):
 
     montos_reales_por_concepto_mes = {}
     montos_proyectados_por_concepto_mes = {}
-    diferencia_tc_valores = {}
 
     totales_reales_mensuales = {}
     totales_proyectados_mensuales = {}
 
     money_market_real_mensual = {}
     money_market_proyectado_mensual = {}
+    diferencia_tc_valores = {}
 
     for anio_columna, mes_numero, _ in meses_base:
         clave_periodo = (anio_columna, mes_numero)
@@ -530,6 +530,7 @@ def inicio(request):
     saldo_disponible_banco_fila = {"nombre": "SALDO DISPONIBLE BANCO", "tipo_fila": "saldo_final", "columnas": [], "total": Decimal("0")}
     money_market_acumulado_fila = {"nombre": "MONEY MARKET ACUMULADO", "tipo_fila": "money_market", "columnas": [], "total": Decimal("0")}
     saldo_total_tesoreria_fila = {"nombre": "SALDO TOTAL TESORERÍA", "tipo_fila": "saldo_total", "columnas": [], "total": Decimal("0")}
+    fila_diferencia_tc = {"nombre": "DIFERENCIA T/C", "tipo_fila": "saldo", "columnas": [], "total": Decimal("0")}
 
     saldo_actual = saldo_inicial_enero
     money_market_acumulado_actual = Decimal("0")
@@ -542,11 +543,13 @@ def inicio(request):
             egresos_mes = totales_reales_mensuales[clave_periodo]["egresos"]
             financiamiento_mes = totales_reales_mensuales[clave_periodo]["financiamiento"]
             money_market_mes = money_market_real_mensual[clave_periodo]
+            diferencia_tc_mes = Decimal("0")
         else:
             ingresos_mes = totales_proyectados_mensuales[clave_periodo]["ingresos"]
             egresos_mes = totales_proyectados_mensuales[clave_periodo]["egresos"]
             financiamiento_mes = totales_proyectados_mensuales[clave_periodo]["financiamiento"]
             money_market_mes = money_market_proyectado_mensual[clave_periodo]
+            diferencia_tc_mes = diferencia_tc_valores[clave_periodo]
 
         neto_operacional_mes = ingresos_mes + egresos_mes
         neto_financiamiento_mes = financiamiento_mes
@@ -558,6 +561,19 @@ def inicio(request):
 
         money_market_acumulado_actual += (money_market_mes * Decimal("-1"))
         saldo_total_tesoreria_mes = saldo_disponible_banco_mes + money_market_acumulado_actual
+
+        fila_diferencia_tc["columnas"].append({
+            "clave": columna["clave"],
+            "anio": columna["anio"],
+            "mes_numero": columna["mes_numero"],
+            "mes_nombre": columna["mes_nombre"],
+            "etiqueta": columna["etiqueta"],
+            "origen": columna["origen"],
+            "es_mes_actual": columna["es_mes_actual"],
+            "monto": diferencia_tc_mes,
+            "tipo_fila": "saldo",
+        })
+        fila_diferencia_tc["total"] += diferencia_tc_mes
 
         total_ingresos_fila["columnas"].append({
             "clave": columna["clave"],
@@ -697,5 +713,5 @@ def inicio(request):
         "saldo_inicial_enero": saldo_inicial_enero,
         "mes_actual_nombre": "abr-26" if mes_actual == 4 else f"{mes_actual:02d}-26",
         "diferencia_tc_concepto_id": diferencia_tc_concepto_id,
-        "diferencia_tc_valores": diferencia_tc_valores,
+        "fila_diferencia_tc": fila_diferencia_tc,
     })
