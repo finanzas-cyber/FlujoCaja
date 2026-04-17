@@ -8,7 +8,7 @@ from flujo.models import Concepto, CuentaBanco, Movimiento
 
 
 class Command(BaseCommand):
-    help = "Importa movimientos desde Softland CWMOVIM solo para 2026"
+    help = "Importa movimientos desde Softland CWMOVIM para 2025 S2 y 2026"
 
     def handle(self, *args, **kwargs):
         ruta_mdb = r"W:\SOFTLAND\DATOS\SLHOE5\Sodatos.mdb"
@@ -46,7 +46,10 @@ class Command(BaseCommand):
                 MovGlosa,
                 CajCod
             FROM CWMOVIM
-            WHERE CpbAno = '2026'
+            WHERE
+                (CpbAno = '2025' AND Val(CpbMes) >= 7)
+                OR
+                (CpbAno = '2026')
             ORDER BY CpbFec, CpbNum
         """)
 

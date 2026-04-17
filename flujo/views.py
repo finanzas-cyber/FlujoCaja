@@ -137,15 +137,24 @@ def guardar_proyeccion(request):
         concepto_id = (request.POST.get("concepto_id") or "").strip()
         mes = (request.POST.get("mes") or "").strip()
         monto = (request.POST.get("monto") or "").strip()
+        anio = (request.POST.get("anio") or "").strip()
 
         if not concepto_id or not mes:
             return JsonResponse({"ok": False, "error": "Faltan datos"}, status=400)
 
         concepto = Concepto.objects.get(id=int(concepto_id))
 
+        if anio:
+            anio_proyeccion = int(anio)
+        else:
+            mes_numero = int(mes)
+            anio_proyeccion = 2026
+            if 1 <= mes_numero <= 12:
+                anio_proyeccion = 2026
+
         proyeccion, _ = Proyeccion.objects.get_or_create(
             concepto=concepto,
-            anio=2026,
+            anio=anio_proyeccion,
             mes=int(mes),
             defaults={
                 "monto": Decimal("0"),
@@ -263,44 +272,81 @@ def inicio(request):
 
     movimientos = movimientos.order_by(*ordenes_validos.get(orden, ["-fecha", "-id"]))
 
-    movimientos_2026 = Movimiento.objects.select_related("concepto").filter(
-        anio=anio_actual
-    ).exclude(cajcod="0000000000").order_by("fecha", "id")
+    movimientos_periodo = list(
+        Movimiento.objects.select_related("concepto").filter(
+            Q(anio=2025, mes__gte=7) | Q(anio=2026)
+        ).exclude(cajcod="0000000000").order_by("anio", "mes", "fecha", "id")
+    )
 
-    proyecciones_2026 = Proyeccion.objects.select_related("concepto").filter(
-        anio=anio_actual,
-        activo=True,
-    ).order_by("mes", "concepto__codigo", "id")
+    proyecciones_periodo = list(
+        Proyeccion.objects.select_related("concepto").filter(
+            Q(anio=2025, mes__gte=7) | Q(anio=2026),
+            activo=True,
+        ).order_by("anio", "mes", "concepto__codigo", "id")
+    )
 
-    meses_base = OrderedDict([
-        (1, "ene-26"),
-        (2, "feb-26"),
-        (3, "mar-26"),
-        (4, "abr-26"),
-        (5, "may-26"),
-        (6, "jun-26"),
-        (7, "jul-26"),
-        (8, "ago-26"),
-        (9, "sep-26"),
-        (10, "oct-26"),
-        (11, "nov-26"),
-        (12, "dic-26"),
-    ])
+    meses_base = [
+        (2025, 7, "jul-25"),
+        (2025, 8, "ago-25"),
+        (2025, 9, "sep-25"),
+        (2025, 10, "oct-25"),
+        (2025, 11, "nov-25"),
+        (2025, 12, "dic-25"),
+        (2026, 1, "ene-26"),
+        (2026, 2, "feb-26"),
+        (2026, 3, "mar-26"),
+        (2026, 4, "abr-26"),
+        (2026, 5, "may-26"),
+        (2026, 6, "jun-26"),
+        (2026, 7, "jul-26"),
+        (2026, 8, "ago-26"),
+        (2026, 9, "sep-26"),
+        (2026, 10, "oct-26"),
+        (2026, 11, "nov-26"),
+        (2026, 12, "dic-26"),
+    ]
+
+    periodos_con_reales = {(m.anio, m.mes) for m in movimientos_periodo}
 
     columnas_flujo = []
-    for mes_numero, mes_nombre in meses_base.items():
-        if mes_numero < mes_actual:
+    for anio_columna, mes_numero, mes_nombre in meses_base:
+        periodo = (anio_columna, mes_numero)
+
+        if anio_columna == 2025:
+            if periodo in periodos_con_reales:
+                columnas_flujo.append({
+                    "clave": f"{anio_columna}_{mes_numero}_real",
+                    "anio": anio_columna,
+                    "mes_numero": mes_numero,
+                    "mes_nombre": mes_nombre,
+                    "etiqueta": "REAL",
+                    "origen": "REAL",
+                    "es_mes_actual": False,
+                })
+            else:
+                columnas_flujo.append({
+                    "clave": f"{anio_columna}_{mes_numero}_proyectado",
+                    "anio": anio_columna,
+                    "mes_numero": mes_numero,
+                    "mes_nombre": mes_nombre,
+                    "etiqueta": "PROY.",
+                    "origen": "PROYECTADO",
+                    "es_mes_actual": False,
+                })
+        elif anio_columna < anio_actual or (anio_columna == anio_actual and mes_numero < mes_actual):
             columnas_flujo.append({
-                "clave": f"{mes_numero}_real",
+                "clave": f"{anio_columna}_{mes_numero}_real",
+                "anio": anio_columna,
                 "mes_numero": mes_numero,
                 "mes_nombre": mes_nombre,
                 "etiqueta": "REAL",
                 "origen": "REAL",
                 "es_mes_actual": False,
             })
-        elif mes_numero == mes_actual:
+        elif anio_columna == anio_actual and mes_numero == mes_actual:
             columnas_flujo.append({
-                "clave": f"{mes_numero}_real",
+                "clave": f"{anio_columna}_{mes_numero}_real",
+                "anio": anio_columna,
                 "mes_numero": mes_numero,
                 "mes_nombre": mes_nombre,
                 "etiqueta": "REAL",
@@ -308,7 +354,8 @@ def inicio(request):
                 "es_mes_actual": True,
             })
             columnas_flujo.append({
-                "clave": f"{mes_numero}_proyectado",
+                "clave": f"{anio_columna}_{mes_numero}_proyectado",
+                "anio": anio_columna,
                 "mes_numero": mes_numero,
                 "mes_nombre": mes_nombre,
                 "etiqueta": "PROY.",
@@ -317,7 +364,8 @@ def inicio(request):
             })
         else:
             columnas_flujo.append({
-                "clave": f"{mes_numero}_proyectado",
+                "clave": f"{anio_columna}_{mes_numero}_proyectado",
+                "anio": anio_columna,
                 "mes_numero": mes_numero,
                 "mes_nombre": mes_nombre,
                 "etiqueta": "PROY.",
@@ -356,59 +404,67 @@ def inicio(request):
     money_market_real_mensual = {}
     money_market_proyectado_mensual = {}
 
-    for mes in meses_base:
-        totales_reales_mensuales[mes] = {
-            "ingresos": Decimal("0"),
-            "egresos": Decimal("0"),
-            "financiamiento": Decimal("0"),
-            "excluir": Decimal("0"),
-        }
-        totales_proyectados_mensuales[mes] = {
-            "ingresos": Decimal("0"),
-            "egresos": Decimal("0"),
-            "financiamiento": Decimal("0"),
-            "excluir": Decimal("0"),
-        }
-        money_market_real_mensual[mes] = Decimal("0")
-        money_market_proyectado_mensual[mes] = Decimal("0")
+    for anio_columna, mes_numero, _ in meses_base:
+        clave_periodo = (anio_columna, mes_numero)
 
-    for m in movimientos_2026:
-        if not m.concepto or m.mes not in meses_base:
+        totales_reales_mensuales[clave_periodo] = {
+            "ingresos": Decimal("0"),
+            "egresos": Decimal("0"),
+            "financiamiento": Decimal("0"),
+            "excluir": Decimal("0"),
+        }
+        totales_proyectados_mensuales[clave_periodo] = {
+            "ingresos": Decimal("0"),
+            "egresos": Decimal("0"),
+            "financiamiento": Decimal("0"),
+            "excluir": Decimal("0"),
+        }
+        money_market_real_mensual[clave_periodo] = Decimal("0")
+        money_market_proyectado_mensual[clave_periodo] = Decimal("0")
+
+    periodos_validos = {(anio_columna, mes_numero) for anio_columna, mes_numero, _ in meses_base}
+
+    for m in movimientos_periodo:
+        if not m.concepto or (m.anio, m.mes) not in periodos_validos:
             continue
 
-        key = (m.concepto_id, m.mes)
+        key = (m.concepto_id, m.anio, m.mes)
+        clave_periodo = (m.anio, m.mes)
+
         montos_reales_por_concepto_mes[key] = montos_reales_por_concepto_mes.get(key, Decimal("0")) + m.monto
 
         if m.concepto.tipo == Concepto.TIPO_INGRESO:
-            totales_reales_mensuales[m.mes]["ingresos"] += m.monto
+            totales_reales_mensuales[clave_periodo]["ingresos"] += m.monto
         elif m.concepto.tipo == Concepto.TIPO_EGRESO:
-            totales_reales_mensuales[m.mes]["egresos"] += m.monto
+            totales_reales_mensuales[clave_periodo]["egresos"] += m.monto
         elif m.concepto.tipo == Concepto.TIPO_FINANCIAMIENTO:
-            totales_reales_mensuales[m.mes]["financiamiento"] += m.monto
+            totales_reales_mensuales[clave_periodo]["financiamiento"] += m.monto
         elif m.concepto.tipo == Concepto.TIPO_EXCLUIR:
-            totales_reales_mensuales[m.mes]["excluir"] += m.monto
+            totales_reales_mensuales[clave_periodo]["excluir"] += m.monto
 
         if money_market_concepto_id and m.concepto_id == money_market_concepto_id:
-            money_market_real_mensual[m.mes] += m.monto
+            money_market_real_mensual[clave_periodo] += m.monto
 
-    for p in proyecciones_2026:
-        if not p.concepto or p.mes not in meses_base:
+    for p in proyecciones_periodo:
+        if not p.concepto or (p.anio, p.mes) not in periodos_validos:
             continue
 
-        key = (p.concepto_id, p.mes)
+        key = (p.concepto_id, p.anio, p.mes)
+        clave_periodo = (p.anio, p.mes)
+
         montos_proyectados_por_concepto_mes[key] = montos_proyectados_por_concepto_mes.get(key, Decimal("0")) + p.monto
 
         if p.concepto.tipo == Concepto.TIPO_INGRESO:
-            totales_proyectados_mensuales[p.mes]["ingresos"] += p.monto
+            totales_proyectados_mensuales[clave_periodo]["ingresos"] += p.monto
         elif p.concepto.tipo == Concepto.TIPO_EGRESO:
-            totales_proyectados_mensuales[p.mes]["egresos"] += p.monto
+            totales_proyectados_mensuales[clave_periodo]["egresos"] += p.monto
         elif p.concepto.tipo == Concepto.TIPO_FINANCIAMIENTO:
-            totales_proyectados_mensuales[p.mes]["financiamiento"] += p.monto
+            totales_proyectados_mensuales[clave_periodo]["financiamiento"] += p.monto
         elif p.concepto.tipo == Concepto.TIPO_EXCLUIR:
-            totales_proyectados_mensuales[p.mes]["excluir"] += p.monto
+            totales_proyectados_mensuales[clave_periodo]["excluir"] += p.monto
 
         if money_market_concepto_id and p.concepto_id == money_market_concepto_id:
-            money_market_proyectado_mensual[p.mes] += p.monto
+            money_market_proyectado_mensual[clave_periodo] += p.monto
 
     def construir_filas(conceptos, tipo_fila):
         filas = []
@@ -426,17 +482,18 @@ def inicio(request):
             for columna in columnas_flujo:
                 if columna["origen"] == "REAL":
                     monto = montos_reales_por_concepto_mes.get(
-                        (concepto.id, columna["mes_numero"]),
+                        (concepto.id, columna["anio"], columna["mes_numero"]),
                         Decimal("0"),
                     )
                 else:
                     monto = montos_proyectados_por_concepto_mes.get(
-                        (concepto.id, columna["mes_numero"]),
+                        (concepto.id, columna["anio"], columna["mes_numero"]),
                         Decimal("0"),
                     )
 
                 fila["columnas"].append({
                     "clave": columna["clave"],
+                    "anio": columna["anio"],
                     "mes_numero": columna["mes_numero"],
                     "mes_nombre": columna["mes_nombre"],
                     "etiqueta": columna["etiqueta"],
@@ -469,18 +526,18 @@ def inicio(request):
     money_market_acumulado_actual = Decimal("0")
 
     for columna in columnas_flujo:
-        mes_numero = columna["mes_numero"]
+        clave_periodo = (columna["anio"], columna["mes_numero"])
 
         if columna["origen"] == "REAL":
-            ingresos_mes = totales_reales_mensuales[mes_numero]["ingresos"]
-            egresos_mes = totales_reales_mensuales[mes_numero]["egresos"]
-            financiamiento_mes = totales_reales_mensuales[mes_numero]["financiamiento"]
-            money_market_mes = money_market_real_mensual[mes_numero]
+            ingresos_mes = totales_reales_mensuales[clave_periodo]["ingresos"]
+            egresos_mes = totales_reales_mensuales[clave_periodo]["egresos"]
+            financiamiento_mes = totales_reales_mensuales[clave_periodo]["financiamiento"]
+            money_market_mes = money_market_real_mensual[clave_periodo]
         else:
-            ingresos_mes = totales_proyectados_mensuales[mes_numero]["ingresos"]
-            egresos_mes = totales_proyectados_mensuales[mes_numero]["egresos"]
-            financiamiento_mes = totales_proyectados_mensuales[mes_numero]["financiamiento"]
-            money_market_mes = money_market_proyectado_mensual[mes_numero]
+            ingresos_mes = totales_proyectados_mensuales[clave_periodo]["ingresos"]
+            egresos_mes = totales_proyectados_mensuales[clave_periodo]["egresos"]
+            financiamiento_mes = totales_proyectados_mensuales[clave_periodo]["financiamiento"]
+            money_market_mes = money_market_proyectado_mensual[clave_periodo]
 
         neto_operacional_mes = ingresos_mes + egresos_mes
         neto_financiamiento_mes = financiamiento_mes
@@ -495,7 +552,8 @@ def inicio(request):
 
         total_ingresos_fila["columnas"].append({
             "clave": columna["clave"],
-            "mes_numero": mes_numero,
+            "anio": columna["anio"],
+            "mes_numero": columna["mes_numero"],
             "mes_nombre": columna["mes_nombre"],
             "etiqueta": columna["etiqueta"],
             "origen": columna["origen"],
@@ -507,7 +565,8 @@ def inicio(request):
 
         total_egresos_fila["columnas"].append({
             "clave": columna["clave"],
-            "mes_numero": mes_numero,
+            "anio": columna["anio"],
+            "mes_numero": columna["mes_numero"],
             "mes_nombre": columna["mes_nombre"],
             "etiqueta": columna["etiqueta"],
             "origen": columna["origen"],
@@ -519,7 +578,8 @@ def inicio(request):
 
         flujo_operacional_fila["columnas"].append({
             "clave": columna["clave"],
-            "mes_numero": mes_numero,
+            "anio": columna["anio"],
+            "mes_numero": columna["mes_numero"],
             "mes_nombre": columna["mes_nombre"],
             "etiqueta": columna["etiqueta"],
             "origen": columna["origen"],
@@ -531,7 +591,8 @@ def inicio(request):
 
         flujo_financiamiento_fila["columnas"].append({
             "clave": columna["clave"],
-            "mes_numero": mes_numero,
+            "anio": columna["anio"],
+            "mes_numero": columna["mes_numero"],
             "mes_nombre": columna["mes_nombre"],
             "etiqueta": columna["etiqueta"],
             "origen": columna["origen"],
@@ -543,7 +604,8 @@ def inicio(request):
 
         total_mes_fila["columnas"].append({
             "clave": columna["clave"],
-            "mes_numero": mes_numero,
+            "anio": columna["anio"],
+            "mes_numero": columna["mes_numero"],
             "mes_nombre": columna["mes_nombre"],
             "etiqueta": columna["etiqueta"],
             "origen": columna["origen"],
@@ -555,7 +617,8 @@ def inicio(request):
 
         saldo_inicial_fila["columnas"].append({
             "clave": columna["clave"],
-            "mes_numero": mes_numero,
+            "anio": columna["anio"],
+            "mes_numero": columna["mes_numero"],
             "mes_nombre": columna["mes_nombre"],
             "etiqueta": columna["etiqueta"],
             "origen": columna["origen"],
@@ -566,7 +629,8 @@ def inicio(request):
 
         saldo_disponible_banco_fila["columnas"].append({
             "clave": columna["clave"],
-            "mes_numero": mes_numero,
+            "anio": columna["anio"],
+            "mes_numero": columna["mes_numero"],
             "mes_nombre": columna["mes_nombre"],
             "etiqueta": columna["etiqueta"],
             "origen": columna["origen"],
@@ -577,7 +641,8 @@ def inicio(request):
 
         money_market_acumulado_fila["columnas"].append({
             "clave": columna["clave"],
-            "mes_numero": mes_numero,
+            "anio": columna["anio"],
+            "mes_numero": columna["mes_numero"],
             "mes_nombre": columna["mes_nombre"],
             "etiqueta": columna["etiqueta"],
             "origen": columna["origen"],
@@ -588,7 +653,8 @@ def inicio(request):
 
         saldo_total_tesoreria_fila["columnas"].append({
             "clave": columna["clave"],
-            "mes_numero": mes_numero,
+            "anio": columna["anio"],
+            "mes_numero": columna["mes_numero"],
             "mes_nombre": columna["mes_nombre"],
             "etiqueta": columna["etiqueta"],
             "origen": columna["origen"],
@@ -597,9 +663,13 @@ def inicio(request):
             "tipo_fila": "saldo_total",
         })
 
+    meses_para_template = OrderedDict()
+    for anio_columna, mes_numero, mes_nombre in meses_base:
+        meses_para_template[f"{anio_columna}-{mes_numero}"] = mes_nombre
+
     return render(request, "flujo/inicio.html", {
         "movimientos": movimientos,
-        "meses": list(meses_base.items()),
+        "meses": list(meses_para_template.items()),
         "columnas_flujo": columnas_flujo,
         "mes_actual": mes_actual,
         "anio_actual": anio_actual,
@@ -616,5 +686,5 @@ def inicio(request):
         "money_market_acumulado_fila": money_market_acumulado_fila,
         "saldo_total_tesoreria_fila": saldo_total_tesoreria_fila,
         "saldo_inicial_enero": saldo_inicial_enero,
-        "mes_actual_nombre": meses_base[mes_actual],
+        "mes_actual_nombre": "abr-26" if mes_actual == 4 else f"{mes_actual:02d}-26",
     })
