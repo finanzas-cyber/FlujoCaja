@@ -395,8 +395,12 @@ def inicio(request):
     money_market_concepto = Concepto.objects.filter(codigo="800010").first()
     money_market_concepto_id = money_market_concepto.id if money_market_concepto else None
 
+    diferencia_tc_concepto = Concepto.objects.filter(codigo="999999").first()
+    diferencia_tc_concepto_id = diferencia_tc_concepto.id if diferencia_tc_concepto else None
+
     montos_reales_por_concepto_mes = {}
     montos_proyectados_por_concepto_mes = {}
+    diferencia_tc_valores = {}
 
     totales_reales_mensuales = {}
     totales_proyectados_mensuales = {}
@@ -421,6 +425,7 @@ def inicio(request):
         }
         money_market_real_mensual[clave_periodo] = Decimal("0")
         money_market_proyectado_mensual[clave_periodo] = Decimal("0")
+        diferencia_tc_valores[clave_periodo] = Decimal("0")
 
     periodos_validos = {(anio_columna, mes_numero) for anio_columna, mes_numero, _ in meses_base}
 
@@ -454,14 +459,18 @@ def inicio(request):
 
         montos_proyectados_por_concepto_mes[key] = montos_proyectados_por_concepto_mes.get(key, Decimal("0")) + p.monto
 
-        if p.concepto.tipo == Concepto.TIPO_INGRESO:
-            totales_proyectados_mensuales[clave_periodo]["ingresos"] += p.monto
-        elif p.concepto.tipo == Concepto.TIPO_EGRESO:
-            totales_proyectados_mensuales[clave_periodo]["egresos"] += p.monto
-        elif p.concepto.tipo == Concepto.TIPO_FINANCIAMIENTO:
+        if diferencia_tc_concepto_id and p.concepto_id == diferencia_tc_concepto_id:
+            diferencia_tc_valores[clave_periodo] += p.monto
             totales_proyectados_mensuales[clave_periodo]["financiamiento"] += p.monto
-        elif p.concepto.tipo == Concepto.TIPO_EXCLUIR:
-            totales_proyectados_mensuales[clave_periodo]["excluir"] += p.monto
+        else:
+            if p.concepto.tipo == Concepto.TIPO_INGRESO:
+                totales_proyectados_mensuales[clave_periodo]["ingresos"] += p.monto
+            elif p.concepto.tipo == Concepto.TIPO_EGRESO:
+                totales_proyectados_mensuales[clave_periodo]["egresos"] += p.monto
+            elif p.concepto.tipo == Concepto.TIPO_FINANCIAMIENTO:
+                totales_proyectados_mensuales[clave_periodo]["financiamiento"] += p.monto
+            elif p.concepto.tipo == Concepto.TIPO_EXCLUIR:
+                totales_proyectados_mensuales[clave_periodo]["excluir"] += p.monto
 
         if money_market_concepto_id and p.concepto_id == money_market_concepto_id:
             money_market_proyectado_mensual[clave_periodo] += p.monto
@@ -687,4 +696,6 @@ def inicio(request):
         "saldo_total_tesoreria_fila": saldo_total_tesoreria_fila,
         "saldo_inicial_enero": saldo_inicial_enero,
         "mes_actual_nombre": "abr-26" if mes_actual == 4 else f"{mes_actual:02d}-26",
+        "diferencia_tc_concepto_id": diferencia_tc_concepto_id,
+        "diferencia_tc_valores": diferencia_tc_valores,
     })
