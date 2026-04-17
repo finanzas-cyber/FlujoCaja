@@ -429,7 +429,7 @@ def inicio(request):
         Concepto.objects.filter(
             activo=True,
             tipo=Concepto.TIPO_FINANCIAMIENTO,
-        ).order_by("codigo")
+        ).exclude(codigo="999999").order_by("codigo")
     )
 
     money_market_concepto = Concepto.objects.filter(codigo="800010").first()
@@ -473,6 +473,9 @@ def inicio(request):
         if not m.concepto or (m.anio, m.mes) not in periodos_validos:
             continue
 
+        if diferencia_tc_concepto_id and m.concepto_id == diferencia_tc_concepto_id:
+            continue
+
         key = (m.concepto_id, m.anio, m.mes)
         clave_periodo = (m.anio, m.mes)
 
@@ -501,7 +504,6 @@ def inicio(request):
 
         if diferencia_tc_concepto_id and p.concepto_id == diferencia_tc_concepto_id:
             diferencia_tc_valores[clave_periodo] += p.monto
-            totales_proyectados_mensuales[clave_periodo]["financiamiento"] += p.monto
         else:
             if p.concepto.tipo == Concepto.TIPO_INGRESO:
                 totales_proyectados_mensuales[clave_periodo]["ingresos"] += p.monto
@@ -583,7 +585,7 @@ def inicio(request):
             egresos_mes = totales_reales_mensuales[clave_periodo]["egresos"]
             financiamiento_mes = totales_reales_mensuales[clave_periodo]["financiamiento"]
             money_market_mes = money_market_real_mensual[clave_periodo]
-            diferencia_tc_mes = Decimal("0")
+            diferencia_tc_mes = diferencia_tc_valores[clave_periodo]
         else:
             ingresos_mes = totales_proyectados_mensuales[clave_periodo]["ingresos"]
             egresos_mes = totales_proyectados_mensuales[clave_periodo]["egresos"]
@@ -592,7 +594,7 @@ def inicio(request):
             diferencia_tc_mes = diferencia_tc_valores[clave_periodo]
 
         neto_operacional_mes = ingresos_mes + egresos_mes
-        neto_financiamiento_mes = financiamiento_mes
+        neto_financiamiento_mes = financiamiento_mes + diferencia_tc_mes
         neto_total_mes = neto_operacional_mes + neto_financiamiento_mes
 
         saldo_inicial_mes = saldo_actual

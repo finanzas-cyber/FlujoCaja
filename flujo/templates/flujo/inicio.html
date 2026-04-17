@@ -285,6 +285,23 @@
             font-weight: bold;
         }
 
+        .input-comodin {
+            border: none !important;
+            background: transparent !important;
+            width: 100%;
+            text-align: right;
+            font-size: 11px;
+            padding: 0;
+            color: inherit;
+        }
+
+        .input-comodin:focus {
+            outline: none;
+            border: 1px solid #94a3b8 !important;
+            background: #ffffff !important;
+            padding: 2px 4px;
+        }
+
         .guardado-ok {
             border-color: #15803d !important;
             background: #f0fdf4 !important;
@@ -585,25 +602,21 @@
                         class="numero semestre-col
                         {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual %}abril-bloque{% endif %}
+                        {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
                         "
                         data-mes="{{ m.mes_numero }}"
                         data-anio="{{ m.anio }}"
                     >
-                        {% if m.origen == 'REAL' %}
-                            <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
-                        {% else %}
-                            <input
-                                type="text"
-                                class="input-proyectado"
-                                data-concepto-id="{{ diferencia_tc_concepto_id }}"
-                                data-mes="{{ m.mes_numero }}"
-                                data-anio="{{ m.anio }}"
-                                data-origen="PROYECTADO"
-                                value="{{ m.monto }}"
-                                style="border:none;background:transparent;text-align:right;width:100%;"
-                            >
-                        {% endif %}
+                        <input
+                            type="text"
+                            class="input-proyectado input-comodin"
+                            data-concepto-id="{{ diferencia_tc_concepto_id }}"
+                            data-mes="{{ m.mes_numero }}"
+                            data-anio="{{ m.anio }}"
+                            data-origen="PROYECTADO"
+                            value="{{ m.monto }}"
+                        >
                     </td>
                 {% endfor %}
                 <td class="numero js-numero" data-value="{{ fila_diferencia_tc.total }}">{{ fila_diferencia_tc.total }}</td>
