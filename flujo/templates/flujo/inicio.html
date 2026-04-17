@@ -579,7 +579,28 @@
             </tr>
 
             <tr class="saldo">
-                <td class="texto">{{ saldo_inicial_fila.nombre }}</td>
+    <td class="texto">DIFERENCIA T/C</td>
+    {% for col in columnas_flujo %}
+        <td
+            class="numero semestre-col proyectado
+            {% if col.anio == anio_actual and col.mes_numero == mes_actual %}abril-bloque{% endif %}
+            "
+            data-mes="{{ col.mes_numero }}"
+            data-anio="{{ col.anio }}"
+        >
+            <input
+                type="text"
+                class="input-proyectado"
+                data-concepto-id="999999"
+                data-mes="{{ col.mes_numero }}"
+                data-anio="{{ col.anio }}"
+                value="0"
+                style="border:none;background:transparent;text-align:right;width:100%;"
+            >
+        </td>
+    {% endfor %}
+    <td></td>
+</tr>
                 {% for m in saldo_inicial_fila.columnas %}
                     <td
                         class="numero semestre-col
