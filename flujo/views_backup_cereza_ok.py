@@ -845,4 +845,3 @@ def inicio(request):
         "diferencia_tc_concepto_id": diferencia_tc_concepto_id,
         "fila_diferencia_tc": fila_diferencia_tc,
     })
-

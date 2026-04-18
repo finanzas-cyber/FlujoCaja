@@ -286,7 +286,7 @@ def detalle_movimientos_real(request):
                 "cpbnum": m.cpbnum or "",
                 "cuenta": m.cuenta_banco.codigo if m.cuenta_banco else "",
                 "descripcion": m.descripcion or "",
-                "monto": int(monto),
+                "monto": float(monto),
             })
 
         return JsonResponse({
@@ -464,6 +464,12 @@ def inicio(request):
             tipo=Concepto.TIPO_INGRESO,
         ).order_by("codigo")
     )
+
+    # Asegurar que CEREZA siempre esté en ingresos
+    cereza = Concepto.objects.filter(nombre__icontains="CEREZA").first()
+    if cereza and cereza not in conceptos_ingresos:
+        conceptos_ingresos.append(cereza)
+
     conceptos_egresos = list(
         Concepto.objects.filter(
             activo=True,
@@ -529,8 +535,7 @@ def inicio(request):
         if diferencia_tc_concepto_id and m.concepto_id == diferencia_tc_concepto_id:
             continue
 
-        if es_concepto_manual(m.concepto):
-            continue
+        # CEREZA ahora no se excluye
 
         key = (m.concepto_id, m.anio, m.mes)
         clave_periodo = (m.anio, m.mes)
@@ -845,4 +850,5 @@ def inicio(request):
         "diferencia_tc_concepto_id": diferencia_tc_concepto_id,
         "fila_diferencia_tc": fila_diferencia_tc,
     })
+
 

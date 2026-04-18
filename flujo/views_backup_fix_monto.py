@@ -1,4 +1,4 @@
-﻿from collections import OrderedDict
+from collections import OrderedDict
 from decimal import Decimal
 from io import StringIO
 from pathlib import Path
@@ -286,7 +286,7 @@ def detalle_movimientos_real(request):
                 "cpbnum": m.cpbnum or "",
                 "cuenta": m.cuenta_banco.codigo if m.cuenta_banco else "",
                 "descripcion": m.descripcion or "",
-                "monto": int(monto),
+                "monto": str(monto),
             })
 
         return JsonResponse({
@@ -845,4 +845,3 @@ def inicio(request):
         "diferencia_tc_concepto_id": diferencia_tc_concepto_id,
         "fila_diferencia_tc": fila_diferencia_tc,
     })
-

@@ -286,7 +286,7 @@ def detalle_movimientos_real(request):
                 "cpbnum": m.cpbnum or "",
                 "cuenta": m.cuenta_banco.codigo if m.cuenta_banco else "",
                 "descripcion": m.descripcion or "",
-                "monto": int(monto),
+                "monto": float(monto),
             })
 
         return JsonResponse({
@@ -529,8 +529,7 @@ def inicio(request):
         if diferencia_tc_concepto_id and m.concepto_id == diferencia_tc_concepto_id:
             continue
 
-        if es_concepto_manual(m.concepto):
-            continue
+        # CEREZA ahora no se excluye
 
         key = (m.concepto_id, m.anio, m.mes)
         clave_periodo = (m.anio, m.mes)
