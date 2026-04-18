@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8">
@@ -285,23 +285,6 @@
             font-weight: bold;
         }
 
-        .input-comodin {
-            border: none !important;
-            background: transparent !important;
-            width: 100%;
-            text-align: right;
-            font-size: 11px;
-            padding: 0;
-            color: inherit;
-        }
-
-        .input-comodin:focus {
-            outline: none;
-            border: 1px solid #94a3b8 !important;
-            background: #ffffff !important;
-            padding: 2px 4px;
-        }
-
         .guardado-ok {
             border-color: #15803d !important;
             background: #f0fdf4 !important;
@@ -345,7 +328,7 @@
         }
 
         .celda-real-detalle::after {
-            content: "??";
+            content: "👁";
             position: absolute;
             top: 2px;
             left: 4px;
@@ -600,23 +583,26 @@
                 {% for m in fila_diferencia_tc.columnas %}
                     <td
                         class="numero semestre-col
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual %}abril-bloque{% endif %}
-                        {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
                         "
                         data-mes="{{ m.mes_numero }}"
                         data-anio="{{ m.anio }}"
                     >
-                        <input
-                            type="text"
-                            class="input-proyectado input-comodin"
-                            data-concepto-id="{{ diferencia_tc_concepto_id }}"
-                            data-mes="{{ m.mes_numero }}"
-                            data-anio="{{ m.anio }}"
-                            data-origen="PROYECTADO"
-                            value="{{ m.monto }}"
-                        >
+                        {% if m.origen == 'REAL' %}
+                            <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                        {% else %}
+                            <input
+                                type="text"
+                                class="input-proyectado"
+                                data-concepto-id="{{ diferencia_tc_concepto_id }}"
+                                data-mes="{{ m.mes_numero }}"
+                                data-anio="{{ m.anio }}"
+                                value="{{ m.monto }}"
+                                style="border:none;background:transparent;text-align:right;width:100%;"
+                            >
+                        {% endif %}
                     </td>
                 {% endfor %}
                 <td class="numero js-numero" data-value="{{ fila_diferencia_tc.total }}">{{ fila_diferencia_tc.total }}</td>
@@ -627,7 +613,7 @@
                 {% for m in saldo_inicial_fila.columnas %}
                     <td
                         class="numero semestre-col
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual %}abril-bloque{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
@@ -636,7 +622,7 @@
                         data-anio="{{ m.anio }}"
                         data-value="{{ m.monto }}"
                     >
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}
+                        {% if m.origen == 'REAL' %}
                             <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
                         {% else %}
                             <input
@@ -644,7 +630,6 @@
                                 class="input-proyectado"
                                 data-concepto-id=""
                                 data-anio="{{ m.anio }}"
-                                data-origen="PROYECTADO"
                                 value="{{ m.monto }}"
                                 readonly
                             >
@@ -656,7 +641,7 @@
 
             <tr class="seccion">
                 <td colspan="{{ columnas_flujo|length|add:'2' }}">
-                    <button type="button" class="boton-grupo" data-group="ingresos" aria-expanded="true">-</button>
+                    <button type="button" class="boton-grupo" data-group="ingresos" aria-expanded="true">−</button>
                     Ingresos
                 </td>
             </tr>
@@ -667,22 +652,24 @@
                 {% for m in fila.columnas %}
                     <td
                         class="numero semestre-col
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}real celda-real-detalle{% else %}proyectado{% endif %}
+                        {% if m.origen == 'REAL' %}real celda-real-detalle{% else %}proyectado{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual %}abril-bloque{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
                         "
                         data-mes="{{ m.mes_numero }}"
                         data-anio="{{ m.anio }}"
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}
-                            data-detalle-real="1"
-                            data-concepto-id="{{ fila.id }}"
-                            data-concepto-codigo="{{ fila.codigo }}"
-                            data-concepto-nombre="{{ fila.nombre }}"
-                            data-mes-nombre="{{ m.mes_nombre }}"
-                        {% endif %}
+                    {% if m.origen == 'REAL' %}
+                        data-detalle-real="1"
+                        data-concepto-id="{{ fila.id }}"
+                        data-concepto-codigo="{{ fila.codigo }}"
+                        data-concepto-nombre="{{ fila.nombre }}"
+                        data-mes="{{ m.mes_numero }}"
+                        data-mes-nombre="{{ m.mes_nombre }}"
+                        data-anio="{{ m.anio }}"
+                    {% endif %}
                     >
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}
+                        {% if m.origen == 'REAL' %}
                             <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
                         {% else %}
                             <input
@@ -691,7 +678,6 @@
                                 data-concepto-id="{{ fila.id }}"
                                 data-mes="{{ m.mes_numero }}"
                                 data-anio="{{ m.anio }}"
-                                data-origen="PROYECTADO"
                                 value="{{ m.monto }}"
                             >
                         {% endif %}
@@ -721,7 +707,7 @@
 
             <tr class="seccion">
                 <td colspan="{{ columnas_flujo|length|add:'2' }}">
-                    <button type="button" class="boton-grupo" data-group="egresos" aria-expanded="true">-</button>
+                    <button type="button" class="boton-grupo" data-group="egresos" aria-expanded="true">−</button>
                     Egresos
                 </td>
             </tr>
@@ -732,22 +718,24 @@
                 {% for m in fila.columnas %}
                     <td
                         class="numero semestre-col
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}real celda-real-detalle{% else %}proyectado{% endif %}
+                        {% if m.origen == 'REAL' %}real celda-real-detalle{% else %}proyectado{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual %}abril-bloque{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
                         "
                         data-mes="{{ m.mes_numero }}"
                         data-anio="{{ m.anio }}"
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}
-                            data-detalle-real="1"
-                            data-concepto-id="{{ fila.id }}"
-                            data-concepto-codigo="{{ fila.codigo }}"
-                            data-concepto-nombre="{{ fila.nombre }}"
-                            data-mes-nombre="{{ m.mes_nombre }}"
-                        {% endif %}
+                    {% if m.origen == 'REAL' %}
+                        data-detalle-real="1"
+                        data-concepto-id="{{ fila.id }}"
+                        data-concepto-codigo="{{ fila.codigo }}"
+                        data-concepto-nombre="{{ fila.nombre }}"
+                        data-mes="{{ m.mes_numero }}"
+                        data-mes-nombre="{{ m.mes_nombre }}"
+                        data-anio="{{ m.anio }}"
+                    {% endif %}
                     >
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}
+                        {% if m.origen == 'REAL' %}
                             <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
                         {% else %}
                             <input
@@ -756,7 +744,6 @@
                                 data-concepto-id="{{ fila.id }}"
                                 data-mes="{{ m.mes_numero }}"
                                 data-anio="{{ m.anio }}"
-                                data-origen="PROYECTADO"
                                 value="{{ m.monto }}"
                             >
                         {% endif %}
@@ -804,7 +791,7 @@
 
             <tr class="seccion">
                 <td colspan="{{ columnas_flujo|length|add:'2' }}">
-                    <button type="button" class="boton-grupo" data-group="financiamiento" aria-expanded="true">-</button>
+                    <button type="button" class="boton-grupo" data-group="financiamiento" aria-expanded="true">−</button>
                     Financiamiento
                 </td>
             </tr>
@@ -815,22 +802,24 @@
                 {% for m in fila.columnas %}
                     <td
                         class="numero semestre-col
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}real celda-real-detalle{% else %}proyectado{% endif %}
+                        {% if m.origen == 'REAL' %}real celda-real-detalle{% else %}proyectado{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual %}abril-bloque{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
                         "
                         data-mes="{{ m.mes_numero }}"
                         data-anio="{{ m.anio }}"
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}
-                            data-detalle-real="1"
-                            data-concepto-id="{{ fila.id }}"
-                            data-concepto-codigo="{{ fila.codigo }}"
-                            data-concepto-nombre="{{ fila.nombre }}"
-                            data-mes-nombre="{{ m.mes_nombre }}"
-                        {% endif %}
+                    {% if m.origen == 'REAL' %}
+                        data-detalle-real="1"
+                        data-concepto-id="{{ fila.id }}"
+                        data-concepto-codigo="{{ fila.codigo }}"
+                        data-concepto-nombre="{{ fila.nombre }}"
+                        data-mes="{{ m.mes_numero }}"
+                        data-mes-nombre="{{ m.mes_nombre }}"
+                        data-anio="{{ m.anio }}"
+                    {% endif %}
                     >
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}
+                        {% if m.origen == 'REAL' %}
                             <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
                         {% else %}
                             <input
@@ -839,7 +828,6 @@
                                 data-concepto-id="{{ fila.id }}"
                                 data-mes="{{ m.mes_numero }}"
                                 data-anio="{{ m.anio }}"
-                                data-origen="PROYECTADO"
                                 value="{{ m.monto }}"
                             >
                         {% endif %}
@@ -890,7 +878,7 @@
                 {% for m in saldo_disponible_banco_fila.columnas %}
                     <td
                         class="numero semestre-col
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual %}abril-bloque{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
@@ -898,7 +886,7 @@
                         data-mes="{{ m.mes_numero }}"
                         data-anio="{{ m.anio }}"
                     >
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}
+                        {% if m.origen == 'REAL' %}
                             <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
                         {% else %}
                             <input
@@ -906,7 +894,6 @@
                                 class="input-proyectado"
                                 data-concepto-id=""
                                 data-anio="{{ m.anio }}"
-                                data-origen="PROYECTADO"
                                 value="{{ m.monto }}"
                                 readonly
                             >
@@ -921,7 +908,7 @@
                 {% for m in money_market_acumulado_fila.columnas %}
                     <td
                         class="numero semestre-col
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual %}abril-bloque{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
@@ -929,7 +916,7 @@
                         data-mes="{{ m.mes_numero }}"
                         data-anio="{{ m.anio }}"
                     >
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}
+                        {% if m.origen == 'REAL' %}
                             <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
                         {% else %}
                             <input
@@ -937,7 +924,6 @@
                                 class="input-proyectado"
                                 data-concepto-id=""
                                 data-anio="{{ m.anio }}"
-                                data-origen="PROYECTADO"
                                 value="{{ m.monto }}"
                                 readonly
                             >
@@ -952,7 +938,7 @@
                 {% for m in saldo_total_tesoreria_fila.columnas %}
                     <td
                         class="numero semestre-col
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual %}abril-bloque abril-inferior{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'REAL' %}abril-inicio{% endif %}
                         {% if m.anio == anio_actual and m.mes_numero == mes_actual and m.etiqueta == 'PROY.' %}abril-fin{% endif %}
@@ -960,7 +946,7 @@
                         data-mes="{{ m.mes_numero }}"
                         data-anio="{{ m.anio }}"
                     >
-                        {% if m.origen == 'REAL' or m.etiqueta == 'REAL' %}
+                        {% if m.origen == 'REAL' %}
                             <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
                         {% else %}
                             <input
@@ -968,7 +954,6 @@
                                 class="input-proyectado"
                                 data-concepto-id=""
                                 data-anio="{{ m.anio }}"
-                                data-origen="PROYECTADO"
                                 value="{{ m.monto }}"
                                 readonly
                             >
@@ -1057,7 +1042,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     function limpiarNumero(v) {
-        return Number(String(v || "").replace(/\./g, "").replace(",", ".")) || 0;
+        return Number(String(v).replace(/\./g, "").replace(",", ".")) || 0;
     }
 
     function formatear(n) {
@@ -1072,24 +1057,10 @@ document.addEventListener("DOMContentLoaded", function () {
         return tokenInput ? tokenInput.value : "";
     }
 
-    function marcarNegativoElemento(elemento, valor) {
-        if (!elemento) return;
-        if (Number(valor) < 0) {
-            elemento.classList.add("negativo");
-        } else {
-            elemento.classList.remove("negativo");
-        }
-    }
-
     function prepararInput(input) {
         var v = limpiarNumero(input.value);
 
         input.value = v === 0 ? "" : formatear(v);
-        marcarNegativoElemento(input, v);
-
-        if (input.hasAttribute("readonly")) {
-            return;
-        }
 
         input.addEventListener("focus", function () {
             input.classList.remove("guardado-ok", "guardado-error");
@@ -1104,12 +1075,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var anio = input.dataset.anio;
             var origen = input.dataset.origen;
 
-            if (!conceptoId || !mes || !anio) {
-                var valorLocal = limpiarNumero(input.value);
-                input.value = valorLocal === 0 ? "" : formatear(valorLocal);
-                marcarNegativoElemento(input, valorLocal);
-                return;
-            }
+            if (!conceptoId || !mes || !anio) return;
 
             var valor = limpiarNumero(input.value);
 
@@ -1130,136 +1096,253 @@ document.addEventListener("DOMContentLoaded", function () {
                     monto: valor
                 }),
             })
-            .then(function (r) { return r.json(); })
-            .then(function (data) {
-                if (!data.ok) {
-                    throw new Error(data.error || "Error al guardar");
-                }
+            .then(r => r.json())
+            .then(data => {
+                if (!data.ok) throw new Error();
 
                 input.classList.add("guardado-ok");
-                input.value = valor === 0 ? "" : formatear(valor);
-                marcarNegativoElemento(input, valor);
 
-                setTimeout(function () {
-                    input.classList.remove("guardado-ok");
-                }, 800);
+                input.value = valor === 0 ? "" : formatear(valor);
+
+                setTimeout(() => input.classList.remove("guardado-ok"), 800);
 
                 location.reload();
             })
-            .catch(function () {
+            .catch(() => {
                 input.classList.add("guardado-error");
-                input.value = valor === 0 ? "" : formatear(valor);
-                marcarNegativoElemento(input, valor);
             });
         });
     }
 
-    function aplicarFormatoNumeros() {
-        document.querySelectorAll(".js-numero").forEach(function (el) {
-            var valor = limpiarNumero(el.dataset.value || el.textContent);
-            el.textContent = valor === 0 ? "0" : formatear(valor);
-            marcarNegativoElemento(el, valor);
-        });
+    // 🔥 ACTIVAR TODOS LOS INPUTS (REAL + PROYECTADO)
+    document.querySelectorAll(".input-proyectado, .input-real").forEach(prepararInput);
 
-        document.querySelectorAll(".input-proyectado").forEach(function (el) {
-            var valor = limpiarNumero(el.value);
-            marcarNegativoElemento(el, valor);
-        });
+});
+</script>
+    function limpiarNumero(v) {
+        return Number(String(v).replace(/\./g, "").replace(",", ".")) || 0;
     }
 
-    function obtenerGrupoPeriodo(anio, mes) {
-        anio = Number(anio);
-        mes = Number(mes);
+    function numeroDesdeServidor(v) {
+        return Number(v) || 0;
+    }
+
+    function formatear(n) {
+        return new Intl.NumberFormat("es-CL", {
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0
+        }).format(n);
+    }
+
+    function obtenerCsrf() {
+        var tokenInput = document.querySelector('[name=csrfmiddlewaretoken]');
+        return tokenInput ? tokenInput.value : "";
+    }
+
+    function periodoVisible(anio, mes) {
+        var ver2025s2 = document.getElementById("check-2025s2").checked;
+        var ver2026s1 = document.getElementById("check-2026s1").checked;
+        var ver2026s2 = document.getElementById("check-2026s2").checked;
 
         if (anio === 2025 && mes >= 7 && mes <= 12) {
-            return "2025s2";
+            return ver2025s2;
         }
+
         if (anio === 2026 && mes >= 1 && mes <= 6) {
-            return "2026s1";
+            return ver2026s1;
         }
+
         if (anio === 2026 && mes >= 7 && mes <= 12) {
-            return "2026s2";
+            return ver2026s2;
         }
-        return "";
+
+        return true;
     }
 
-    function actualizarVistaPeriodos() {
-        var mostrar2025s2 = document.getElementById("check-2025s2").checked;
-        var mostrar2026s1 = document.getElementById("check-2026s1").checked;
-        var mostrar2026s2 = document.getElementById("check-2026s2").checked;
-
+    window.actualizarVistaPeriodos = function () {
         document.querySelectorAll(".semestre-col").forEach(function (el) {
-            var grupo = obtenerGrupoPeriodo(el.dataset.anio, el.dataset.mes);
-            var visible = true;
+            var mes = parseInt(el.dataset.mes || "0", 10);
+            var anio = parseInt(el.dataset.anio || "0", 10);
 
-            if (grupo === "2025s2") visible = mostrar2025s2;
-            if (grupo === "2026s1") visible = mostrar2026s1;
-            if (grupo === "2026s2") visible = mostrar2026s2;
+            el.classList.remove("oculto-semestre");
 
-            el.classList.toggle("oculto-semestre", !visible);
+            if (!periodoVisible(anio, mes)) {
+                el.classList.add("oculto-semestre");
+            }
         });
-    }
+    };
 
-    function seleccionarTodo() {
+    window.seleccionarTodo = function () {
         document.getElementById("check-2025s2").checked = true;
         document.getElementById("check-2026s1").checked = true;
         document.getElementById("check-2026s2").checked = true;
         actualizarVistaPeriodos();
-    }
+    };
 
-    function limpiarSeleccion() {
+    window.limpiarSeleccion = function () {
         document.getElementById("check-2025s2").checked = false;
         document.getElementById("check-2026s1").checked = false;
         document.getElementById("check-2026s2").checked = false;
         actualizarVistaPeriodos();
-    }
+    };
 
-    function prepararGrupos() {
-        document.querySelectorAll(".boton-grupo").forEach(function (boton) {
-            boton.addEventListener("click", function () {
-                var group = boton.dataset.group;
-                var expandido = boton.getAttribute("aria-expanded") === "true";
-                var nuevoEstado = !expandido;
+    document.querySelectorAll(".js-numero").forEach(function (c) {
+        var v = limpiarNumero(c.dataset.value);
 
-                document.querySelectorAll('.detalle-grupo[data-group="' + group + '"]').forEach(function (fila) {
-                    fila.classList.toggle("detalle-oculto", !nuevoEstado);
-                });
-
-                boton.setAttribute("aria-expanded", nuevoEstado ? "true" : "false");
-                boton.textContent = nuevoEstado ? "-" : "+";
-            });
-        });
-    }
-
-    function prepararFiltrosMovimientos() {
-        var filtros = Array.from(document.querySelectorAll(".filtro-columna"));
-        var filas = Array.from(document.querySelectorAll("#tbody-movimientos tr"));
-
-        function aplicarFiltros() {
-            filas.forEach(function (fila) {
-                var visible = true;
-
-                filtros.forEach(function (input) {
-                    if (!visible) return;
-
-                    var col = Number(input.dataset.col);
-                    var valor = (input.value || "").trim().toLowerCase();
-                    var celda = fila.cells[col];
-                    var texto = celda ? celda.textContent.trim().toLowerCase() : "";
-
-                    if (valor && texto.indexOf(valor) === -1) {
-                        visible = false;
-                    }
-                });
-
-                fila.style.display = visible ? "" : "none";
-            });
+        if (v === 0) {
+            c.textContent = "";
+            return;
         }
 
-        filtros.forEach(function (input) {
-            input.addEventListener("input", aplicarFiltros);
+        c.textContent = formatear(v);
+
+        if (v < 0) {
+            c.classList.add("negativo");
+        }
+    });
+
+    document.querySelectorAll(".input-proyectado").forEach(function (input) {
+        if (input.hasAttribute("readonly")) {
+            var vReadonly = limpiarNumero(input.value);
+            input.value = vReadonly === 0 ? "" : formatear(vReadonly);
+            return;
+        }
+
+        var v = limpiarNumero(input.value);
+
+        if (v === 0) {
+            input.value = "";
+        } else {
+            input.value = formatear(v);
+            if (v < 0) {
+                input.classList.add("negativo");
+            }
+        }
+
+        input.addEventListener("focus", function () {
+            input.classList.remove("guardado-ok", "guardado-error");
+            var valor = limpiarNumero(input.value);
+            input.value = valor === 0 ? "" : String(valor);
+            input.select();
+        });
+
+        input.addEventListener("blur", function () {
+            var conceptoId = input.dataset.conceptoId;
+            var mes = input.dataset.mes;
+            var anio = input.dataset.anio;
+
+            if (!conceptoId || !mes || !anio) {
+                return;
+            }
+
+            var valorTexto = input.value.trim();
+            var valorNumerico = limpiarNumero(valorTexto);
+
+            if (valorTexto === "" || valorTexto === "-" || valorTexto === "--") {
+                valorNumerico = 0;
+            }
+
+            var montoEnviar = String(valorNumerico);
+
+            fetch("{% url 'guardar_proyeccion' %}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                    "X-CSRFToken": obtenerCsrf(),
+                },
+                body: new URLSearchParams({
+                    concepto_id: conceptoId,
+                    mes: mes,
+                    anio: anio,
+                    monto: montoEnviar,
+                }),
+            })
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error("Error al guardar");
+                }
+                return response.json();
+            })
+            .then(function (data) {
+                if (!data.ok) {
+                    throw new Error(data.error || "No se pudo guardar");
+                }
+
+                input.classList.remove("guardado-error");
+                input.classList.add("guardado-ok");
+
+                if (valorNumerico === 0) {
+                    input.value = "";
+                    input.classList.remove("negativo");
+                } else {
+                    input.value = formatear(valorNumerico);
+                    if (valorNumerico < 0) {
+                        input.classList.add("negativo");
+                    } else {
+                        input.classList.remove("negativo");
+                    }
+                }
+
+                setTimeout(function () {
+                    input.classList.remove("guardado-ok");
+                }, 1200);
+
+                window.location.reload();
+            })
+            .catch(function () {
+                input.classList.remove("guardado-ok");
+                input.classList.add("guardado-error");
+            });
+        });
+    });
+
+    document.querySelectorAll(".boton-grupo").forEach(function (boton) {
+        boton.addEventListener("click", function () {
+            var group = boton.dataset.group;
+            var expandido = boton.getAttribute("aria-expanded") === "true";
+            var filas = document.querySelectorAll('.detalle-grupo[data-group="' + group + '"]');
+
+            filas.forEach(function (fila) {
+                if (expandido) {
+                    fila.classList.add("detalle-oculto");
+                } else {
+                    fila.classList.remove("detalle-oculto");
+                }
+            });
+
+            boton.setAttribute("aria-expanded", expandido ? "false" : "true");
+            boton.textContent = expandido ? "+" : "−";
+        });
+    });
+
+    var inputsFiltro = document.querySelectorAll(".filtro-columna");
+
+    function filtrar() {
+        document.querySelectorAll("#tbody-movimientos tr").forEach(function (fila) {
+            var visible = true;
+
+            inputsFiltro.forEach(function (input) {
+                var col = input.dataset.col;
+                var val = input.value.toLowerCase().trim();
+
+                if (!val) {
+                    return;
+                }
+
+                var texto = fila.children[col].textContent.toLowerCase();
+
+                if (!texto.includes(val)) {
+                    visible = false;
+                }
+            });
+
+            fila.style.display = visible ? "" : "none";
         });
     }
+
+    inputsFiltro.forEach(function (input) {
+        input.addEventListener("input", filtrar);
+    });
 
     var modal = document.getElementById("modal-detalle-real");
     var modalTitulo = document.getElementById("modal-detalle-titulo");
@@ -1267,130 +1350,105 @@ document.addEventListener("DOMContentLoaded", function () {
     var modalEstado = document.getElementById("modal-detalle-estado");
     var modalTbody = document.getElementById("modal-detalle-tbody");
     var modalTotal = document.getElementById("modal-detalle-total");
-    var cerrarModalBtn = document.getElementById("cerrar-modal-detalle");
+    var botonCerrarModal = document.getElementById("cerrar-modal-detalle");
 
-    function cerrarModalDetalle() {
-        modal.classList.remove("abierto");
-    }
-
-    function abrirModalDetalle() {
+    function abrirModal() {
         modal.classList.add("abierto");
     }
 
-    function prepararModalDetalleReal() {
-        document.querySelectorAll("[data-detalle-real='1']").forEach(function (celda) {
-            celda.addEventListener("click", function () {
-                var conceptoId = celda.dataset.conceptoId;
-                var conceptoCodigo = celda.dataset.conceptoCodigo || "";
-                var conceptoNombre = celda.dataset.conceptoNombre || "";
-                var mes = celda.dataset.mes;
-                var anio = celda.dataset.anio;
-                var mesNombre = celda.dataset.mesNombre || "";
-
-                modalTitulo.textContent = "Detalle movimientos";
-                modalSubtitulo.textContent = conceptoCodigo + " - " + conceptoNombre + " | " + mesNombre + " " + anio;
-                modalEstado.textContent = "Cargando detalle...";
-                modalTbody.innerHTML = "";
-                modalTotal.textContent = "";
-                abrirModalDetalle();
-
-                var url = "{% url 'detalle_movimientos_real' %}?" + new URLSearchParams({
-                    concepto_id: conceptoId,
-                    mes: mes,
-                    anio: anio
-                }).toString();
-
-                fetch(url)
-                    .then(function (r) { return r.json(); })
-                    .then(function (data) {
-                        if (!data.ok) {
-                            throw new Error(data.error || "No se pudo cargar el detalle");
-                        }
-
-                        modalTitulo.textContent = data.concepto_codigo + " - " + data.concepto_nombre;
-                        modalSubtitulo.textContent = "Mes " + data.mes + " / Año " + data.anio;
-
-                        if (!data.movimientos || !data.movimientos.length) {
-                            modalEstado.textContent = "No hay movimientos para este período.";
-                            modalTbody.innerHTML = "";
-                            modalTotal.textContent = "Total: 0";
-                            return;
-                        }
-
-                        modalEstado.textContent = data.movimientos.length + " movimiento(s) encontrados.";
-                        modalTbody.innerHTML = "";
-
-                        data.movimientos.forEach(function (mov) {
-                            var tr = document.createElement("tr");
-
-                            var tdFecha = document.createElement("td");
-                            tdFecha.textContent = mov.fecha || "";
-
-                            var tdCpb = document.createElement("td");
-                            tdCpb.textContent = mov.cpbnum || "";
-
-                            var tdCuenta = document.createElement("td");
-                            tdCuenta.textContent = mov.cuenta || "";
-
-                            var tdDescripcion = document.createElement("td");
-                            tdDescripcion.textContent = mov.descripcion || "";
-
-                            var tdMonto = document.createElement("td");
-                            tdMonto.className = "numero";
-                            var montoNum = limpiarNumero(mov.monto);
-                            tdMonto.textContent = formatear(montoNum);
-                            marcarNegativoElemento(tdMonto, montoNum);
-
-                            tr.appendChild(tdFecha);
-                            tr.appendChild(tdCpb);
-                            tr.appendChild(tdCuenta);
-                            tr.appendChild(tdDescripcion);
-                            tr.appendChild(tdMonto);
-
-                            modalTbody.appendChild(tr);
-                        });
-
-                        var totalNum = limpiarNumero(data.total);
-                        modalTotal.textContent = "Total: " + formatear(totalNum);
-                        marcarNegativoElemento(modalTotal, totalNum);
-                    })
-                    .catch(function (error) {
-                        modalEstado.textContent = error.message || "Error al cargar el detalle.";
-                        modalTbody.innerHTML = "";
-                        modalTotal.textContent = "";
-                    });
-            });
-        });
-
-        cerrarModalBtn.addEventListener("click", cerrarModalDetalle);
-
-        modal.addEventListener("click", function (e) {
-            if (e.target === modal) {
-                cerrarModalDetalle();
-            }
-        });
-
-        document.addEventListener("keydown", function (e) {
-            if (e.key === "Escape" && modal.classList.contains("abierto")) {
-                cerrarModalDetalle();
-            }
-        });
+    function cerrarModal() {
+        modal.classList.remove("abierto");
     }
 
-    document.querySelectorAll(".input-proyectado, .input-real").forEach(prepararInput);
+    function escapeHtml(texto) {
+        return String(texto || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
 
-    aplicarFormatoNumeros();
-    prepararGrupos();
-    prepararFiltrosMovimientos();
-    prepararModalDetalleReal();
+    function cargarDetalleReal(celda) {
+        var conceptoId = celda.dataset.conceptoId;
+        var conceptoCodigo = celda.dataset.conceptoCodigo || "";
+        var conceptoNombre = celda.dataset.conceptoNombre || "";
+        var mes = celda.dataset.mes;
+        var mesNombre = celda.dataset.mesNombre || "";
+        var anio = celda.dataset.anio || "{{ anio_actual }}";
+
+        modalTitulo.textContent = "Detalle movimientos reales";
+        modalSubtitulo.textContent = conceptoCodigo + " - " + conceptoNombre + " | " + mesNombre + " | " + anio;
+        modalEstado.textContent = "Cargando movimientos...";
+        modalTbody.innerHTML = "";
+        modalTotal.textContent = "";
+        abrirModal();
+
+        fetch("{% url 'detalle_movimientos_real' %}?concepto_id=" + encodeURIComponent(conceptoId) + "&mes=" + encodeURIComponent(mes) + "&anio=" + encodeURIComponent(anio))
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error("No se pudo obtener el detalle");
+                }
+                return response.json();
+            })
+            .then(function (data) {
+                if (!data.ok) {
+                    throw new Error(data.error || "No se pudo obtener el detalle");
+                }
+
+                if (!data.movimientos || data.movimientos.length === 0) {
+                    modalEstado.textContent = "No hay movimientos para este concepto en este mes.";
+                    modalTbody.innerHTML = "";
+                    modalTotal.textContent = "Total: 0";
+                    return;
+                }
+
+                modalEstado.textContent = "Movimientos encontrados: " + data.movimientos.length;
+
+                modalTbody.innerHTML = data.movimientos.map(function (m) {
+                    var monto = numeroDesdeServidor(m.monto);
+                    return ""
+                        + "<tr>"
+                        + "<td>" + escapeHtml(m.fecha) + "</td>"
+                        + "<td>" + escapeHtml(m.cpbnum) + "</td>"
+                        + "<td>" + escapeHtml(m.cuenta) + "</td>"
+                        + "<td>" + escapeHtml(m.descripcion) + "</td>"
+                        + "<td class='numero" + (monto < 0 ? " negativo" : "") + "'>" + (monto === 0 ? "" : formatear(monto)) + "</td>"
+                        + "</tr>";
+                }).join("");
+
+                modalTotal.textContent = "Total: " + formatear(numeroDesdeServidor(data.total));
+            })
+            .catch(function (error) {
+                modalEstado.textContent = error.message || "Error al cargar movimientos.";
+                modalTbody.innerHTML = "";
+                modalTotal.textContent = "";
+            });
+    }
+
+    document.querySelectorAll("[data-detalle-real='1']").forEach(function (celda) {
+        celda.addEventListener("click", function () {
+            cargarDetalleReal(celda);
+        });
+    });
+
+    botonCerrarModal.addEventListener("click", cerrarModal);
+
+    modal.addEventListener("click", function (e) {
+        if (e.target === modal) {
+            cerrarModal();
+        }
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && modal.classList.contains("abierto")) {
+            cerrarModal();
+        }
+    });
+
     actualizarVistaPeriodos();
-
-    window.seleccionarTodo = seleccionarTodo;
-    window.limpiarSeleccion = limpiarSeleccion;
-    window.actualizarVistaPeriodos = actualizarVistaPeriodos;
 });
 </script>
 
 </body>
 </html>
-

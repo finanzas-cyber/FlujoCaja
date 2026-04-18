@@ -16,6 +16,13 @@ from django.utils import timezone
 from .models import Movimiento, Concepto, Proyeccion, ConfiguracionFlujo
 
 
+def es_concepto_manual(concepto):
+    if not concepto:
+        return False
+    nombre = (concepto.nombre or "").upper()
+    return "CEREZA" in nombre
+
+
 def actualizar_softland(request):
     if request.method != "POST":
         return redirect("inicio")
@@ -478,9 +485,11 @@ def inicio(request):
 
     montos_reales_por_concepto_mes = {}
     montos_proyectados_por_concepto_mes = {}
+    montos_manuales_por_concepto_mes = {}
 
     totales_reales_mensuales = {}
     totales_proyectados_mensuales = {}
+    totales_manuales_mensuales = {}
 
     money_market_real_mensual = {}
     money_market_proyectado_mensual = {}
@@ -501,6 +510,12 @@ def inicio(request):
             "financiamiento": Decimal("0"),
             "excluir": Decimal("0"),
         }
+        totales_manuales_mensuales[clave_periodo] = {
+            "ingresos": Decimal("0"),
+            "egresos": Decimal("0"),
+            "financiamiento": Decimal("0"),
+            "excluir": Decimal("0"),
+        }
         money_market_real_mensual[clave_periodo] = Decimal("0")
         money_market_proyectado_mensual[clave_periodo] = Decimal("0")
         diferencia_tc_valores[clave_periodo] = Decimal("0")
@@ -512,6 +527,9 @@ def inicio(request):
             continue
 
         if diferencia_tc_concepto_id and m.concepto_id == diferencia_tc_concepto_id:
+            continue
+
+        if es_concepto_manual(m.concepto):
             continue
 
         key = (m.concepto_id, m.anio, m.mes)
@@ -535,9 +553,23 @@ def inicio(request):
         if not p.concepto or (p.anio, p.mes) not in periodos_validos:
             continue
 
-        key = (p.concepto_id, p.anio, p.mes)
         clave_periodo = (p.anio, p.mes)
 
+        if es_concepto_manual(p.concepto):
+            key = (p.concepto_id, p.anio, p.mes)
+            montos_manuales_por_concepto_mes[key] = montos_manuales_por_concepto_mes.get(key, Decimal("0")) + p.monto
+
+            if p.concepto.tipo == Concepto.TIPO_INGRESO:
+                totales_manuales_mensuales[clave_periodo]["ingresos"] += p.monto
+            elif p.concepto.tipo == Concepto.TIPO_EGRESO:
+                totales_manuales_mensuales[clave_periodo]["egresos"] += p.monto
+            elif p.concepto.tipo == Concepto.TIPO_FINANCIAMIENTO:
+                totales_manuales_mensuales[clave_periodo]["financiamiento"] += p.monto
+            elif p.concepto.tipo == Concepto.TIPO_EXCLUIR:
+                totales_manuales_mensuales[clave_periodo]["excluir"] += p.monto
+            continue
+
+        key = (p.concepto_id, p.anio, p.mes)
         montos_proyectados_por_concepto_mes[key] = montos_proyectados_por_concepto_mes.get(key, Decimal("0")) + p.monto
 
         if diferencia_tc_concepto_id and p.concepto_id == diferencia_tc_concepto_id:
@@ -559,17 +591,25 @@ def inicio(request):
         filas = []
 
         for concepto in conceptos:
+            es_manual = es_concepto_manual(concepto)
+
             fila = {
                 "id": concepto.id,
                 "codigo": concepto.codigo,
                 "nombre": concepto.nombre,
                 "tipo_fila": tipo_fila,
+                "es_manual": es_manual,
                 "columnas": [],
                 "total": Decimal("0"),
             }
 
             for columna in columnas_flujo:
-                if columna["origen"] == "REAL":
+                if es_manual:
+                    monto = montos_manuales_por_concepto_mes.get(
+                        (concepto.id, columna["anio"], columna["mes_numero"]),
+                        Decimal("0"),
+                    )
+                elif columna["origen"] == "REAL":
                     monto = montos_reales_por_concepto_mes.get(
                         (concepto.id, columna["anio"], columna["mes_numero"]),
                         Decimal("0"),
@@ -632,6 +672,10 @@ def inicio(request):
             financiamiento_mes = totales_proyectados_mensuales[clave_periodo]["financiamiento"]
             money_market_mes = money_market_proyectado_mensual[clave_periodo]
             diferencia_tc_mes = diferencia_tc_valores[clave_periodo]
+
+        ingresos_mes += totales_manuales_mensuales[clave_periodo]["ingresos"]
+        egresos_mes += totales_manuales_mensuales[clave_periodo]["egresos"]
+        financiamiento_mes += totales_manuales_mensuales[clave_periodo]["financiamiento"]
 
         neto_operacional_mes = ingresos_mes + egresos_mes
         neto_financiamiento_mes = financiamiento_mes + diferencia_tc_mes
