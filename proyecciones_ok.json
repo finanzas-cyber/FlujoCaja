@@ -2251,21 +2251,6 @@
     },
     {
         "model": "flujo.proyeccion",
-        "pk": 151,
-        "fields": {
-            "concepto": [
-                "999999"
-            ],
-            "anio": 2026,
-            "mes": 4,
-            "origen": "PROYECTADO",
-            "monto": "0.00",
-            "descripcion": "",
-            "activo": true
-        }
-    },
-    {
-        "model": "flujo.proyeccion",
         "pk": 152,
         "fields": {
             "concepto": [
