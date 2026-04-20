@@ -16,6 +16,10 @@ from django.utils import timezone
 from .models import Movimiento, Concepto, Proyeccion, ConfiguracionFlujo
 
 
+ORIGEN_REAL = "REAL"
+ORIGEN_PROYECTADO = "PROYECTADO"
+
+
 def es_concepto_manual(concepto):
     if not concepto:
         return False
@@ -33,7 +37,7 @@ def actualizar_softland(request):
         call_command("importar_movimientos", stdout=salida)
         messages.success(
             request,
-            "Actualización desde Softland realizada correctamente. " + salida.getvalue().strip()
+            "Actualizacion desde Softland realizada correctamente. " + salida.getvalue().strip()
         )
     except Exception as e:
         messages.error(request, f"Error al actualizar desde Softland: {e}")
@@ -100,7 +104,7 @@ def publicar_proyecciones(request):
         if diff.returncode == 0:
             messages.success(
                 request,
-                "No había cambios nuevos en proyecciones_ok.json. No fue necesario publicar."
+                "No habia cambios nuevos en proyecciones_ok.json. No fue necesario publicar."
             )
             return redirect("inicio")
 
@@ -138,7 +142,7 @@ def publicar_proyecciones(request):
 
 def guardar_proyeccion(request):
     if request.method != "POST":
-        return JsonResponse({"ok": False, "error": "Método no permitido"}, status=405)
+        return JsonResponse({"ok": False, "error": "Metodo no permitido"}, status=405)
 
     try:
         concepto_id = (request.POST.get("concepto_id") or "").strip()
@@ -163,6 +167,7 @@ def guardar_proyeccion(request):
             concepto=concepto,
             anio=anio_proyeccion,
             mes=int(mes),
+            origen=ORIGEN_PROYECTADO,
             defaults={
                 "monto": Decimal("0"),
                 "descripcion": "",
@@ -172,6 +177,7 @@ def guardar_proyeccion(request):
 
         proyeccion.monto = Decimal(monto or "0")
         proyeccion.activo = True
+        proyeccion.origen = ORIGEN_PROYECTADO
         proyeccion.save()
 
         return JsonResponse({"ok": True})
@@ -184,13 +190,33 @@ def guardar_proyeccion(request):
 
 def guardar_movimiento_real(request):
     if request.method != "POST":
-        return JsonResponse({"ok": False, "error": "Método no permitido"}, status=405)
+        return JsonResponse({"ok": False, "error": "Metodo no permitido"}, status=405)
 
     try:
         concepto_id = int((request.POST.get("concepto_id") or "").strip())
         mes = int((request.POST.get("mes") or "").strip())
         anio = int((request.POST.get("anio") or "").strip())
         monto = Decimal((request.POST.get("monto") or "0").strip())
+
+        concepto = Concepto.objects.get(id=concepto_id)
+
+        if es_concepto_manual(concepto) or concepto.codigo == "999999":
+            proyeccion, _ = Proyeccion.objects.get_or_create(
+                concepto=concepto,
+                anio=anio,
+                mes=mes,
+                origen=ORIGEN_REAL,
+                defaults={
+                    "monto": Decimal("0"),
+                    "descripcion": "",
+                    "activo": True,
+                },
+            )
+            proyeccion.monto = monto
+            proyeccion.activo = True
+            proyeccion.origen = ORIGEN_REAL
+            proyeccion.save()
+            return JsonResponse({"ok": True})
 
         movimientos = Movimiento.objects.filter(
             concepto_id=concepto_id,
@@ -218,20 +244,22 @@ def guardar_movimiento_real(request):
 
         return JsonResponse({"ok": True})
 
+    except Concepto.DoesNotExist:
+        return JsonResponse({"ok": False, "error": "Concepto no existe"}, status=404)
     except Exception as e:
         return JsonResponse({"ok": False, "error": str(e)}, status=500)
 
 
 def guardar_configuracion_flujo(request):
     if request.method != "POST":
-        return JsonResponse({"ok": False, "error": "Método no permitido"}, status=405)
+        return JsonResponse({"ok": False, "error": "Metodo no permitido"}, status=405)
 
     try:
         campo = (request.POST.get("campo") or "").strip()
         monto = Decimal((request.POST.get("monto") or "0").strip())
 
         if campo not in ["saldo_inicial_base", "money_market_inicial_base"]:
-            return JsonResponse({"ok": False, "error": "Campo inválido"}, status=400)
+            return JsonResponse({"ok": False, "error": "Campo invalido"}, status=400)
 
         config, _ = ConfiguracionFlujo.objects.get_or_create(
             id=1,
@@ -252,7 +280,7 @@ def guardar_configuracion_flujo(request):
 
 def detalle_movimientos_real(request):
     if request.method != "GET":
-        return JsonResponse({"ok": False, "error": "Método no permitido"}, status=405)
+        return JsonResponse({"ok": False, "error": "Metodo no permitido"}, status=405)
 
     try:
         concepto_id = int((request.GET.get("concepto_id") or "").strip())
@@ -260,6 +288,28 @@ def detalle_movimientos_real(request):
         anio = int((request.GET.get("anio") or "2026").strip())
 
         concepto = Concepto.objects.get(id=concepto_id)
+
+        if es_concepto_manual(concepto) or concepto.codigo == "999999":
+            proyeccion_real = Proyeccion.objects.filter(
+                concepto_id=concepto_id,
+                anio=anio,
+                mes=mes,
+                origen=ORIGEN_REAL,
+                activo=True,
+            ).order_by("-id").first()
+
+            total = proyeccion_real.monto if proyeccion_real else Decimal("0")
+
+            return JsonResponse({
+                "ok": True,
+                "concepto_id": concepto.id,
+                "concepto_codigo": concepto.codigo,
+                "concepto_nombre": concepto.nombre,
+                "anio": anio,
+                "mes": mes,
+                "total": str(total),
+                "movimientos": [],
+            })
 
         movimientos = Movimiento.objects.select_related(
             "cuenta_banco",
@@ -301,7 +351,7 @@ def detalle_movimientos_real(request):
         })
 
     except ValueError:
-        return JsonResponse({"ok": False, "error": "Parámetros inválidos"}, status=400)
+        return JsonResponse({"ok": False, "error": "Parametros invalidos"}, status=400)
     except Concepto.DoesNotExist:
         return JsonResponse({"ok": False, "error": "Concepto no existe"}, status=404)
     except Exception as e:
@@ -405,7 +455,7 @@ def inicio(request):
                     "mes_numero": mes_numero,
                     "mes_nombre": mes_nombre,
                     "etiqueta": "REAL",
-                    "origen": "REAL",
+                    "origen": ORIGEN_REAL,
                     "es_mes_actual": False,
                 })
             else:
@@ -415,7 +465,7 @@ def inicio(request):
                     "mes_numero": mes_numero,
                     "mes_nombre": mes_nombre,
                     "etiqueta": "PROY.",
-                    "origen": "PROYECTADO",
+                    "origen": ORIGEN_PROYECTADO,
                     "es_mes_actual": False,
                 })
         elif anio_columna < anio_actual or (anio_columna == anio_actual and mes_numero < mes_actual):
@@ -425,7 +475,7 @@ def inicio(request):
                 "mes_numero": mes_numero,
                 "mes_nombre": mes_nombre,
                 "etiqueta": "REAL",
-                "origen": "REAL",
+                "origen": ORIGEN_REAL,
                 "es_mes_actual": False,
             })
         elif anio_columna == anio_actual and mes_numero == mes_actual:
@@ -435,7 +485,7 @@ def inicio(request):
                 "mes_numero": mes_numero,
                 "mes_nombre": mes_nombre,
                 "etiqueta": "REAL",
-                "origen": "REAL",
+                "origen": ORIGEN_REAL,
                 "es_mes_actual": True,
             })
             columnas_flujo.append({
@@ -444,7 +494,7 @@ def inicio(request):
                 "mes_numero": mes_numero,
                 "mes_nombre": mes_nombre,
                 "etiqueta": "PROY.",
-                "origen": "PROYECTADO",
+                "origen": ORIGEN_PROYECTADO,
                 "es_mes_actual": True,
             })
         else:
@@ -454,7 +504,7 @@ def inicio(request):
                 "mes_numero": mes_numero,
                 "mes_nombre": mes_nombre,
                 "etiqueta": "PROY.",
-                "origen": "PROYECTADO",
+                "origen": ORIGEN_PROYECTADO,
                 "es_mes_actual": False,
             })
 
@@ -485,15 +535,17 @@ def inicio(request):
 
     montos_reales_por_concepto_mes = {}
     montos_proyectados_por_concepto_mes = {}
-    montos_manuales_por_concepto_mes = {}
+    montos_manuales_reales_por_concepto_mes = {}
+    montos_manuales_proyectados_por_concepto_mes = {}
 
     totales_reales_mensuales = {}
     totales_proyectados_mensuales = {}
-    totales_manuales_mensuales = {}
+    totales_manuales_reales_mensuales = {}
+    totales_manuales_proyectados_mensuales = {}
 
     money_market_real_mensual = {}
     money_market_proyectado_mensual = {}
-    diferencia_tc_valores = {}
+    diferencia_tc_valores = {}  # dict con origen
 
     for anio_columna, mes_numero, _ in meses_base:
         clave_periodo = (anio_columna, mes_numero)
@@ -510,7 +562,13 @@ def inicio(request):
             "financiamiento": Decimal("0"),
             "excluir": Decimal("0"),
         }
-        totales_manuales_mensuales[clave_periodo] = {
+        totales_manuales_reales_mensuales[clave_periodo] = {
+            "ingresos": Decimal("0"),
+            "egresos": Decimal("0"),
+            "financiamiento": Decimal("0"),
+            "excluir": Decimal("0"),
+        }
+        totales_manuales_proyectados_mensuales[clave_periodo] = {
             "ingresos": Decimal("0"),
             "egresos": Decimal("0"),
             "financiamiento": Decimal("0"),
@@ -518,7 +576,7 @@ def inicio(request):
         }
         money_market_real_mensual[clave_periodo] = Decimal("0")
         money_market_proyectado_mensual[clave_periodo] = Decimal("0")
-        diferencia_tc_valores[clave_periodo] = Decimal("0")
+        diferencia_tc_valores[clave_periodo] = {ORIGEN_REAL: Decimal("0"), ORIGEN_PROYECTADO: Decimal("0")}
 
     periodos_validos = {(anio_columna, mes_numero) for anio_columna, mes_numero, _ in meses_base}
 
@@ -527,9 +585,8 @@ def inicio(request):
             continue
 
         if diferencia_tc_concepto_id and m.concepto_id == diferencia_tc_concepto_id:
-            continue
-
-        if es_concepto_manual(m.concepto):
+            clave_periodo = (m.anio, m.mes)
+            diferencia_tc_valores[clave_periodo][ORIGEN_REAL] += m.monto
             continue
 
         key = (m.concepto_id, m.anio, m.mes)
@@ -554,38 +611,72 @@ def inicio(request):
             continue
 
         clave_periodo = (p.anio, p.mes)
+        origen = (getattr(p, "origen", ORIGEN_PROYECTADO) or ORIGEN_PROYECTADO).upper()
+        key = (p.concepto_id, p.anio, p.mes)
 
         if es_concepto_manual(p.concepto):
-            key = (p.concepto_id, p.anio, p.mes)
-            montos_manuales_por_concepto_mes[key] = montos_manuales_por_concepto_mes.get(key, Decimal("0")) + p.monto
+            if origen == ORIGEN_REAL:
+                montos_manuales_reales_por_concepto_mes[key] = (
+                    montos_manuales_reales_por_concepto_mes.get(key, Decimal("0")) + p.monto
+                )
 
-            if p.concepto.tipo == Concepto.TIPO_INGRESO:
-                totales_manuales_mensuales[clave_periodo]["ingresos"] += p.monto
-            elif p.concepto.tipo == Concepto.TIPO_EGRESO:
-                totales_manuales_mensuales[clave_periodo]["egresos"] += p.monto
-            elif p.concepto.tipo == Concepto.TIPO_FINANCIAMIENTO:
-                totales_manuales_mensuales[clave_periodo]["financiamiento"] += p.monto
-            elif p.concepto.tipo == Concepto.TIPO_EXCLUIR:
-                totales_manuales_mensuales[clave_periodo]["excluir"] += p.monto
+                if p.concepto.tipo == Concepto.TIPO_INGRESO:
+                    totales_manuales_reales_mensuales[clave_periodo]["ingresos"] += p.monto
+                elif p.concepto.tipo == Concepto.TIPO_EGRESO:
+                    totales_manuales_reales_mensuales[clave_periodo]["egresos"] += p.monto
+                elif p.concepto.tipo == Concepto.TIPO_FINANCIAMIENTO:
+                    totales_manuales_reales_mensuales[clave_periodo]["financiamiento"] += p.monto
+                elif p.concepto.tipo == Concepto.TIPO_EXCLUIR:
+                    totales_manuales_reales_mensuales[clave_periodo]["excluir"] += p.monto
+            else:
+                montos_manuales_proyectados_por_concepto_mes[key] = (
+                    montos_manuales_proyectados_por_concepto_mes.get(key, Decimal("0")) + p.monto
+                )
+
+                if p.concepto.tipo == Concepto.TIPO_INGRESO:
+                    totales_manuales_proyectados_mensuales[clave_periodo]["ingresos"] += p.monto
+                elif p.concepto.tipo == Concepto.TIPO_EGRESO:
+                    totales_manuales_proyectados_mensuales[clave_periodo]["egresos"] += p.monto
+                elif p.concepto.tipo == Concepto.TIPO_FINANCIAMIENTO:
+                    totales_manuales_proyectados_mensuales[clave_periodo]["financiamiento"] += p.monto
+                elif p.concepto.tipo == Concepto.TIPO_EXCLUIR:
+                    totales_manuales_proyectados_mensuales[clave_periodo]["excluir"] += p.monto
             continue
 
-        key = (p.concepto_id, p.anio, p.mes)
-        montos_proyectados_por_concepto_mes[key] = montos_proyectados_por_concepto_mes.get(key, Decimal("0")) + p.monto
+        if origen == ORIGEN_REAL:
+            montos_reales_por_concepto_mes[key] = montos_reales_por_concepto_mes.get(key, Decimal("0")) + p.monto
 
-        if diferencia_tc_concepto_id and p.concepto_id == diferencia_tc_concepto_id:
-            diferencia_tc_valores[clave_periodo] += p.monto
+            if diferencia_tc_concepto_id and p.concepto_id == diferencia_tc_concepto_id:
+                diferencia_tc_valores[clave_periodo][origen] += p.monto
+            else:
+                if p.concepto.tipo == Concepto.TIPO_INGRESO:
+                    totales_reales_mensuales[clave_periodo]["ingresos"] += p.monto
+                elif p.concepto.tipo == Concepto.TIPO_EGRESO:
+                    totales_reales_mensuales[clave_periodo]["egresos"] += p.monto
+                elif p.concepto.tipo == Concepto.TIPO_FINANCIAMIENTO:
+                    totales_reales_mensuales[clave_periodo]["financiamiento"] += p.monto
+                elif p.concepto.tipo == Concepto.TIPO_EXCLUIR:
+                    totales_reales_mensuales[clave_periodo]["excluir"] += p.monto
+
+            if money_market_concepto_id and p.concepto_id == money_market_concepto_id:
+                money_market_real_mensual[clave_periodo] += p.monto
         else:
-            if p.concepto.tipo == Concepto.TIPO_INGRESO:
-                totales_proyectados_mensuales[clave_periodo]["ingresos"] += p.monto
-            elif p.concepto.tipo == Concepto.TIPO_EGRESO:
-                totales_proyectados_mensuales[clave_periodo]["egresos"] += p.monto
-            elif p.concepto.tipo == Concepto.TIPO_FINANCIAMIENTO:
-                totales_proyectados_mensuales[clave_periodo]["financiamiento"] += p.monto
-            elif p.concepto.tipo == Concepto.TIPO_EXCLUIR:
-                totales_proyectados_mensuales[clave_periodo]["excluir"] += p.monto
+            montos_proyectados_por_concepto_mes[key] = montos_proyectados_por_concepto_mes.get(key, Decimal("0")) + p.monto
 
-        if money_market_concepto_id and p.concepto_id == money_market_concepto_id:
-            money_market_proyectado_mensual[clave_periodo] += p.monto
+            if diferencia_tc_concepto_id and p.concepto_id == diferencia_tc_concepto_id:
+                diferencia_tc_valores[clave_periodo][origen] += p.monto
+            else:
+                if p.concepto.tipo == Concepto.TIPO_INGRESO:
+                    totales_proyectados_mensuales[clave_periodo]["ingresos"] += p.monto
+                elif p.concepto.tipo == Concepto.TIPO_EGRESO:
+                    totales_proyectados_mensuales[clave_periodo]["egresos"] += p.monto
+                elif p.concepto.tipo == Concepto.TIPO_FINANCIAMIENTO:
+                    totales_proyectados_mensuales[clave_periodo]["financiamiento"] += p.monto
+                elif p.concepto.tipo == Concepto.TIPO_EXCLUIR:
+                    totales_proyectados_mensuales[clave_periodo]["excluir"] += p.monto
+
+            if money_market_concepto_id and p.concepto_id == money_market_concepto_id:
+                money_market_proyectado_mensual[clave_periodo] += p.monto
 
     def construir_filas(conceptos, tipo_fila):
         filas = []
@@ -604,21 +695,17 @@ def inicio(request):
             }
 
             for columna in columnas_flujo:
+                key = (concepto.id, columna["anio"], columna["mes_numero"])
+
                 if es_manual:
-                    monto = montos_manuales_por_concepto_mes.get(
-                        (concepto.id, columna["anio"], columna["mes_numero"]),
-                        Decimal("0"),
-                    )
-                elif columna["origen"] == "REAL":
-                    monto = montos_reales_por_concepto_mes.get(
-                        (concepto.id, columna["anio"], columna["mes_numero"]),
-                        Decimal("0"),
-                    )
+                    if columna["origen"] == ORIGEN_REAL:
+                        monto = montos_manuales_reales_por_concepto_mes.get(key, Decimal("0"))
+                    else:
+                        monto = montos_manuales_proyectados_por_concepto_mes.get(key, Decimal("0"))
+                elif columna["origen"] == ORIGEN_REAL:
+                    monto = montos_reales_por_concepto_mes.get(key, Decimal("0"))
                 else:
-                    monto = montos_proyectados_por_concepto_mes.get(
-                        (concepto.id, columna["anio"], columna["mes_numero"]),
-                        Decimal("0"),
-                    )
+                    monto = montos_proyectados_por_concepto_mes.get(key, Decimal("0"))
 
                 fila["columnas"].append({
                     "clave": columna["clave"],
@@ -649,41 +736,68 @@ def inicio(request):
     saldo_inicial_fila = {"nombre": "SALDO INICIAL", "tipo_fila": "saldo_inicial", "columnas": [], "total": Decimal("0")}
     saldo_disponible_banco_fila = {"nombre": "SALDO DISPONIBLE BANCO", "tipo_fila": "saldo_final", "columnas": [], "total": Decimal("0")}
     money_market_acumulado_fila = {"nombre": "MONEY MARKET ACUMULADO", "tipo_fila": "money_market", "columnas": [], "total": Decimal("0")}
-    saldo_total_tesoreria_fila = {"nombre": "SALDO TOTAL TESORERÍA", "tipo_fila": "saldo_total", "columnas": [], "total": Decimal("0")}
+    saldo_total_tesoreria_fila = {"nombre": "SALDO TOTAL TESORERIA", "tipo_fila": "saldo_total", "columnas": [], "total": Decimal("0")}
     fila_diferencia_tc = {"nombre": "DIFERENCIA T/C", "tipo_fila": "saldo", "columnas": [], "total": Decimal("0")}
 
     saldo_actual = saldo_inicial_base
     money_market_acumulado_actual = money_market_inicial_base
+    saldo_base_mes_actual = None
 
     primer_periodo = meses_base[0][:2]
 
     for columna in columnas_flujo:
         clave_periodo = (columna["anio"], columna["mes_numero"])
 
-        if columna["origen"] == "REAL":
-            ingresos_mes = totales_reales_mensuales[clave_periodo]["ingresos"]
-            egresos_mes = totales_reales_mensuales[clave_periodo]["egresos"]
-            financiamiento_mes = totales_reales_mensuales[clave_periodo]["financiamiento"]
+        if columna["origen"] == ORIGEN_REAL:
+            ingresos_mes = (
+                totales_reales_mensuales[clave_periodo]["ingresos"]
+                + totales_manuales_reales_mensuales[clave_periodo]["ingresos"]
+            )
+            egresos_mes = (
+                totales_reales_mensuales[clave_periodo]["egresos"]
+                + totales_manuales_reales_mensuales[clave_periodo]["egresos"]
+            )
+            financiamiento_mes = (
+                totales_reales_mensuales[clave_periodo]["financiamiento"]
+                + totales_manuales_reales_mensuales[clave_periodo]["financiamiento"]
+            )
             money_market_mes = money_market_real_mensual[clave_periodo]
-            diferencia_tc_mes = diferencia_tc_valores[clave_periodo]
+            diferencia_tc_mes = diferencia_tc_valores[clave_periodo][columna["origen"]]
         else:
-            ingresos_mes = totales_proyectados_mensuales[clave_periodo]["ingresos"]
-            egresos_mes = totales_proyectados_mensuales[clave_periodo]["egresos"]
-            financiamiento_mes = totales_proyectados_mensuales[clave_periodo]["financiamiento"]
+            ingresos_mes = (
+                totales_proyectados_mensuales[clave_periodo]["ingresos"]
+                + totales_manuales_proyectados_mensuales[clave_periodo]["ingresos"]
+            )
+            egresos_mes = (
+                totales_proyectados_mensuales[clave_periodo]["egresos"]
+                + totales_manuales_proyectados_mensuales[clave_periodo]["egresos"]
+            )
+            financiamiento_mes = (
+                totales_proyectados_mensuales[clave_periodo]["financiamiento"]
+                + totales_manuales_proyectados_mensuales[clave_periodo]["financiamiento"]
+            )
             money_market_mes = money_market_proyectado_mensual[clave_periodo]
-            diferencia_tc_mes = diferencia_tc_valores[clave_periodo]
-
-        ingresos_mes += totales_manuales_mensuales[clave_periodo]["ingresos"]
-        egresos_mes += totales_manuales_mensuales[clave_periodo]["egresos"]
-        financiamiento_mes += totales_manuales_mensuales[clave_periodo]["financiamiento"]
+            diferencia_tc_mes = diferencia_tc_valores[clave_periodo][columna["origen"]]
 
         neto_operacional_mes = ingresos_mes + egresos_mes
         neto_financiamiento_mes = financiamiento_mes + diferencia_tc_mes
         neto_total_mes = neto_operacional_mes + neto_financiamiento_mes
 
-        saldo_inicial_mes = saldo_actual
+        # guardar base antes de abril REAL
+        if columna["es_mes_actual"] and columna["origen"] == ORIGEN_REAL:
+            saldo_base_mes_actual = saldo_actual
+
+        # usar misma base para PROY abril
+        if columna["es_mes_actual"] and columna["origen"] == ORIGEN_PROYECTADO and saldo_base_mes_actual is not None:
+            saldo_inicial_mes = saldo_base_mes_actual
+        else:
+            saldo_inicial_mes = saldo_actual
+
         saldo_disponible_banco_mes = saldo_inicial_mes + neto_total_mes
-        saldo_actual = saldo_disponible_banco_mes
+
+        # no avanzar saldo en PROY del mes actual
+        if not (columna["es_mes_actual"] and columna["origen"] == ORIGEN_PROYECTADO):
+            saldo_actual = saldo_disponible_banco_mes
 
         money_market_acumulado_mes = money_market_acumulado_actual + (money_market_mes * Decimal("-1"))
         money_market_acumulado_actual = money_market_acumulado_mes
@@ -845,4 +959,8 @@ def inicio(request):
         "diferencia_tc_concepto_id": diferencia_tc_concepto_id,
         "fila_diferencia_tc": fila_diferencia_tc,
     })
+
+
+
+
 
