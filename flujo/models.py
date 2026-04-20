@@ -83,6 +83,14 @@ class Movimiento(models.Model):
 
 
 class Proyeccion(models.Model):
+    ORIGEN_REAL = "REAL"
+    ORIGEN_PROYECTADO = "PROYECTADO"
+
+    ORIGEN_CHOICES = [
+        (ORIGEN_REAL, "Real"),
+        (ORIGEN_PROYECTADO, "Proyectado"),
+    ]
+
     concepto = models.ForeignKey(
         Concepto,
         on_delete=models.PROTECT,
@@ -90,17 +98,23 @@ class Proyeccion(models.Model):
     )
     anio = models.IntegerField()
     mes = models.IntegerField()
+    origen = models.CharField(
+        max_length=20,
+        choices=ORIGEN_CHOICES,
+        default=ORIGEN_PROYECTADO,
+        db_index=True,
+    )
     monto = models.DecimalField(max_digits=18, decimal_places=2, default=0)
     descripcion = models.CharField(max_length=500, blank=True, default="")
     activo = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ["anio", "mes", "concepto__codigo", "id"]
+        ordering = ["anio", "mes", "concepto__codigo", "origen", "id"]
         verbose_name = "Proyección"
         verbose_name_plural = "Proyecciones"
 
     def __str__(self):
-        return f"{self.anio}-{self.mes:02d} | {self.concepto.codigo} | {self.monto}"
+        return f"{self.anio}-{self.mes:02d} | {self.concepto.codigo} | {self.origen} | {self.monto}"
 
 
 class ConfiguracionFlujo(models.Model):
