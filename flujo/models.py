@@ -1,7 +1,13 @@
-from django.db import models
+﻿from django.db import models
+
+
+class ConceptoManager(models.Manager):
+    def get_by_natural_key(self, codigo):
+        return self.get(codigo=codigo)
 
 
 class Concepto(models.Model):
+    objects = ConceptoManager()
     TIPO_INGRESO = "INGRESO"
     TIPO_EGRESO = "EGRESO"
     TIPO_FINANCIAMIENTO = "FINANCIAMIENTO"
@@ -24,6 +30,9 @@ class Concepto(models.Model):
 
     def __str__(self):
         return f"{self.codigo} - {self.nombre}"
+
+    def natural_key(self):
+        return (self.codigo,)
 
 
 class CuentaBanco(models.Model):
@@ -110,7 +119,7 @@ class Proyeccion(models.Model):
 
     class Meta:
         ordering = ["anio", "mes", "concepto__codigo", "origen", "id"]
-        verbose_name = "Proyección"
+        verbose_name = "ProyecciÃ³n"
         verbose_name_plural = "Proyecciones"
 
     def __str__(self):
@@ -123,8 +132,9 @@ class ConfiguracionFlujo(models.Model):
     actualizado_en = models.DateTimeField(auto_now=True)
 
     class Meta:
-        verbose_name = "Configuración flujo"
-        verbose_name_plural = "Configuración flujo"
+        verbose_name = "ConfiguraciÃ³n flujo"
+        verbose_name_plural = "ConfiguraciÃ³n flujo"
 
     def __str__(self):
-        return "Configuración flujo"
+        return "ConfiguraciÃ³n flujo"
+
