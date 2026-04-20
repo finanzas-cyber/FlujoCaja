@@ -59,6 +59,8 @@ class Command(BaseCommand):
         ignorados = 0
         eliminados = 0
         procesados = 0
+        self.stdout.write('Limpiando movimientos reales 2026...')
+        Movimiento.objects.filter(anio=2026).delete()
 
         ultimo_cpbnum = None
         secuencia_por_grupo = {}
@@ -92,6 +94,7 @@ class Command(BaseCommand):
             cajcod = (row.CajCod or "").strip()
 
             cuenta_banco = cuentas.get(pctcod)
+            if cpbnum == 'TU_NUMERO': self.stdout.write(f'--- REVISANDO: {cpbnum} | Cuenta: {pctcod} | CajCod: {cajcod} ---')
             if not cuenta_banco:
                 ignorados += 1
                 continue
