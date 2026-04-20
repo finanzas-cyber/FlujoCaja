@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
+# exit on error
+set -o errexit
 
-echo "🔥 BUILD NUEVO EJECUTANDOSE 🔥"
+# Instalar dependencias
+pip install -r requirements.txt
 
+# Recolectar archivos estáticos
+python manage.py collectstatic --no-input
+
+# Correr migraciones (por si hay cambios en las tablas)
 python manage.py migrate
-python manage.py flush --no-input
 
-python manage.py loaddata conceptos_ok.json
-python manage.py loaddata cuentas_ok.json
-python manage.py loaddata movimientos_ok.json
-python manage.py loaddata proyecciones_ok.json
+# EJECUTAR TU NUEVO COMANDO AUTOMÁTICO
+# Esto borrará la basura y cargará el JSON limpio
+python manage.py cargar_datos
