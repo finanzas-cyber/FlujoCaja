@@ -65,7 +65,7 @@
     "cpbnum": "00003452",
     "mov_debe": "0.00",
     "mov_haber": "1830790.00",
-    "descripcion": "CUOTAS TEMP. 2025-2026, JUNTA DE VIGILANCIA RIO —UBLE",
+    "descripcion": "CUOTAS TEMP. 2025-2026, JUNTA DE VIGILANCIA RIO √ëUBLE",
     "cajcod": "200115",
     "origen_clave": "2-1-05-21|00003452|2025-07-01|1",
     "origen_hash": "5fbebe8ab52d22fba1661bf19b7a8647c49b9bfbabe911dde725856edb1ba522"
@@ -551,7 +551,7 @@
     "cpbnum": "00003485",
     "mov_debe": "0.00",
     "mov_haber": "200000.00",
-    "descripcion": "BH/653, CLAUDIA MU—OZ PALMA.",
+    "descripcion": "BH/653, CLAUDIA MU√ëOZ PALMA.",
     "cajcod": "200113",
     "origen_clave": "2-1-05-21|00003485|2025-07-02|1",
     "origen_hash": "60e48d83b61fb668f080ae8ac66bd9080427bdff9000a525aa0a6051662c46aa"
@@ -731,7 +731,7 @@
     "cpbnum": "00004861",
     "mov_debe": "0.00",
     "mov_haber": "1368500.00",
-    "descripcion": "NOMINA N∫ 78 Y 79",
+    "descripcion": "NOMINA N¬∫ 78 Y 79",
     "cajcod": "400101",
     "origen_clave": "1-1-01-19|00004861|2025-07-05|1",
     "origen_hash": "239a47427941d1ee929f6644e3a175f095a84bb64a80e39d35a59c06aa751f81"
@@ -749,7 +749,7 @@
     "cpbnum": "00004861",
     "mov_debe": "0.00",
     "mov_haber": "529000.00",
-    "descripcion": "NOMINA N∫ 78 Y 79",
+    "descripcion": "NOMINA N¬∫ 78 Y 79",
     "cajcod": "400101",
     "origen_clave": "1-1-01-19|00004861|2025-07-05|2",
     "origen_hash": "42dfea2a4776cbaf761c32257fff99e7c03333bb8505b594a7f0b66e561eb1e8"
@@ -767,7 +767,7 @@
     "cpbnum": "00004861",
     "mov_debe": "1368500.00",
     "mov_haber": "0.00",
-    "descripcion": "NOMINA N∫ 78 Y 79",
+    "descripcion": "NOMINA N¬∫ 78 Y 79",
     "cajcod": "400101",
     "origen_clave": "2-1-05-24|00004861|2025-07-05|1",
     "origen_hash": "647586c29ecabaf94bdf653bd1667feb7b623629ccde943b6811073b1e4f6605"
@@ -785,7 +785,7 @@
     "cpbnum": "00004861",
     "mov_debe": "529000.00",
     "mov_haber": "0.00",
-    "descripcion": "NOMINA N∫ 78 Y 79",
+    "descripcion": "NOMINA N¬∫ 78 Y 79",
     "cajcod": "400101",
     "origen_clave": "2-1-05-24|00004861|2025-07-05|2",
     "origen_hash": "052db09e6b2b0ffa0239ea896c2940ca3bcea5eb74b47c47764c839153906654"
@@ -857,7 +857,7 @@
     "cpbnum": "00003636",
     "mov_debe": "0.00",
     "mov_haber": "80000.00",
-    "descripcion": "RENDICION DE GASTOS NRO. 1, BENCINA MOTOS, MATIAS OT¡ROLA.",
+    "descripcion": "RENDICION DE GASTOS NRO. 1, BENCINA MOTOS, MATIAS OT√ÅROLA.",
     "cajcod": "200107",
     "origen_clave": "2-1-05-21|00003636|2025-07-09|1",
     "origen_hash": "702334883175fba7f67cbb746878a585f5afa04a72aab0aa84586ec13dee132d"
@@ -893,7 +893,7 @@
     "cpbnum": "00003638",
     "mov_debe": "0.00",
     "mov_haber": "150000.00",
-    "descripcion": "RENDICION DE COMBUSTIBLE, JOSE MOLINA PI—A",
+    "descripcion": "RENDICION DE COMBUSTIBLE, JOSE MOLINA PI√ëA",
     "cajcod": "200107",
     "origen_clave": "2-1-05-21|00003638|2025-07-09|1",
     "origen_hash": "624f7fe689b95693d8ed165401934d30fa6bfe3beb4a556b805011ab2a426336"
@@ -1019,7 +1019,7 @@
     "cpbnum": "00003650",
     "mov_debe": "0.00",
     "mov_haber": "546304.00",
-    "descripcion": "F/12976-12975, LUIS ALFONSO MU—OZ VASQUEZ",
+    "descripcion": "F/12976-12975, LUIS ALFONSO MU√ëOZ VASQUEZ",
     "cajcod": "200108",
     "origen_clave": "2-1-05-21|00003650|2025-07-09|1",
     "origen_hash": "536679dd7620243fb531c67231bef72ecedc09665cd78b3f3cbcc550b6afcdc1"
@@ -1037,7 +1037,7 @@
     "cpbnum": "00003653",
     "mov_debe": "0.00",
     "mov_haber": "180880.00",
-    "descripcion": "F/278011, VICTOR ARRIAGADA NU—EZ",
+    "descripcion": "F/278011, VICTOR ARRIAGADA NU√ëEZ",
     "cajcod": "200108",
     "origen_clave": "2-1-05-21|00003653|2025-07-09|1",
     "origen_hash": "f610fe83b9b88e93dfa57e529905961b1eb666c974dcd2491032a59bfc48a52b"
@@ -1091,7 +1091,7 @@
     "cpbnum": "00003660",
     "mov_debe": "0.00",
     "mov_haber": "402931.00",
-    "descripcion": "BH/484, MIGUEL GUI—EZ SAAVEDRA",
+    "descripcion": "BH/484, MIGUEL GUI√ëEZ SAAVEDRA",
     "cajcod": "200113",
     "origen_clave": "2-1-05-21|00003660|2025-07-09|1",
     "origen_hash": "da9af5a460a8ed5cabf8d2cdf332551e04e39be8df911a9de4a3d1422891cc8b"
@@ -1145,7 +1145,7 @@
     "cpbnum": "00003666",
     "mov_debe": "0.00",
     "mov_haber": "143640.00",
-    "descripcion": "ANTICIPO A PROVEEDOR, ANIBAL ACU—A DIAZ",
+    "descripcion": "ANTICIPO A PROVEEDOR, ANIBAL ACU√ëA DIAZ",
     "cajcod": "100105",
     "origen_clave": "2-1-05-21|00003666|2025-07-09|1",
     "origen_hash": "eb8a7cf951df69f65fec5ef4c3ec5f0a05614aaebbe4d82e369cff55075945b4"
@@ -1199,7 +1199,7 @@
     "cpbnum": "00003676",
     "mov_debe": "0.00",
     "mov_haber": "3330000.00",
-    "descripcion": "CANCELA SALDO ARRIENDO FUNDO JUNIO 2025.- DO—A GILDA",
+    "descripcion": "CANCELA SALDO ARRIENDO FUNDO JUNIO 2025.- DO√ëA GILDA",
     "cajcod": "200109",
     "origen_clave": "2-1-05-21|00003676|2025-07-09|1",
     "origen_hash": "1984c2482de000cb2654d179b11931324c2b735c39aa18739af4f19ec42e5db8"
@@ -1631,7 +1631,7 @@
     "cpbnum": "00003687",
     "mov_debe": "0.00",
     "mov_haber": "277370.00",
-    "descripcion": "FINIQUITO LUIS ENRIQUE ESPINOZA MU—OZ",
+    "descripcion": "FINIQUITO LUIS ENRIQUE ESPINOZA MU√ëOZ",
     "cajcod": "200103",
     "origen_clave": "1-1-01-10|00003687|2025-07-09|1",
     "origen_hash": "7b0691aee94d931b63d7033bf5ae1c66e77a4581e1cd135098a1226d5abe6141"
@@ -1865,7 +1865,7 @@
     "cpbnum": "00004255",
     "mov_debe": "546304.00",
     "mov_haber": "0.00",
-    "descripcion": "NOMINA N∫260 BANCO CHILE",
+    "descripcion": "NOMINA N¬∫260 BANCO CHILE",
     "cajcod": "400101",
     "origen_clave": "1-1-01-10|00004255|2025-07-10|1",
     "origen_hash": "aaa1a0962fa78fddb8cc0f171da107b9d350f5ad8fd8297850382809b2295fa2"
@@ -1883,7 +1883,7 @@
     "cpbnum": "00004255",
     "mov_debe": "77588321.00",
     "mov_haber": "0.00",
-    "descripcion": "NOMINA N∫260 BANCO CHILE",
+    "descripcion": "NOMINA N¬∫260 BANCO CHILE",
     "cajcod": "400101",
     "origen_clave": "2-1-05-21|00004255|2025-07-10|1",
     "origen_hash": "0ef6b1effb980ed8a8fe13c6529d51bdc966f1603b9771f330f388156331eac9"
@@ -1901,7 +1901,7 @@
     "cpbnum": "00004255",
     "mov_debe": "0.00",
     "mov_haber": "78134625.00",
-    "descripcion": "NOMINA N∫260 BANCO CHILE",
+    "descripcion": "NOMINA N¬∫260 BANCO CHILE",
     "cajcod": "400101",
     "origen_clave": "1-1-01-10|00004255|2025-07-10|2",
     "origen_hash": "63bd7bb7a90a47929e21b515158f76da93a8312b8df328126e6ae37268c58762"
@@ -3467,7 +3467,7 @@
     "cpbnum": "00003902",
     "mov_debe": "0.00",
     "mov_haber": "3000000.00",
-    "descripcion": "DEV. PRESTAMO A DON MAURO. DO—A GILDA SPA",
+    "descripcion": "DEV. PRESTAMO A DON MAURO. DO√ëA GILDA SPA",
     "cajcod": "300108",
     "origen_clave": "1-1-01-10|00003902|2025-07-28|1",
     "origen_hash": "c2db1e751856fe7ca12e8054ab604e7356a7d69fd31e159f6bdafd95a68f99c1"
@@ -3485,7 +3485,7 @@
     "cpbnum": "00003902",
     "mov_debe": "0.00",
     "mov_haber": "8000000.00",
-    "descripcion": "DEV. PRESTAMO A DON MAURO. DO—A GILDA SPA",
+    "descripcion": "DEV. PRESTAMO A DON MAURO. DO√ëA GILDA SPA",
     "cajcod": "300105",
     "origen_clave": "2-1-05-21|00003902|2025-07-28|1",
     "origen_hash": "a3d14cc943228986208ce50630554980fb38da93ecfcb90f875ab606bf97e254"
@@ -3503,7 +3503,7 @@
     "cpbnum": "00003902",
     "mov_debe": "0.00",
     "mov_haber": "5000000.00",
-    "descripcion": "DEV. PRESTAMO A DON MAURO. DO—A GILDA SPA",
+    "descripcion": "DEV. PRESTAMO A DON MAURO. DO√ëA GILDA SPA",
     "cajcod": "300108",
     "origen_clave": "1-1-01-10|00003902|2025-07-28|2",
     "origen_hash": "4950e1d0429a05b1b31f2e6c2c60bbf40a43e0e999379433c4c38fe521194542"
@@ -3521,7 +3521,7 @@
     "cpbnum": "00003902",
     "mov_debe": "0.00",
     "mov_haber": "5000000.00",
-    "descripcion": "DEV. PRESTAMO A DON MAURO. DO—A GILDA SPA",
+    "descripcion": "DEV. PRESTAMO A DON MAURO. DO√ëA GILDA SPA",
     "cajcod": "300108",
     "origen_clave": "1-1-01-10|00003902|2025-07-28|3",
     "origen_hash": "4950e1d0429a05b1b31f2e6c2c60bbf40a43e0e999379433c4c38fe521194542"
@@ -4259,7 +4259,7 @@
     "cpbnum": "00003953",
     "mov_debe": "0.00",
     "mov_haber": "401924.00",
-    "descripcion": "BH/485, MIGUEL GUI—EZ SAAVEDRA",
+    "descripcion": "BH/485, MIGUEL GUI√ëEZ SAAVEDRA",
     "cajcod": "200113",
     "origen_clave": "2-1-05-21|00003953|2025-08-04|1",
     "origen_hash": "79d65ded4048b8226b062b4fcf219de64528c24a753759f4160b0df5706c3689"
@@ -4385,7 +4385,7 @@
     "cpbnum": "00003960",
     "mov_debe": "0.00",
     "mov_haber": "387849.00",
-    "descripcion": "F/31248-31297-31308-31501, ROBINSON CERDA MU—OZ.",
+    "descripcion": "F/31248-31297-31308-31501, ROBINSON CERDA MU√ëOZ.",
     "cajcod": "200108",
     "origen_clave": "2-1-05-21|00003960|2025-08-05|1",
     "origen_hash": "9fd795bfcdb5523898a7e78a1734258e0af6a07dd1f9fa7249010d52838e9994"
@@ -5069,7 +5069,7 @@
     "cpbnum": "00003996",
     "mov_debe": "0.00",
     "mov_haber": "413556.00",
-    "descripcion": "FINIQUITO DANIEL RAUL MU—OZ SEPULVEDA.",
+    "descripcion": "FINIQUITO DANIEL RAUL MU√ëOZ SEPULVEDA.",
     "cajcod": "200103",
     "origen_clave": "1-1-01-10|00003996|2025-08-07|1",
     "origen_hash": "f18cacd6bb4ef2af7548aeb21390496f275183f3fd1f9d6904bc462f3583f9d1"
@@ -5861,7 +5861,7 @@
     "cpbnum": "00004131",
     "mov_debe": "0.00",
     "mov_haber": "171300.00",
-    "descripcion": "F/31565-31639, ROBINSON CERDA MU—OZ.",
+    "descripcion": "F/31565-31639, ROBINSON CERDA MU√ëOZ.",
     "cajcod": "200108",
     "origen_clave": "2-1-05-21|00004131|2025-08-14|1",
     "origen_hash": "eb805cc68435aa2fcd5216eea4c9938636127e97ba4b6f6df4e81479f8422b44"
@@ -6023,7 +6023,7 @@
     "cpbnum": "00004397",
     "mov_debe": "1263780.00",
     "mov_haber": "0.00",
-    "descripcion": "NOMINA N∫266 BANCO CHILE",
+    "descripcion": "NOMINA N¬∫266 BANCO CHILE",
     "cajcod": "400101",
     "origen_clave": "1-1-01-10|00004397|2025-08-14|1",
     "origen_hash": "26ac7f924368ff202407f07cbef5caedff422ed10d3eb451f371e144f272c270"
@@ -6041,7 +6041,7 @@
     "cpbnum": "00004397",
     "mov_debe": "0.00",
     "mov_haber": "25022132.00",
-    "descripcion": "NOMINA N∫266 BANCO CHILE",
+    "descripcion": "NOMINA N¬∫266 BANCO CHILE",
     "cajcod": "400101",
     "origen_clave": "1-1-01-10|00004397|2025-08-14|2",
     "origen_hash": "72163be6e4b6148419d5c6fd0f1a1fd1c6885e872d9ae60306411f16fe0e7a39"
@@ -6059,7 +6059,7 @@
     "cpbnum": "00004397",
     "mov_debe": "23758352.00",
     "mov_haber": "0.00",
-    "descripcion": "NOMINA N∫266 BANCO CHILE",
+    "descripcion": "NOMINA N¬∫266 BANCO CHILE",
     "cajcod": "400101",
     "origen_clave": "2-1-05-21|00004397|2025-08-14|1",
     "origen_hash": "2d1e5edc82c3e548a9655a55a48c62527580bb9a0daf3dfa794a830247ba7927"
@@ -6095,7 +6095,7 @@
     "cpbnum": "00004140",
     "mov_debe": "0.00",
     "mov_haber": "5000000.00",
-    "descripcion": "DEV. PRESTAMO A DON MAURO. DO—A GILDA SPA",
+    "descripcion": "DEV. PRESTAMO A DON MAURO. DO√ëA GILDA SPA",
     "cajcod": "300108",
     "origen_clave": "1-1-01-10|00004140|2025-08-18|1",
     "origen_hash": "374b8dbfb1a4d2ed94bd86a6cfdd87527ed834aa05c7adf1c665676a45505926"
@@ -6113,7 +6113,7 @@
     "cpbnum": "00004140",
     "mov_debe": "0.00",
     "mov_haber": "1000000.00",
-    "descripcion": "DEV. PRESTAMO A DON MAURO. DO—A GILDA SPA",
+    "descripcion": "DEV. PRESTAMO A DON MAURO. DO√ëA GILDA SPA",
     "cajcod": "300108",
     "origen_clave": "1-1-01-10|00004140|2025-08-18|2",
     "origen_hash": "384ffb875c515e96b06757f6de646c6249d814060dd0e666d5c9c5704ac54d93"
@@ -6401,7 +6401,7 @@
     "cpbnum": "00004236",
     "mov_debe": "0.00",
     "mov_haber": "7587685.00",
-    "descripcion": "F/20, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/20, SERVICIOS AGRICOLAS √ëUBLE SPA",
     "cajcod": "200101",
     "origen_clave": "2-1-05-21|00004236|2025-08-26|1",
     "origen_hash": "6e292cc336f63a9c60cf46545919180420e57576900efd6a8677b2ef1d1c0e29"
@@ -6671,7 +6671,7 @@
     "cpbnum": "00004249",
     "mov_debe": "0.00",
     "mov_haber": "1486963.00",
-    "descripcion": "F/857079, COPELEC LTDA. DO—A GILDA - AGRICOLA",
+    "descripcion": "F/857079, COPELEC LTDA. DO√ëA GILDA - AGRICOLA",
     "cajcod": "200107",
     "origen_clave": "1-1-01-10|00004249|2025-08-27|1",
     "origen_hash": "180bf52ae2e6c6c195f33a424cd502b662ef81662d3279f4088e8114dcce26df"
@@ -7319,7 +7319,7 @@
     "cpbnum": "00004388",
     "mov_debe": "0.00",
     "mov_haber": "376529.00",
-    "descripcion": "F/31750-31749-31824-31751, ROBINSON CERDA MU—OZ",
+    "descripcion": "F/31750-31749-31824-31751, ROBINSON CERDA MU√ëOZ",
     "cajcod": "200108",
     "origen_clave": "2-1-05-21|00004388|2025-09-02|1",
     "origen_hash": "7df137a91b325d21c9ee9214ccbcf41e002385469a4fad4275e99c1c8b6a8ba2"
@@ -7607,7 +7607,7 @@
     "cpbnum": "00004406",
     "mov_debe": "0.00",
     "mov_haber": "1564276.00",
-    "descripcion": "CANCELA BONO GESTION 2024-2025, MANUEL MU—OZ PALMA.",
+    "descripcion": "CANCELA BONO GESTION 2024-2025, MANUEL MU√ëOZ PALMA.",
     "cajcod": "200101",
     "origen_clave": "2-1-05-21|00004406|2025-09-05|1",
     "origen_hash": "9bd2e30d60fb7ab9629c2fada27103f328a10c1073e5e9f2e442d6ee5e02919d"
@@ -7697,7 +7697,7 @@
     "cpbnum": "00004411",
     "mov_debe": "0.00",
     "mov_haber": "801000.00",
-    "descripcion": "CANCELA BONO 2024-2025, KAREN ESCOBAR MU—OZ.",
+    "descripcion": "CANCELA BONO 2024-2025, KAREN ESCOBAR MU√ëOZ.",
     "cajcod": "200101",
     "origen_clave": "2-1-05-21|00004411|2025-09-05|1",
     "origen_hash": "e6f85011ffc028c429814551f30e3f58fcbe8f551d1c4a529ef8d2803c4bd804"
@@ -7967,7 +7967,7 @@
     "cpbnum": "00004623",
     "mov_debe": "27746825.00",
     "mov_haber": "0.00",
-    "descripcion": "NOMINA N∫269 BANCO CHILE",
+    "descripcion": "NOMINA N¬∫269 BANCO CHILE",
     "cajcod": "400101",
     "origen_clave": "2-1-05-21|00004623|2025-09-05|1",
     "origen_hash": "3f5ba8b20e0efeddc640ce95d9c834a95e97b96e70a493561344d0949221125a"
@@ -7985,7 +7985,7 @@
     "cpbnum": "00004623",
     "mov_debe": "0.00",
     "mov_haber": "27746825.00",
-    "descripcion": "NOMINA N∫269 BANCO CHILE",
+    "descripcion": "NOMINA N¬∫269 BANCO CHILE",
     "cajcod": "400101",
     "origen_clave": "1-1-01-10|00004623|2025-09-05|1",
     "origen_hash": "2804e29d08ca6d8848097110ddf8cf98f3ac4385740a74be8a2f26985bf5a0f6"
@@ -8255,7 +8255,7 @@
     "cpbnum": "00004464",
     "mov_debe": "0.00",
     "mov_haber": "404187.00",
-    "descripcion": "BH/487, MIGUEL LUIS GUI—EZ SAAVEDRA.",
+    "descripcion": "BH/487, MIGUEL LUIS GUI√ëEZ SAAVEDRA.",
     "cajcod": "200113",
     "origen_clave": "2-1-05-21|00004464|2025-09-08|1",
     "origen_hash": "7de9de1e5c7212ccfd806a2a5e960bd7adb3677fa924e22be7e861fc6423167f"
@@ -8705,7 +8705,7 @@
     "cpbnum": "00004516",
     "mov_debe": "0.00",
     "mov_haber": "1564276.00",
-    "descripcion": "CANCELA BONO GESTION 2024-2025, MANUEL MU—OZ PALMA",
+    "descripcion": "CANCELA BONO GESTION 2024-2025, MANUEL MU√ëOZ PALMA",
     "cajcod": "200101",
     "origen_clave": "2-1-05-21|00004516|2025-09-16|1",
     "origen_hash": "cd6e80526eab65b345ec8aa454a554c217c8b7c580e15ba441f50e046efc46cb"
@@ -11009,7 +11009,7 @@
     "cpbnum": "00004800",
     "mov_debe": "0.00",
     "mov_haber": "405122.00",
-    "descripcion": "BH/488, MIGUEL LUIS GUI—EZ SAAVEDRA",
+    "descripcion": "BH/488, MIGUEL LUIS GUI√ëEZ SAAVEDRA",
     "cajcod": "200113",
     "origen_clave": "2-1-05-21|00004800|2025-10-06|1",
     "origen_hash": "aec5df5da48807bdfc38f0b80adac4c67f743f340308c06dce24aa96c64cea58"
@@ -11477,7 +11477,7 @@
     "cpbnum": "00004824",
     "mov_debe": "0.00",
     "mov_haber": "4361350.00",
-    "descripcion": "F/143-144-145-146-147, ALEJANDRO DE— CARMEN CONTRERAS",
+    "descripcion": "F/143-144-145-146-147, ALEJANDRO DE√ë CARMEN CONTRERAS",
     "cajcod": "200115",
     "origen_clave": "2-1-05-21|00004824|2025-10-07|1",
     "origen_hash": "bb6e874c260793d0a1c9a57b7c5e50f53006a68b8014fd4bd51ae26ff6618add"
@@ -11621,7 +11621,7 @@
     "cpbnum": "00004833",
     "mov_debe": "0.00",
     "mov_haber": "2115225.00",
-    "descripcion": "F/399, LUIS ARTURO TRONCOSO MU—OZ",
+    "descripcion": "F/399, LUIS ARTURO TRONCOSO MU√ëOZ",
     "cajcod": "200115",
     "origen_clave": "2-1-05-21|00004833|2025-10-08|1",
     "origen_hash": "ca0271585721b0192767cc9cb042c9511ed627840b6eeefde163103e0a24e816"
@@ -12431,7 +12431,7 @@
     "cpbnum": "00005036",
     "mov_debe": "0.00",
     "mov_haber": "190584.00",
-    "descripcion": "F/34575, COMERCIAL —UBLE REGION LTDA.",
+    "descripcion": "F/34575, COMERCIAL √ëUBLE REGION LTDA.",
     "cajcod": "200108",
     "origen_clave": "1-1-01-10|00005036|2025-10-28|1",
     "origen_hash": "7e01471f791715a87b68c08d6000c8103eb26ddc2d967204fd62585bf8726d7f"
@@ -12575,7 +12575,7 @@
     "cpbnum": "00005124",
     "mov_debe": "0.00",
     "mov_haber": "282800.00",
-    "descripcion": "F/32224 - 32226, ROBINSON CERDA MU—OZ",
+    "descripcion": "F/32224 - 32226, ROBINSON CERDA MU√ëOZ",
     "cajcod": "200108",
     "origen_clave": "2-1-05-21|00005124|2025-10-29|1",
     "origen_hash": "ff0b1ed0c03d7b282198560be64235568f7e46a83f4002c7c4516a04bbcefc4e"
@@ -13295,7 +13295,7 @@
     "cpbnum": "00005205",
     "mov_debe": "0.00",
     "mov_haber": "406324.00",
-    "descripcion": "BH/489, MIGUEL GUI—EZ SAAVEDRA",
+    "descripcion": "BH/489, MIGUEL GUI√ëEZ SAAVEDRA",
     "cajcod": "200113",
     "origen_clave": "2-1-05-21|00005205|2025-11-05|1",
     "origen_hash": "eb9b990583bc72b46ab9c62452bc9c3d4ae92e12ecf37cd89bc4ec2547991a24"
@@ -13691,7 +13691,7 @@
     "cpbnum": "00005283",
     "mov_debe": "0.00",
     "mov_haber": "273590.00",
-    "descripcion": "F/32343-32434, ROBINSON CERDA MU—OZ.",
+    "descripcion": "F/32343-32434, ROBINSON CERDA MU√ëOZ.",
     "cajcod": "200108",
     "origen_clave": "2-1-05-24|00005283|2025-11-12|1",
     "origen_hash": "48127021f06b5ff5aa3509138042c3f185d2b15b3463d48528b46ce2e4ba1f64"
@@ -14393,7 +14393,7 @@
     "cpbnum": "00005324",
     "mov_debe": "0.00",
     "mov_haber": "1904000.00",
-    "descripcion": "F/1499, MANUEL HERMINIO IBA—EZ ANCAN",
+    "descripcion": "F/1499, MANUEL HERMINIO IBA√ëEZ ANCAN",
     "cajcod": "200105",
     "origen_clave": "2-1-05-24|00005324|2025-11-12|1",
     "origen_hash": "cd18b89f349d010d994b7a1dc2af25144ffe683a4a28c56077d20b637fad1fd9"
@@ -14789,7 +14789,7 @@
     "cpbnum": "00005335",
     "mov_debe": "0.00",
     "mov_haber": "3000000.00",
-    "descripcion": "DEV. PRESTAMO DON MAURO. DO—A GILDA",
+    "descripcion": "DEV. PRESTAMO DON MAURO. DO√ëA GILDA",
     "cajcod": "300105",
     "origen_clave": "2-1-05-24|00005335|2025-11-14|1",
     "origen_hash": "c01614e53ea3a38f9ced1d46f0e56803163ab146f324e655182826bc64884f05"
@@ -14807,7 +14807,7 @@
     "cpbnum": "00005336",
     "mov_debe": "0.00",
     "mov_haber": "8330000.00",
-    "descripcion": "CANCELA ARRIENDO FUNDO NOVIEMBRE 2025. DO—A GILDA",
+    "descripcion": "CANCELA ARRIENDO FUNDO NOVIEMBRE 2025. DO√ëA GILDA",
     "cajcod": "200109",
     "origen_clave": "2-1-05-24|00005336|2025-11-14|1",
     "origen_hash": "077b22350fb0b727fbbc7970b8e620309a5b7f4023d822a407231af99f0e12bb"
@@ -15725,7 +15725,7 @@
     "cpbnum": "00005447",
     "mov_debe": "0.00",
     "mov_haber": "1316557.00",
-    "descripcion": "F/23, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/23, SERVICIOS AGRICOLAS √ëUBLE SPA",
     "cajcod": "200101",
     "origen_clave": "2-1-05-24|00005447|2025-11-20|1",
     "origen_hash": "c1536471bcd37bb3bca56b351850ac8be19427fc2ca32a8c04718e4243791091"
@@ -16193,7 +16193,7 @@
     "cpbnum": "00005480",
     "mov_debe": "0.00",
     "mov_haber": "8330000.00",
-    "descripcion": "CANCELA ARRIENDO FUNDO. DO—A GILDA",
+    "descripcion": "CANCELA ARRIENDO FUNDO. DO√ëA GILDA",
     "cajcod": "200109",
     "origen_clave": "2-1-05-24|00005480|2025-11-25|1",
     "origen_hash": "4b1e12aaee82a32de4a8beae358d6fea26d3f735440782254ae0c92c23d1f29d"
@@ -16283,7 +16283,7 @@
     "cpbnum": "00005610",
     "mov_debe": "0.00",
     "mov_haber": "9160099.00",
-    "descripcion": "F/25, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/25, SERVICIOS AGRICOLAS √ëUBLE SPA",
     "cajcod": "200101",
     "origen_clave": "2-1-05-24|00005610|2025-11-26|1",
     "origen_hash": "f2b72b783afcf6d623f499289822a2f81a3762f3151ea4872ef0444343bb8af5"
@@ -16679,7 +16679,7 @@
     "cpbnum": "00005659",
     "mov_debe": "0.00",
     "mov_haber": "2769863.00",
-    "descripcion": "F/26, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/26, SERVICIOS AGRICOLAS √ëUBLE SPA",
     "cajcod": "200101",
     "origen_clave": "2-1-05-24|00005659|2025-11-28|1",
     "origen_hash": "008f8aac91b2492e2168d3b521fafa59946d7ef60b767850820c35f8381cbbdf"
@@ -17111,7 +17111,7 @@
     "cpbnum": "00005675",
     "mov_debe": "0.00",
     "mov_haber": "1249500.00",
-    "descripcion": "F/240, —UBLE TRANSPORTE SPA",
+    "descripcion": "F/240, √ëUBLE TRANSPORTE SPA",
     "cajcod": "200110",
     "origen_clave": "2-1-05-21|00005675|2025-12-03|1",
     "origen_hash": "c191730b68be6fac5489a2550f2db2bedd0a0f60a4824d7ad8bdeaf797295844"
@@ -17201,7 +17201,7 @@
     "cpbnum": "00005738",
     "mov_debe": "0.00",
     "mov_haber": "239801.00",
-    "descripcion": "F/852-1071, MANUEL ALDRIN MU—OZ JIMENEZ",
+    "descripcion": "F/852-1071, MANUEL ALDRIN MU√ëOZ JIMENEZ",
     "cajcod": "200108",
     "origen_clave": "2-1-05-21|00005738|2025-12-03|1",
     "origen_hash": "bdfb31843c360a7f72d6fad6aaee905de0e8e93724e4239ced241357f332fb29"
@@ -17237,7 +17237,7 @@
     "cpbnum": "00005742",
     "mov_debe": "0.00",
     "mov_haber": "406743.00",
-    "descripcion": "BH/491, MIGUEL LUIS GUI—EZ SAAVEDRA.",
+    "descripcion": "BH/491, MIGUEL LUIS GUI√ëEZ SAAVEDRA.",
     "cajcod": "200113",
     "origen_clave": "2-1-05-21|00005742|2025-12-03|1",
     "origen_hash": "88b3b373743dcf01dd247a52c1f2352888aac863cd067fe4bb8919f4e729409c"
@@ -17255,7 +17255,7 @@
     "cpbnum": "00005743",
     "mov_debe": "0.00",
     "mov_haber": "1200000.00",
-    "descripcion": "BH/673, CLAUDIA MU—OZ PALMA",
+    "descripcion": "BH/673, CLAUDIA MU√ëOZ PALMA",
     "cajcod": "200113",
     "origen_clave": "2-1-05-21|00005743|2025-12-03|1",
     "origen_hash": "282e642db274aee8938bea053df240e19bfd96d2698d368c4b9668fb4907cde1"
@@ -17651,7 +17651,7 @@
     "cpbnum": "00005779",
     "mov_debe": "0.00",
     "mov_haber": "8000000.00",
-    "descripcion": "DEV. PRESTAMO DON MAURO, DO—A GILDA SPA",
+    "descripcion": "DEV. PRESTAMO DON MAURO, DO√ëA GILDA SPA",
     "cajcod": "300105",
     "origen_clave": "2-1-05-21|00005779|2025-12-03|1",
     "origen_hash": "58eb583dae3b90e92525847e0eb2d3420615aaaaa6bc0259e3f0945c6a6974f2"
@@ -18173,7 +18173,7 @@
     "cpbnum": "00005817",
     "mov_debe": "0.00",
     "mov_haber": "11789845.00",
-    "descripcion": "F/27-28, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/27-28, SERVICIOS AGRICOLAS √ëUBLE SPA",
     "cajcod": "200101",
     "origen_clave": "2-1-05-21|00005817|2025-12-04|1",
     "origen_hash": "284b6031d6618409ffa6bb22dc18dc21a31351c4aa281696e0b820249d14f679"
@@ -18281,7 +18281,7 @@
     "cpbnum": "00006262",
     "mov_debe": "0.00",
     "mov_haber": "1249500.00",
-    "descripcion": "F/270, —UBLE TRANSPORTE SPA",
+    "descripcion": "F/270, √ëUBLE TRANSPORTE SPA",
     "cajcod": "200110",
     "origen_clave": "2-1-05-21|00006262|2025-12-04|1",
     "origen_hash": "b32ecbcbad1308c6742bb167944fa0f0414905a636b199c7a56cb57f4c9e3463"
@@ -19289,7 +19289,7 @@
     "cpbnum": "00005896",
     "mov_debe": "0.00",
     "mov_haber": "309400.00",
-    "descripcion": "F/19, INFORMATICA Y TEC. VICTOR ALARCON ACU—A",
+    "descripcion": "F/19, INFORMATICA Y TEC. VICTOR ALARCON ACU√ëA",
     "cajcod": "200116",
     "origen_clave": "2-1-05-24|00005896|2025-12-11|1",
     "origen_hash": "d68eca7c004b84d91dfc6b463527df2e262e2908309f316445d04931ee788411"
@@ -19325,7 +19325,7 @@
     "cpbnum": "00005898",
     "mov_debe": "0.00",
     "mov_haber": "165499.00",
-    "descripcion": "F/32257-32576, ROBINSO CERDA MU—OZ",
+    "descripcion": "F/32257-32576, ROBINSO CERDA MU√ëOZ",
     "cajcod": "200108",
     "origen_clave": "2-1-05-24|00005898|2025-12-11|1",
     "origen_hash": "29c7bb97c3a8b3af3dc71f16b33e12ef85cff649c4ef0bf48bd072ed535e78b3"
@@ -19595,7 +19595,7 @@
     "cpbnum": "00005933",
     "mov_debe": "0.00",
     "mov_haber": "17350024.00",
-    "descripcion": "F/32-34, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/32-34, SERVICIOS AGRICOLAS √ëUBLE SPA",
     "cajcod": "200101",
     "origen_clave": "2-1-05-24|00005933|2025-12-11|1",
     "origen_hash": "cd4c40c9d07fc2974bcc38c669e5261ce442a74207ee21283142a7b7cb61ca86"
@@ -19775,7 +19775,7 @@
     "cpbnum": "00006006",
     "mov_debe": "0.00",
     "mov_haber": "1904000.00",
-    "descripcion": "F/1510-1514, MANUEL HERMINIO IBA—EZ ANCAN",
+    "descripcion": "F/1510-1514, MANUEL HERMINIO IBA√ëEZ ANCAN",
     "cajcod": "200105",
     "origen_clave": "2-1-05-24|00006006|2025-12-11|1",
     "origen_hash": "7ee4c1c8b527766c6636800fc86a059c116834660e3a4ede16179421f1a8853e"
@@ -21809,7 +21809,7 @@
     "cpbnum": "00006251",
     "mov_debe": "0.00",
     "mov_haber": "6529762.00",
-    "descripcion": "F/38, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/38, SERVICIOS AGRICOLAS √ëUBLE SPA",
     "cajcod": "200101",
     "origen_clave": "2-1-05-21|00006251|2025-12-23|1",
     "origen_hash": "3f78d70d61485bdd6a141ecf9653b5d6eafbc578b893d6b9e7339147504bde3a"
@@ -22529,7 +22529,7 @@
     "cpbnum": "00006306",
     "mov_debe": "0.00",
     "mov_haber": "1362240.00",
-    "descripcion": "DEV GASTOS COMIDA FIN DE A—O TORREON. MAURO MAGNASCO.",
+    "descripcion": "DEV GASTOS COMIDA FIN DE A√ëO TORREON. MAURO MAGNASCO.",
     "cajcod": "200116",
     "origen_clave": "1-1-01-10|00006306|2025-12-31|1",
     "origen_hash": "1d32c8d91c3260761e410f060bc5b6151669caba6353d3cf86d093752a8fd101"
@@ -22691,7 +22691,7 @@
     "cpbnum": "00000002",
     "mov_debe": "0.00",
     "mov_haber": "1800000.00",
-    "descripcion": "BH/677, CLAUDIA LORENA MU—OZ PALMA",
+    "descripcion": "BH/677, CLAUDIA LORENA MU√ëOZ PALMA",
     "cajcod": "200112",
     "origen_clave": "2-1-05-24|00000002|2026-01-02|1",
     "origen_hash": "d980520075867651d7efc01e0e0535ff38cca8b930195d456a2666fad89020fb"
@@ -22781,7 +22781,7 @@
     "cpbnum": "00000007",
     "mov_debe": "0.00",
     "mov_haber": "6877248.00",
-    "descripcion": "F/39-41, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/39-41, SERVICIOS AGRICOLAS √ëUBLE SPA",
     "cajcod": "200101",
     "origen_clave": "2-1-05-24|00000007|2026-01-02|1",
     "origen_hash": "5d3e5537474d9bb6db43aa4b4564772a6d0ce520d62ffd87bb82d5b9365047b1"
@@ -23015,7 +23015,7 @@
     "cpbnum": "00000148",
     "mov_debe": "0.00",
     "mov_haber": "5279329.00",
-    "descripcion": "F/42, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/42, SERVICIOS AGRICOLAS √ëUBLE SPA",
     "cajcod": "200101",
     "origen_clave": "2-1-05-21|00000148|2026-01-02|1",
     "origen_hash": "ec3c3956d2c87f7f5a3772be3646634cc1fbdb6d22983e175004bebe9ea83f41"
@@ -24905,7 +24905,7 @@
     "cpbnum": "00000244",
     "mov_debe": "0.00",
     "mov_haber": "4358406.00",
-    "descripcion": "F/43-44, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/43-44, SERVICIOS AGRICOLAS √ëUBLE SPA",
     "cajcod": "200101",
     "origen_clave": "2-1-05-21|00000244|2026-01-13|1",
     "origen_hash": "9c1185b4121e8219cf0bb995bd4825e5d54be95c42be168be0268014c2a4701a"
@@ -26003,7 +26003,7 @@
     "cpbnum": "00000282",
     "mov_debe": "0.00",
     "mov_haber": "19104.00",
-    "descripcion": "CANCELA FINIQUITO, FABIOLA AURORA ACU—A RIQUELME",
+    "descripcion": "CANCELA FINIQUITO, FABIOLA AURORA ACU√ëA RIQUELME",
     "cajcod": "200103",
     "origen_clave": "1-1-01-10|00000282|2026-01-19|1",
     "origen_hash": "7dd7e7f9381cffe55098758129612e8e42721248363d0b4c6566f92db9028206"
@@ -26273,7 +26273,7 @@
     "cpbnum": "00000308",
     "mov_debe": "0.00",
     "mov_haber": "407608.00",
-    "descripcion": "BH/492, MIGUEL LUIS GUI—EZ SAAVEDRA",
+    "descripcion": "BH/492, MIGUEL LUIS GUI√ëEZ SAAVEDRA",
     "cajcod": "200113",
     "origen_clave": "2-1-05-21|00000308|2026-01-20|1",
     "origen_hash": "01e036a19ca487edc901b7269ee6decee68b6c3aea4a0a355477498e9fe13d7d"
@@ -26309,7 +26309,7 @@
     "cpbnum": "00000380",
     "mov_debe": "0.00",
     "mov_haber": "3960723.00",
-    "descripcion": "F/45, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/45, SERVICIOS AGRICOLAS √ëUBLE SPA",
     "cajcod": "200101",
     "origen_clave": "2-1-05-21|00000380|2026-01-21|1",
     "origen_hash": "1c999388f1a570a71294bc2ab650ea5ad72cfe6d33b4c354f9e13442a23941f3"
@@ -27623,7 +27623,7 @@
     "cpbnum": "00000485",
     "mov_debe": "0.00",
     "mov_haber": "194000.00",
-    "descripcion": "F/32926, ROBINSON HERALDO CERDA MU—OZ",
+    "descripcion": "F/32926, ROBINSON HERALDO CERDA MU√ëOZ",
     "cajcod": "200108",
     "origen_clave": "2-1-05-21|00000485|2026-01-27|1",
     "origen_hash": "cbb523376ce0d4a8fdabded7fe02b777703e76f4b08fa7dfd6662ade46f523f1"
@@ -27893,7 +27893,7 @@
     "cpbnum": "00000500",
     "mov_debe": "0.00",
     "mov_haber": "8330000.00",
-    "descripcion": "CANCELA ARRIENDO FUNDO, ENERO 2026, DO—A GILDA",
+    "descripcion": "CANCELA ARRIENDO FUNDO, ENERO 2026, DO√ëA GILDA",
     "cajcod": "200109",
     "origen_clave": "2-1-05-21|00000500|2026-01-27|1",
     "origen_hash": "c38cf5a5f08d5c34903e7c35ee4a6938fca9462facb280f59ba73137c205836c"
@@ -28775,7 +28775,7 @@
     "cpbnum": "00000516",
     "mov_debe": "0.00",
     "mov_haber": "3869115.00",
-    "descripcion": "F/49, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/49, SERVICIOS AGRICOLAS √ëUBLE SPA",
     "cajcod": "200101",
     "origen_clave": "2-1-05-21|00000516|2026-01-29|1",
     "origen_hash": "672b8f9795e0de713fb5931bd071a35fdc8f252b45b1a4b720755d857360a23b"
@@ -29693,7 +29693,7 @@
     "cpbnum": "00000652",
     "mov_debe": "0.00",
     "mov_haber": "403785.00",
-    "descripcion": "BH/493, MIGUEL LUIS GUI—EZ SAAVEDRA",
+    "descripcion": "BH/493, MIGUEL LUIS GUI√ëEZ SAAVEDRA",
     "cajcod": "200113",
     "origen_clave": "2-1-05-21|00000652|2026-02-04|1",
     "origen_hash": "f134c4c51b3362d9526c210e5434960565b054bc6e0b56d7e8c225058ee16860"
@@ -29783,7 +29783,7 @@
     "cpbnum": "00000657",
     "mov_debe": "0.00",
     "mov_haber": "448050.00",
-    "descripcion": "F/33041, ROBINSON CERDA MU—OZ",
+    "descripcion": "F/33041, ROBINSON CERDA MU√ëOZ",
     "cajcod": "200108",
     "origen_clave": "2-1-05-21|00000657|2026-02-04|1",
     "origen_hash": "7ad25a7ed4423c15c06f97998de6204ff2b6c92f199ad9b4517025ec4f9b5cd1"
@@ -30449,7 +30449,7 @@
     "cpbnum": "00000728",
     "mov_debe": "0.00",
     "mov_haber": "198697.00",
-    "descripcion": "CANCELA FINIQUITO SOLANGE LISSETTE MU—OZ CAMPOS",
+    "descripcion": "CANCELA FINIQUITO SOLANGE LISSETTE MU√ëOZ CAMPOS",
     "cajcod": "200103",
     "origen_clave": "1-1-01-10|00000728|2026-02-06|1",
     "origen_hash": "00e004ce78c4ffff28659bdb10be90c77fc6d7722ed652938636edc68018fa11"
@@ -30989,7 +30989,7 @@
     "cpbnum": "00000751",
     "mov_debe": "0.00",
     "mov_haber": "185799.00",
-    "descripcion": "F/1288, MANUEL ALDRIN MU—OZ JIMENEZ",
+    "descripcion": "F/1288, MANUEL ALDRIN MU√ëOZ JIMENEZ",
     "cajcod": "200108",
     "origen_clave": "2-1-05-21|00000751|2026-02-09|1",
     "origen_hash": "cf18f74dfa41d7b0024fcde5800037a3b8ad3b3fbf68e258e7cd826351db81da"
@@ -31169,7 +31169,7 @@
     "cpbnum": "00000760",
     "mov_debe": "0.00",
     "mov_haber": "8678137.00",
-    "descripcion": "F/50-51, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/50-51, SERVICIOS AGRICOLAS √ëUBLE SPA",
     "cajcod": "200101",
     "origen_clave": "2-1-05-21|00000760|2026-02-10|1",
     "origen_hash": "dfe83de8bf83910df7f4cf86a6cd0de0e7831284745d7b5c3a26c6a267a93868"
@@ -31529,7 +31529,7 @@
     "cpbnum": "00000815",
     "mov_debe": "0.00",
     "mov_haber": "134700.00",
-    "descripcion": "F/32874, ROBINSON CERDA MU—OZ",
+    "descripcion": "F/32874, ROBINSON CERDA MU√ëOZ",
     "cajcod": "200108",
     "origen_clave": "2-1-05-21|00000815|2026-02-10|1",
     "origen_hash": "93164a116d3900f3f55443a8b4da33caa9938c6dfad400a01a3a0fa8e8f74af5"
@@ -35291,7 +35291,7 @@
     "cpbnum": "00001253",
     "mov_debe": "0.00",
     "mov_haber": "404768.00",
-    "descripcion": "BH/494, MIGUEL LUIS GUI—EZ SAAVEDRA.",
+    "descripcion": "BH/494, MIGUEL LUIS GUI√ëEZ SAAVEDRA.",
     "cajcod": "200113",
     "origen_clave": "2-1-05-21|00001253|2026-03-03|1",
     "origen_hash": "f0a1621b3b8cf912c11a79fcfa73c5372313b0e2422cad37b7e5bd9a91d65c44"
@@ -35345,7 +35345,7 @@
     "cpbnum": "00001260",
     "mov_debe": "0.00",
     "mov_haber": "360000.00",
-    "descripcion": "BH/682, CLAUDIA MU—OZ PALMA.",
+    "descripcion": "BH/682, CLAUDIA MU√ëOZ PALMA.",
     "cajcod": "200112",
     "origen_clave": "2-1-05-21|00001260|2026-03-03|1",
     "origen_hash": "ef951f62019480bb220015d591408916f1825089a0b2455ee12e883d5c1f2daf"
@@ -35975,7 +35975,7 @@
     "cpbnum": "00001291",
     "mov_debe": "0.00",
     "mov_haber": "8557731.00",
-    "descripcion": "F/55-56-57, SERVICIOS AGRICOLAS —UBLE SPA",
+    "descripcion": "F/55-56-57, SERVICIOS AGRICOLAS √ëUBLE SPA",
     "cajcod": "200101",
     "origen_clave": "2-1-05-24|00001291|2026-03-05|1",
     "origen_hash": "57331471b325172baca436b0d9527ebaf84ee5243a16ef71f48fcf96844fa9d2"
@@ -36587,7 +36587,7 @@
     "cpbnum": "00001569",
     "mov_debe": "0.00",
     "mov_haber": "215000.00",
-    "descripcion": "F/33669, ROBINSON HERALDO CERDA MU—OZ",
+    "descripcion": "F/33669, ROBINSON HERALDO CERDA MU√ëOZ",
     "cajcod": "200108",
     "origen_clave": "2-1-05-21|00001569|2026-03-12|1",
     "origen_hash": "521c15058b1a19e58aeba82fe38321130ab3cc8de6024a00476c4dc7cde1c6f2"
@@ -37019,7 +37019,7 @@
     "cpbnum": "00001599",
     "mov_debe": "0.00",
     "mov_haber": "215000.00",
-    "descripcion": "F/1618, MANUEL MU—OZ JIMENEZ",
+    "descripcion": "F/1618, MANUEL MU√ëOZ JIMENEZ",
     "cajcod": "200108",
     "origen_clave": "2-1-05-21|00001599|2026-03-12|1",
     "origen_hash": "49d058309aabffe918611b2df6370a6666ed5ac9d9206fa76058cc82accab063"
@@ -38567,7 +38567,7 @@
     "cpbnum": "00001644",
     "mov_debe": "0.00",
     "mov_haber": "5516783.00",
-    "descripcion": "NETO F/575, FRIGORIFICO —UBLE ORGANICO SPA",
+    "descripcion": "NETO F/575, FRIGORIFICO √ëUBLE ORGANICO SPA",
     "cajcod": "200109",
     "origen_clave": "1-1-01-11|00001644|2026-03-16|1",
     "origen_hash": "94c0924cda1c070c35ab4044d9ec6db703d2c129c875231ad10c91ffd29cc2eb"
@@ -38873,7 +38873,7 @@
     "cpbnum": "00001930",
     "mov_debe": "348233.00",
     "mov_haber": "0.00",
-    "descripcion": "DEVOLUCI”N DE DUCASSE",
+    "descripcion": "DEVOLUCI√ìN DE DUCASSE",
     "cajcod": "200108",
     "origen_clave": "1-1-01-10|00001930|2026-03-18|1",
     "origen_hash": "c46ee947bca059c69a2ac05d16d2533c3f251fb6b7d295c47b1bcc3012c67d42"
@@ -39125,7 +39125,7 @@
     "cpbnum": "00001719",
     "mov_debe": "0.00",
     "mov_haber": "195001.00",
-    "descripcion": "F/1657, MANUEL ALDRIN MU—OZ JIMENEZ",
+    "descripcion": "F/1657, MANUEL ALDRIN MU√ëOZ JIMENEZ",
     "cajcod": "200108",
     "origen_clave": "2-1-05-21|00001719|2026-03-19|1",
     "origen_hash": "dbc3ca414fd9dac249f7adfa55ee072d308f40c4c2310d18cfa0ddd399f96798"
@@ -39197,7 +39197,7 @@
     "cpbnum": "00001723",
     "mov_debe": "0.00",
     "mov_haber": "309400.00",
-    "descripcion": "F/27, INFORMATICA Y TEC. VICTOR ALARCON ACU—A",
+    "descripcion": "F/27, INFORMATICA Y TEC. VICTOR ALARCON ACU√ëA",
     "cajcod": "200116",
     "origen_clave": "2-1-05-21|00001723|2026-03-19|1",
     "origen_hash": "2ec135c33d37884a85ccdf7fe29b41c3454c7a8bac206ebf208789c693a62f30"
@@ -40457,7 +40457,7 @@
     "cpbnum": "00001881",
     "mov_debe": "0.00",
     "mov_haber": "987647.00",
-    "descripcion": "IVA, F/575, FRIGORIFICO  —UBLE ORGANICO SPA",
+    "descripcion": "IVA, F/575, FRIGORIFICO  √ëUBLE ORGANICO SPA",
     "cajcod": "200109",
     "origen_clave": "2-1-05-21|00001881|2026-03-25|1",
     "origen_hash": "0ab7377d832d80a309c0a3f19a74c48a743e4f8d08cebafac44c96da91a018a6"
@@ -41537,7 +41537,7 @@
     "cpbnum": "00002044",
     "mov_debe": "0.00",
     "mov_haber": "1800000.00",
-    "descripcion": "BH/684, CLAUDIA MU—OZ PALMA.",
+    "descripcion": "BH/684, CLAUDIA MU√ëOZ PALMA.",
     "cajcod": "200112",
     "origen_clave": "2-1-05-24|00002044|2026-04-01|1",
     "origen_hash": "31eb20ee326572ca75382a1831e2846f3a81d6435e41ad98f578ed7b24130084"
@@ -41879,7 +41879,7 @@
     "cpbnum": "00002063",
     "mov_debe": "0.00",
     "mov_haber": "345000.00",
-    "descripcion": "F/1637, MANUEL ALDRIN MU—OZ JIMENEZ",
+    "descripcion": "F/1637, MANUEL ALDRIN MU√ëOZ JIMENEZ",
     "cajcod": "200108",
     "origen_clave": "2-1-05-24|00002063|2026-04-01|1",
     "origen_hash": "d4b850980a42e2ba5e092180d4e486f2586ad310798dfdf40a149d7eb778e0d2"
@@ -42167,7 +42167,7 @@
     "cpbnum": "00002080",
     "mov_debe": "0.00",
     "mov_haber": "405190.00",
-    "descripcion": "BH/495, MIGUEL LUIS GUI—EZ SAAVEDRA",
+    "descripcion": "BH/495, MIGUEL LUIS GUI√ëEZ SAAVEDRA",
     "cajcod": "200113",
     "origen_clave": "2-1-05-24|00002080|2026-04-01|1",
     "origen_hash": "5fc20bd7b9a028460ac84167bb7fa3a2ecc8aca26185d134e6432a125d498718"
@@ -42419,7 +42419,7 @@
     "cpbnum": "00002180",
     "mov_debe": "0.00",
     "mov_haber": "1773156.00",
-    "descripcion": "F/900737, COPELEC LTDA. DO—A GILDA PIVOTE SUR",
+    "descripcion": "F/900737, COPELEC LTDA. DO√ëA GILDA PIVOTE SUR",
     "cajcod": "200107",
     "origen_clave": "1-1-01-10|00002180|2026-04-07|1",
     "origen_hash": "47588f5a8bdec95b34cbb3ca9f643c2449a04212eb70a56c8333345a753b1e13"
@@ -42635,7 +42635,7 @@
     "cpbnum": "00002192",
     "mov_debe": "0.00",
     "mov_haber": "1212600.00",
-    "descripcion": "F/578, FRIGORIFICO —UBLE ORGANICO SPA",
+    "descripcion": "F/578, FRIGORIFICO √ëUBLE ORGANICO SPA",
     "cajcod": "200109",
     "origen_clave": "2-1-05-21|00002192|2026-04-07|1",
     "origen_hash": "28e7157cfeb1c00a14b53bdf9629a500829dece60198e0e5d81f862763e8cad2"
@@ -42743,7 +42743,7 @@
     "cpbnum": "00002199",
     "mov_debe": "0.00",
     "mov_haber": "8330000.00",
-    "descripcion": "CANCELA ARRIENDO FUNDO MARZO 2026. DO—A GILDA SPA.",
+    "descripcion": "CANCELA ARRIENDO FUNDO MARZO 2026. DO√ëA GILDA SPA.",
     "cajcod": "200109",
     "origen_clave": "2-1-05-21|00002199|2026-04-08|1",
     "origen_hash": "d3a97551a37d753028745914cc92bfb79419de72dc9e691ba517b6542a0ca6f9"
@@ -44057,7 +44057,7 @@
     "cpbnum": "00002404",
     "mov_debe": "0.00",
     "mov_haber": "261800.00",
-    "descripcion": "F/1249, GEMA ENEDIAN MU—OZ",
+    "descripcion": "F/1249, GEMA ENEDIAN MU√ëOZ",
     "cajcod": "200108",
     "origen_clave": "2-1-05-21|00002404|2026-04-17|1",
     "origen_hash": "ada54ca1fe16fa66d40d72733a5c4eeb2b26659a38c4ccc04e8cc37081c56351"
