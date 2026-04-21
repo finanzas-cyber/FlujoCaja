@@ -3,7 +3,7 @@
     "model": "flujo.proyeccion",
     "pk": 1,
     "fields": {
-      "concepto": "100101",
+      "concepto": 1,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -16,7 +16,7 @@
     "model": "flujo.proyeccion",
     "pk": 2,
     "fields": {
-      "concepto": "100104",
+      "concepto": 4,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -29,7 +29,7 @@
     "model": "flujo.proyeccion",
     "pk": 3,
     "fields": {
-      "concepto": "100104",
+      "concepto": 4,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -42,7 +42,7 @@
     "model": "flujo.proyeccion",
     "pk": 4,
     "fields": {
-      "concepto": "100103",
+      "concepto": 3,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -55,7 +55,7 @@
     "model": "flujo.proyeccion",
     "pk": 5,
     "fields": {
-      "concepto": "100103",
+      "concepto": 3,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -68,7 +68,7 @@
     "model": "flujo.proyeccion",
     "pk": 6,
     "fields": {
-      "concepto": "100103",
+      "concepto": 3,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -81,7 +81,7 @@
     "model": "flujo.proyeccion",
     "pk": 7,
     "fields": {
-      "concepto": "100103",
+      "concepto": 3,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -94,7 +94,7 @@
     "model": "flujo.proyeccion",
     "pk": 8,
     "fields": {
-      "concepto": "100105",
+      "concepto": 5,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -107,7 +107,7 @@
     "model": "flujo.proyeccion",
     "pk": 9,
     "fields": {
-      "concepto": "100105",
+      "concepto": 5,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -120,7 +120,7 @@
     "model": "flujo.proyeccion",
     "pk": 10,
     "fields": {
-      "concepto": "100105",
+      "concepto": 5,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -133,7 +133,7 @@
     "model": "flujo.proyeccion",
     "pk": 11,
     "fields": {
-      "concepto": "100105",
+      "concepto": 5,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -146,7 +146,7 @@
     "model": "flujo.proyeccion",
     "pk": 12,
     "fields": {
-      "concepto": "200101",
+      "concepto": 7,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -159,7 +159,7 @@
     "model": "flujo.proyeccion",
     "pk": 13,
     "fields": {
-      "concepto": "200101",
+      "concepto": 7,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -172,7 +172,7 @@
     "model": "flujo.proyeccion",
     "pk": 14,
     "fields": {
-      "concepto": "200101",
+      "concepto": 7,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -185,7 +185,7 @@
     "model": "flujo.proyeccion",
     "pk": 15,
     "fields": {
-      "concepto": "200101",
+      "concepto": 7,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -198,7 +198,7 @@
     "model": "flujo.proyeccion",
     "pk": 16,
     "fields": {
-      "concepto": "200102",
+      "concepto": 8,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -211,7 +211,7 @@
     "model": "flujo.proyeccion",
     "pk": 17,
     "fields": {
-      "concepto": "200102",
+      "concepto": 8,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -224,7 +224,7 @@
     "model": "flujo.proyeccion",
     "pk": 18,
     "fields": {
-      "concepto": "200102",
+      "concepto": 8,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -237,7 +237,7 @@
     "model": "flujo.proyeccion",
     "pk": 19,
     "fields": {
-      "concepto": "200102",
+      "concepto": 8,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -250,7 +250,7 @@
     "model": "flujo.proyeccion",
     "pk": 20,
     "fields": {
-      "concepto": "200103",
+      "concepto": 9,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -263,7 +263,7 @@
     "model": "flujo.proyeccion",
     "pk": 21,
     "fields": {
-      "concepto": "200103",
+      "concepto": 9,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -276,7 +276,7 @@
     "model": "flujo.proyeccion",
     "pk": 22,
     "fields": {
-      "concepto": "200104",
+      "concepto": 10,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -289,7 +289,7 @@
     "model": "flujo.proyeccion",
     "pk": 23,
     "fields": {
-      "concepto": "200104",
+      "concepto": 10,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -302,7 +302,7 @@
     "model": "flujo.proyeccion",
     "pk": 24,
     "fields": {
-      "concepto": "200105",
+      "concepto": 11,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -315,7 +315,7 @@
     "model": "flujo.proyeccion",
     "pk": 25,
     "fields": {
-      "concepto": "200105",
+      "concepto": 11,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -328,7 +328,7 @@
     "model": "flujo.proyeccion",
     "pk": 26,
     "fields": {
-      "concepto": "200105",
+      "concepto": 11,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -341,7 +341,7 @@
     "model": "flujo.proyeccion",
     "pk": 27,
     "fields": {
-      "concepto": "200105",
+      "concepto": 11,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -354,7 +354,7 @@
     "model": "flujo.proyeccion",
     "pk": 28,
     "fields": {
-      "concepto": "200106",
+      "concepto": 12,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -367,7 +367,7 @@
     "model": "flujo.proyeccion",
     "pk": 29,
     "fields": {
-      "concepto": "200106",
+      "concepto": 12,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -380,7 +380,7 @@
     "model": "flujo.proyeccion",
     "pk": 30,
     "fields": {
-      "concepto": "200106",
+      "concepto": 12,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -393,7 +393,7 @@
     "model": "flujo.proyeccion",
     "pk": 31,
     "fields": {
-      "concepto": "200106",
+      "concepto": 12,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -406,7 +406,7 @@
     "model": "flujo.proyeccion",
     "pk": 32,
     "fields": {
-      "concepto": "200107",
+      "concepto": 13,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -419,7 +419,7 @@
     "model": "flujo.proyeccion",
     "pk": 33,
     "fields": {
-      "concepto": "200107",
+      "concepto": 13,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -432,7 +432,7 @@
     "model": "flujo.proyeccion",
     "pk": 34,
     "fields": {
-      "concepto": "200107",
+      "concepto": 13,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -445,7 +445,7 @@
     "model": "flujo.proyeccion",
     "pk": 35,
     "fields": {
-      "concepto": "200107",
+      "concepto": 13,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -458,7 +458,7 @@
     "model": "flujo.proyeccion",
     "pk": 36,
     "fields": {
-      "concepto": "200108",
+      "concepto": 14,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -471,7 +471,7 @@
     "model": "flujo.proyeccion",
     "pk": 37,
     "fields": {
-      "concepto": "200108",
+      "concepto": 14,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -484,7 +484,7 @@
     "model": "flujo.proyeccion",
     "pk": 38,
     "fields": {
-      "concepto": "200108",
+      "concepto": 14,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -497,7 +497,7 @@
     "model": "flujo.proyeccion",
     "pk": 39,
     "fields": {
-      "concepto": "200108",
+      "concepto": 14,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -510,7 +510,7 @@
     "model": "flujo.proyeccion",
     "pk": 40,
     "fields": {
-      "concepto": "200109",
+      "concepto": 15,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -523,7 +523,7 @@
     "model": "flujo.proyeccion",
     "pk": 41,
     "fields": {
-      "concepto": "200109",
+      "concepto": 15,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -536,7 +536,7 @@
     "model": "flujo.proyeccion",
     "pk": 42,
     "fields": {
-      "concepto": "200109",
+      "concepto": 15,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -549,7 +549,7 @@
     "model": "flujo.proyeccion",
     "pk": 43,
     "fields": {
-      "concepto": "200109",
+      "concepto": 15,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -562,7 +562,7 @@
     "model": "flujo.proyeccion",
     "pk": 44,
     "fields": {
-      "concepto": "200110",
+      "concepto": 16,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -575,7 +575,7 @@
     "model": "flujo.proyeccion",
     "pk": 45,
     "fields": {
-      "concepto": "200110",
+      "concepto": 16,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -588,7 +588,7 @@
     "model": "flujo.proyeccion",
     "pk": 46,
     "fields": {
-      "concepto": "200110",
+      "concepto": 16,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -601,7 +601,7 @@
     "model": "flujo.proyeccion",
     "pk": 47,
     "fields": {
-      "concepto": "200111",
+      "concepto": 17,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -614,7 +614,7 @@
     "model": "flujo.proyeccion",
     "pk": 48,
     "fields": {
-      "concepto": "200111",
+      "concepto": 17,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -627,7 +627,7 @@
     "model": "flujo.proyeccion",
     "pk": 49,
     "fields": {
-      "concepto": "200111",
+      "concepto": 17,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -640,7 +640,7 @@
     "model": "flujo.proyeccion",
     "pk": 50,
     "fields": {
-      "concepto": "200111",
+      "concepto": 17,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -653,7 +653,7 @@
     "model": "flujo.proyeccion",
     "pk": 51,
     "fields": {
-      "concepto": "200112",
+      "concepto": 18,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -666,7 +666,7 @@
     "model": "flujo.proyeccion",
     "pk": 52,
     "fields": {
-      "concepto": "200112",
+      "concepto": 18,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -679,7 +679,7 @@
     "model": "flujo.proyeccion",
     "pk": 53,
     "fields": {
-      "concepto": "200112",
+      "concepto": 18,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -692,7 +692,7 @@
     "model": "flujo.proyeccion",
     "pk": 54,
     "fields": {
-      "concepto": "200113",
+      "concepto": 19,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -705,7 +705,7 @@
     "model": "flujo.proyeccion",
     "pk": 55,
     "fields": {
-      "concepto": "200113",
+      "concepto": 19,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -718,7 +718,7 @@
     "model": "flujo.proyeccion",
     "pk": 56,
     "fields": {
-      "concepto": "200113",
+      "concepto": 19,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -731,7 +731,7 @@
     "model": "flujo.proyeccion",
     "pk": 57,
     "fields": {
-      "concepto": "200113",
+      "concepto": 19,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -744,7 +744,7 @@
     "model": "flujo.proyeccion",
     "pk": 58,
     "fields": {
-      "concepto": "200114",
+      "concepto": 20,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -757,7 +757,7 @@
     "model": "flujo.proyeccion",
     "pk": 59,
     "fields": {
-      "concepto": "200114",
+      "concepto": 20,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -770,7 +770,7 @@
     "model": "flujo.proyeccion",
     "pk": 60,
     "fields": {
-      "concepto": "200114",
+      "concepto": 20,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -783,7 +783,7 @@
     "model": "flujo.proyeccion",
     "pk": 61,
     "fields": {
-      "concepto": "200115",
+      "concepto": 21,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -796,7 +796,7 @@
     "model": "flujo.proyeccion",
     "pk": 62,
     "fields": {
-      "concepto": "200116",
+      "concepto": 22,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -809,7 +809,7 @@
     "model": "flujo.proyeccion",
     "pk": 63,
     "fields": {
-      "concepto": "200116",
+      "concepto": 22,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -822,7 +822,7 @@
     "model": "flujo.proyeccion",
     "pk": 64,
     "fields": {
-      "concepto": "200116",
+      "concepto": 22,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -835,7 +835,7 @@
     "model": "flujo.proyeccion",
     "pk": 65,
     "fields": {
-      "concepto": "200116",
+      "concepto": 22,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -848,7 +848,7 @@
     "model": "flujo.proyeccion",
     "pk": 66,
     "fields": {
-      "concepto": "200118",
+      "concepto": 24,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -861,7 +861,7 @@
     "model": "flujo.proyeccion",
     "pk": 67,
     "fields": {
-      "concepto": "200118",
+      "concepto": 24,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -874,7 +874,7 @@
     "model": "flujo.proyeccion",
     "pk": 68,
     "fields": {
-      "concepto": "200118",
+      "concepto": 24,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -887,7 +887,7 @@
     "model": "flujo.proyeccion",
     "pk": 69,
     "fields": {
-      "concepto": "200118",
+      "concepto": 24,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -900,7 +900,7 @@
     "model": "flujo.proyeccion",
     "pk": 70,
     "fields": {
-      "concepto": "200119",
+      "concepto": 25,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -913,7 +913,7 @@
     "model": "flujo.proyeccion",
     "pk": 71,
     "fields": {
-      "concepto": "200119",
+      "concepto": 25,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -926,7 +926,7 @@
     "model": "flujo.proyeccion",
     "pk": 72,
     "fields": {
-      "concepto": "200119",
+      "concepto": 25,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -939,7 +939,7 @@
     "model": "flujo.proyeccion",
     "pk": 73,
     "fields": {
-      "concepto": "200119",
+      "concepto": 25,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -952,7 +952,7 @@
     "model": "flujo.proyeccion",
     "pk": 74,
     "fields": {
-      "concepto": "300105",
+      "concepto": 30,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -965,7 +965,7 @@
     "model": "flujo.proyeccion",
     "pk": 75,
     "fields": {
-      "concepto": "300105",
+      "concepto": 30,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -978,7 +978,7 @@
     "model": "flujo.proyeccion",
     "pk": 76,
     "fields": {
-      "concepto": "300105",
+      "concepto": 30,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -991,7 +991,7 @@
     "model": "flujo.proyeccion",
     "pk": 77,
     "fields": {
-      "concepto": "300105",
+      "concepto": 30,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -1004,7 +1004,7 @@
     "model": "flujo.proyeccion",
     "pk": 78,
     "fields": {
-      "concepto": "800010",
+      "concepto": 36,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -1017,7 +1017,7 @@
     "model": "flujo.proyeccion",
     "pk": 79,
     "fields": {
-      "concepto": "800010",
+      "concepto": 36,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -1030,7 +1030,7 @@
     "model": "flujo.proyeccion",
     "pk": 80,
     "fields": {
-      "concepto": "800010",
+      "concepto": 36,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -1043,7 +1043,7 @@
     "model": "flujo.proyeccion",
     "pk": 81,
     "fields": {
-      "concepto": "200103",
+      "concepto": 9,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -1056,7 +1056,7 @@
     "model": "flujo.proyeccion",
     "pk": 82,
     "fields": {
-      "concepto": "200110",
+      "concepto": 16,
       "anio": 2026,
       "mes": 8,
       "origen": "PROYECTADO",
@@ -1069,7 +1069,7 @@
     "model": "flujo.proyeccion",
     "pk": 83,
     "fields": {
-      "concepto": "200109",
+      "concepto": 15,
       "anio": 2026,
       "mes": 8,
       "origen": "PROYECTADO",
@@ -1082,7 +1082,7 @@
     "model": "flujo.proyeccion",
     "pk": 84,
     "fields": {
-      "concepto": "200109",
+      "concepto": 15,
       "anio": 2026,
       "mes": 9,
       "origen": "PROYECTADO",
@@ -1095,7 +1095,7 @@
     "model": "flujo.proyeccion",
     "pk": 85,
     "fields": {
-      "concepto": "200109",
+      "concepto": 15,
       "anio": 2026,
       "mes": 10,
       "origen": "PROYECTADO",
@@ -1108,7 +1108,7 @@
     "model": "flujo.proyeccion",
     "pk": 86,
     "fields": {
-      "concepto": "200109",
+      "concepto": 15,
       "anio": 2026,
       "mes": 11,
       "origen": "PROYECTADO",
@@ -1121,7 +1121,7 @@
     "model": "flujo.proyeccion",
     "pk": 87,
     "fields": {
-      "concepto": "200109",
+      "concepto": 15,
       "anio": 2026,
       "mes": 12,
       "origen": "PROYECTADO",
@@ -1134,7 +1134,7 @@
     "model": "flujo.proyeccion",
     "pk": 88,
     "fields": {
-      "concepto": "200107",
+      "concepto": 13,
       "anio": 2026,
       "mes": 9,
       "origen": "PROYECTADO",
@@ -1147,7 +1147,7 @@
     "model": "flujo.proyeccion",
     "pk": 89,
     "fields": {
-      "concepto": "200110",
+      "concepto": 16,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -1160,7 +1160,7 @@
     "model": "flujo.proyeccion",
     "pk": 90,
     "fields": {
-      "concepto": "200114",
+      "concepto": 20,
       "anio": 2026,
       "mes": 8,
       "origen": "PROYECTADO",
@@ -1173,7 +1173,7 @@
     "model": "flujo.proyeccion",
     "pk": 91,
     "fields": {
-      "concepto": "300105",
+      "concepto": 30,
       "anio": 2026,
       "mes": 8,
       "origen": "PROYECTADO",
@@ -1186,7 +1186,7 @@
     "model": "flujo.proyeccion",
     "pk": 92,
     "fields": {
-      "concepto": "300105",
+      "concepto": 30,
       "anio": 2026,
       "mes": 9,
       "origen": "PROYECTADO",
@@ -1199,7 +1199,7 @@
     "model": "flujo.proyeccion",
     "pk": 93,
     "fields": {
-      "concepto": "300105",
+      "concepto": 30,
       "anio": 2026,
       "mes": 10,
       "origen": "PROYECTADO",
@@ -1212,7 +1212,7 @@
     "model": "flujo.proyeccion",
     "pk": 94,
     "fields": {
-      "concepto": "300105",
+      "concepto": 30,
       "anio": 2026,
       "mes": 11,
       "origen": "PROYECTADO",
@@ -1225,7 +1225,7 @@
     "model": "flujo.proyeccion",
     "pk": 95,
     "fields": {
-      "concepto": "300105",
+      "concepto": 30,
       "anio": 2026,
       "mes": 12,
       "origen": "PROYECTADO",
@@ -1238,7 +1238,7 @@
     "model": "flujo.proyeccion",
     "pk": 96,
     "fields": {
-      "concepto": "300107",
+      "concepto": 32,
       "anio": 2026,
       "mes": 11,
       "origen": "PROYECTADO",
@@ -1251,7 +1251,7 @@
     "model": "flujo.proyeccion",
     "pk": 97,
     "fields": {
-      "concepto": "300107",
+      "concepto": 32,
       "anio": 2026,
       "mes": 10,
       "origen": "PROYECTADO",
@@ -1264,7 +1264,7 @@
     "model": "flujo.proyeccion",
     "pk": 98,
     "fields": {
-      "concepto": "100102",
+      "concepto": 2,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -1277,7 +1277,7 @@
     "model": "flujo.proyeccion",
     "pk": 99,
     "fields": {
-      "concepto": "300103",
+      "concepto": 28,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -1290,7 +1290,7 @@
     "model": "flujo.proyeccion",
     "pk": 100,
     "fields": {
-      "concepto": "300101",
+      "concepto": 26,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -1303,7 +1303,7 @@
     "model": "flujo.proyeccion",
     "pk": 101,
     "fields": {
-      "concepto": "300101",
+      "concepto": 26,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -1316,7 +1316,7 @@
     "model": "flujo.proyeccion",
     "pk": 102,
     "fields": {
-      "concepto": "300101",
+      "concepto": 26,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -1329,7 +1329,7 @@
     "model": "flujo.proyeccion",
     "pk": 103,
     "fields": {
-      "concepto": "300101",
+      "concepto": 26,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -1342,7 +1342,7 @@
     "model": "flujo.proyeccion",
     "pk": 104,
     "fields": {
-      "concepto": "300101",
+      "concepto": 26,
       "anio": 2026,
       "mes": 8,
       "origen": "PROYECTADO",
@@ -1355,7 +1355,7 @@
     "model": "flujo.proyeccion",
     "pk": 105,
     "fields": {
-      "concepto": "300101",
+      "concepto": 26,
       "anio": 2026,
       "mes": 9,
       "origen": "PROYECTADO",
@@ -1368,7 +1368,7 @@
     "model": "flujo.proyeccion",
     "pk": 106,
     "fields": {
-      "concepto": "300101",
+      "concepto": 26,
       "anio": 2026,
       "mes": 10,
       "origen": "PROYECTADO",
@@ -1381,7 +1381,7 @@
     "model": "flujo.proyeccion",
     "pk": 107,
     "fields": {
-      "concepto": "300101",
+      "concepto": 26,
       "anio": 2026,
       "mes": 11,
       "origen": "PROYECTADO",
@@ -1394,7 +1394,7 @@
     "model": "flujo.proyeccion",
     "pk": 108,
     "fields": {
-      "concepto": "300101",
+      "concepto": 26,
       "anio": 2026,
       "mes": 12,
       "origen": "PROYECTADO",
@@ -1407,7 +1407,7 @@
     "model": "flujo.proyeccion",
     "pk": 109,
     "fields": {
-      "concepto": "300102",
+      "concepto": 27,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -1420,7 +1420,7 @@
     "model": "flujo.proyeccion",
     "pk": 110,
     "fields": {
-      "concepto": "300102",
+      "concepto": 27,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -1433,7 +1433,7 @@
     "model": "flujo.proyeccion",
     "pk": 111,
     "fields": {
-      "concepto": "300102",
+      "concepto": 27,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -1446,7 +1446,7 @@
     "model": "flujo.proyeccion",
     "pk": 112,
     "fields": {
-      "concepto": "300102",
+      "concepto": 27,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -1459,7 +1459,7 @@
     "model": "flujo.proyeccion",
     "pk": 113,
     "fields": {
-      "concepto": "300102",
+      "concepto": 27,
       "anio": 2026,
       "mes": 8,
       "origen": "PROYECTADO",
@@ -1472,7 +1472,7 @@
     "model": "flujo.proyeccion",
     "pk": 114,
     "fields": {
-      "concepto": "300102",
+      "concepto": 27,
       "anio": 2026,
       "mes": 9,
       "origen": "PROYECTADO",
@@ -1485,7 +1485,7 @@
     "model": "flujo.proyeccion",
     "pk": 115,
     "fields": {
-      "concepto": "300102",
+      "concepto": 27,
       "anio": 2026,
       "mes": 10,
       "origen": "PROYECTADO",
@@ -1498,7 +1498,7 @@
     "model": "flujo.proyeccion",
     "pk": 116,
     "fields": {
-      "concepto": "300102",
+      "concepto": 27,
       "anio": 2026,
       "mes": 11,
       "origen": "PROYECTADO",
@@ -1511,7 +1511,7 @@
     "model": "flujo.proyeccion",
     "pk": 117,
     "fields": {
-      "concepto": "300102",
+      "concepto": 27,
       "anio": 2026,
       "mes": 12,
       "origen": "PROYECTADO",
@@ -1524,7 +1524,7 @@
     "model": "flujo.proyeccion",
     "pk": 118,
     "fields": {
-      "concepto": "300104",
+      "concepto": 29,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -1537,7 +1537,7 @@
     "model": "flujo.proyeccion",
     "pk": 119,
     "fields": {
-      "concepto": "300104",
+      "concepto": 29,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -1550,7 +1550,7 @@
     "model": "flujo.proyeccion",
     "pk": 120,
     "fields": {
-      "concepto": "300104",
+      "concepto": 29,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -1563,7 +1563,7 @@
     "model": "flujo.proyeccion",
     "pk": 121,
     "fields": {
-      "concepto": "300104",
+      "concepto": 29,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -1576,7 +1576,7 @@
     "model": "flujo.proyeccion",
     "pk": 122,
     "fields": {
-      "concepto": "300104",
+      "concepto": 29,
       "anio": 2026,
       "mes": 8,
       "origen": "PROYECTADO",
@@ -1589,7 +1589,7 @@
     "model": "flujo.proyeccion",
     "pk": 123,
     "fields": {
-      "concepto": "300104",
+      "concepto": 29,
       "anio": 2026,
       "mes": 9,
       "origen": "PROYECTADO",
@@ -1602,7 +1602,7 @@
     "model": "flujo.proyeccion",
     "pk": 124,
     "fields": {
-      "concepto": "300104",
+      "concepto": 29,
       "anio": 2026,
       "mes": 10,
       "origen": "PROYECTADO",
@@ -1615,7 +1615,7 @@
     "model": "flujo.proyeccion",
     "pk": 125,
     "fields": {
-      "concepto": "300104",
+      "concepto": 29,
       "anio": 2026,
       "mes": 11,
       "origen": "PROYECTADO",
@@ -1628,7 +1628,7 @@
     "model": "flujo.proyeccion",
     "pk": 126,
     "fields": {
-      "concepto": "300104",
+      "concepto": 29,
       "anio": 2026,
       "mes": 12,
       "origen": "PROYECTADO",
@@ -1641,7 +1641,7 @@
     "model": "flujo.proyeccion",
     "pk": 127,
     "fields": {
-      "concepto": "300103",
+      "concepto": 28,
       "anio": 2026,
       "mes": 10,
       "origen": "PROYECTADO",
@@ -1654,7 +1654,7 @@
     "model": "flujo.proyeccion",
     "pk": 128,
     "fields": {
-      "concepto": "100102",
+      "concepto": 2,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -1667,7 +1667,7 @@
     "model": "flujo.proyeccion",
     "pk": 129,
     "fields": {
-      "concepto": "100102",
+      "concepto": 2,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -1680,7 +1680,7 @@
     "model": "flujo.proyeccion",
     "pk": 130,
     "fields": {
-      "concepto": "100104",
+      "concepto": 4,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -1693,7 +1693,7 @@
     "model": "flujo.proyeccion",
     "pk": 131,
     "fields": {
-      "concepto": "100103",
+      "concepto": 3,
       "anio": 2026,
       "mes": 9,
       "origen": "PROYECTADO",
@@ -1706,7 +1706,7 @@
     "model": "flujo.proyeccion",
     "pk": 132,
     "fields": {
-      "concepto": "100103",
+      "concepto": 3,
       "anio": 2026,
       "mes": 10,
       "origen": "PROYECTADO",
@@ -1719,7 +1719,7 @@
     "model": "flujo.proyeccion",
     "pk": 133,
     "fields": {
-      "concepto": "100103",
+      "concepto": 3,
       "anio": 2026,
       "mes": 11,
       "origen": "PROYECTADO",
@@ -1732,7 +1732,7 @@
     "model": "flujo.proyeccion",
     "pk": 134,
     "fields": {
-      "concepto": "100104",
+      "concepto": 4,
       "anio": 2026,
       "mes": 9,
       "origen": "PROYECTADO",
@@ -1745,7 +1745,7 @@
     "model": "flujo.proyeccion",
     "pk": 135,
     "fields": {
-      "concepto": "100104",
+      "concepto": 4,
       "anio": 2026,
       "mes": 10,
       "origen": "PROYECTADO",
@@ -1758,7 +1758,7 @@
     "model": "flujo.proyeccion",
     "pk": 136,
     "fields": {
-      "concepto": "100104",
+      "concepto": 4,
       "anio": 2026,
       "mes": 11,
       "origen": "PROYECTADO",
@@ -1771,7 +1771,7 @@
     "model": "flujo.proyeccion",
     "pk": 137,
     "fields": {
-      "concepto": "800100",
+      "concepto": 37,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -1784,7 +1784,7 @@
     "model": "flujo.proyeccion",
     "pk": 138,
     "fields": {
-      "concepto": "800100",
+      "concepto": 37,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -1797,7 +1797,7 @@
     "model": "flujo.proyeccion",
     "pk": 139,
     "fields": {
-      "concepto": "800100",
+      "concepto": 37,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -1810,7 +1810,7 @@
     "model": "flujo.proyeccion",
     "pk": 140,
     "fields": {
-      "concepto": "800100",
+      "concepto": 37,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -1823,7 +1823,7 @@
     "model": "flujo.proyeccion",
     "pk": 141,
     "fields": {
-      "concepto": "300106",
+      "concepto": 31,
       "anio": 2026,
       "mes": 11,
       "origen": "PROYECTADO",
@@ -1836,7 +1836,7 @@
     "model": "flujo.proyeccion",
     "pk": 142,
     "fields": {
-      "concepto": "300103",
+      "concepto": 28,
       "anio": 2026,
       "mes": 5,
       "origen": "PROYECTADO",
@@ -1849,7 +1849,7 @@
     "model": "flujo.proyeccion",
     "pk": 143,
     "fields": {
-      "concepto": "300103",
+      "concepto": 28,
       "anio": 2026,
       "mes": 6,
       "origen": "PROYECTADO",
@@ -1862,7 +1862,7 @@
     "model": "flujo.proyeccion",
     "pk": 144,
     "fields": {
-      "concepto": "300103",
+      "concepto": 28,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -1875,7 +1875,7 @@
     "model": "flujo.proyeccion",
     "pk": 145,
     "fields": {
-      "concepto": "300103",
+      "concepto": 28,
       "anio": 2026,
       "mes": 8,
       "origen": "PROYECTADO",
@@ -1888,7 +1888,7 @@
     "model": "flujo.proyeccion",
     "pk": 146,
     "fields": {
-      "concepto": "300103",
+      "concepto": 28,
       "anio": 2026,
       "mes": 9,
       "origen": "PROYECTADO",
@@ -1901,7 +1901,7 @@
     "model": "flujo.proyeccion",
     "pk": 147,
     "fields": {
-      "concepto": "300103",
+      "concepto": 28,
       "anio": 2026,
       "mes": 11,
       "origen": "PROYECTADO",
@@ -1914,7 +1914,7 @@
     "model": "flujo.proyeccion",
     "pk": 148,
     "fields": {
-      "concepto": "300103",
+      "concepto": 28,
       "anio": 2026,
       "mes": 12,
       "origen": "PROYECTADO",
@@ -1927,7 +1927,7 @@
     "model": "flujo.proyeccion",
     "pk": 149,
     "fields": {
-      "concepto": "300106",
+      "concepto": 31,
       "anio": 2026,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -1940,7 +1940,7 @@
     "model": "flujo.proyeccion",
     "pk": 151,
     "fields": {
-      "concepto": "999999",
+      "concepto": 999999,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -1953,7 +1953,7 @@
     "model": "flujo.proyeccion",
     "pk": 152,
     "fields": {
-      "concepto": "999999",
+      "concepto": 999999,
       "anio": 2025,
       "mes": 7,
       "origen": "PROYECTADO",
@@ -1966,7 +1966,7 @@
     "model": "flujo.proyeccion",
     "pk": 153,
     "fields": {
-      "concepto": "999999",
+      "concepto": 999999,
       "anio": 2025,
       "mes": 8,
       "origen": "PROYECTADO",
@@ -1979,7 +1979,7 @@
     "model": "flujo.proyeccion",
     "pk": 154,
     "fields": {
-      "concepto": "999998",
+      "concepto": 1000000,
       "anio": 2026,
       "mes": 4,
       "origen": "PROYECTADO",
@@ -1992,7 +1992,7 @@
     "model": "flujo.proyeccion",
     "pk": 155,
     "fields": {
-      "concepto": "999998",
+      "concepto": 1000000,
       "anio": 2025,
       "mes": 8,
       "origen": "REAL",
@@ -2005,7 +2005,7 @@
     "model": "flujo.proyeccion",
     "pk": 156,
     "fields": {
-      "concepto": "999998",
+      "concepto": 1000000,
       "anio": 2025,
       "mes": 11,
       "origen": "REAL",
@@ -2018,7 +2018,7 @@
     "model": "flujo.proyeccion",
     "pk": 157,
     "fields": {
-      "concepto": "999998",
+      "concepto": 1000000,
       "anio": 2025,
       "mes": 12,
       "origen": "REAL",
@@ -2031,7 +2031,7 @@
     "model": "flujo.proyeccion",
     "pk": 158,
     "fields": {
-      "concepto": "999998",
+      "concepto": 1000000,
       "anio": 2026,
       "mes": 1,
       "origen": "REAL",
@@ -2044,7 +2044,7 @@
     "model": "flujo.proyeccion",
     "pk": 159,
     "fields": {
-      "concepto": "999998",
+      "concepto": 1000000,
       "anio": 2026,
       "mes": 2,
       "origen": "REAL",
@@ -2057,7 +2057,7 @@
     "model": "flujo.proyeccion",
     "pk": 160,
     "fields": {
-      "concepto": "999998",
+      "concepto": 1000000,
       "anio": 2026,
       "mes": 3,
       "origen": "REAL",
@@ -2070,7 +2070,7 @@
     "model": "flujo.proyeccion",
     "pk": 161,
     "fields": {
-      "concepto": "999999",
+      "concepto": 999999,
       "anio": 2025,
       "mes": 8,
       "origen": "REAL",
@@ -2083,7 +2083,7 @@
     "model": "flujo.proyeccion",
     "pk": 162,
     "fields": {
-      "concepto": "999999",
+      "concepto": 999999,
       "anio": 2025,
       "mes": 7,
       "origen": "REAL",
@@ -2096,7 +2096,7 @@
     "model": "flujo.proyeccion",
     "pk": 163,
     "fields": {
-      "concepto": "999999",
+      "concepto": 999999,
       "anio": 2025,
       "mes": 9,
       "origen": "REAL",
@@ -2109,7 +2109,7 @@
     "model": "flujo.proyeccion",
     "pk": 164,
     "fields": {
-      "concepto": "999999",
+      "concepto": 999999,
       "anio": 2025,
       "mes": 10,
       "origen": "REAL",
@@ -2122,7 +2122,7 @@
     "model": "flujo.proyeccion",
     "pk": 165,
     "fields": {
-      "concepto": "999999",
+      "concepto": 999999,
       "anio": 2025,
       "mes": 11,
       "origen": "REAL",
@@ -2135,7 +2135,7 @@
     "model": "flujo.proyeccion",
     "pk": 166,
     "fields": {
-      "concepto": "999999",
+      "concepto": 999999,
       "anio": 2025,
       "mes": 12,
       "origen": "REAL",
@@ -2148,7 +2148,7 @@
     "model": "flujo.proyeccion",
     "pk": 167,
     "fields": {
-      "concepto": "999999",
+      "concepto": 999999,
       "anio": 2026,
       "mes": 3,
       "origen": "REAL",
@@ -2161,7 +2161,7 @@
     "model": "flujo.proyeccion",
     "pk": 168,
     "fields": {
-      "concepto": "999999",
+      "concepto": 999999,
       "anio": 2026,
       "mes": 1,
       "origen": "REAL",
@@ -2174,7 +2174,7 @@
     "model": "flujo.proyeccion",
     "pk": 169,
     "fields": {
-      "concepto": "999999",
+      "concepto": 999999,
       "anio": 2026,
       "mes": 2,
       "origen": "REAL",
@@ -2187,7 +2187,7 @@
     "model": "flujo.proyeccion",
     "pk": 170,
     "fields": {
-      "concepto": "999999",
+      "concepto": 999999,
       "anio": 2026,
       "mes": 4,
       "origen": "REAL",

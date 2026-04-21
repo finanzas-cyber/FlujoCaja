@@ -6,8 +6,5 @@ pip install -r requirements.txt
 python manage.py collectstatic --no-input
 python manage.py migrate
 
-# 🔥 CARGAR CONCEPTOS PRIMERO
-python manage.py cargar_maestros
-
-# 🔥 DESPUÉS PROYECCIONES
+python manage.py loaddata conceptos.json
 python manage.py cargar_datos

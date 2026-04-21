@@ -1,0 +1,432 @@
+[
+{
+  "model": "flujo.concepto",
+  "pk": 1,
+  "fields": {
+    "codigo": "100101",
+    "nombre": "CULTIVOS ANUALES",
+    "tipo": "INGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 2,
+  "fields": {
+    "codigo": "100102",
+    "nombre": "ARANDANO NACIONAL",
+    "tipo": "INGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 3,
+  "fields": {
+    "codigo": "100103",
+    "nombre": "MANZANA NACIONAL",
+    "tipo": "INGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 4,
+  "fields": {
+    "codigo": "100104",
+    "nombre": "EXPORTACION ARANDANOS",
+    "tipo": "INGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 5,
+  "fields": {
+    "codigo": "100105",
+    "nombre": "PACKING MANZANOS",
+    "tipo": "INGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 6,
+  "fields": {
+    "codigo": "100106",
+    "nombre": "SERVICIOS",
+    "tipo": "INGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 7,
+  "fields": {
+    "codigo": "200101",
+    "nombre": "MANO DE OBRA",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 8,
+  "fields": {
+    "codigo": "200102",
+    "nombre": "IMPOSICIONES",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 9,
+  "fields": {
+    "codigo": "200103",
+    "nombre": "FINIQUITOS",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 10,
+  "fields": {
+    "codigo": "200104",
+    "nombre": "TRASLADO PERSONAL",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 11,
+  "fields": {
+    "codigo": "200105",
+    "nombre": "EMBALAJES",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 12,
+  "fields": {
+    "codigo": "200106",
+    "nombre": "INSUMOS AGRICOLAS",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 13,
+  "fields": {
+    "codigo": "200107",
+    "nombre": "ENERGIA Y COMBUSTIBLE",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 14,
+  "fields": {
+    "codigo": "200108",
+    "nombre": "MANTENCIONES",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 15,
+  "fields": {
+    "codigo": "200109",
+    "nombre": "ARRIENDO PREDIOS Y OTROS",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 16,
+  "fields": {
+    "codigo": "200110",
+    "nombre": "FLETES A PUERTO",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 17,
+  "fields": {
+    "codigo": "200111",
+    "nombre": "SEGUROS",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 18,
+  "fields": {
+    "codigo": "200112",
+    "nombre": "GASTOS ADUANA-SAG-EXP",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 19,
+  "fields": {
+    "codigo": "200113",
+    "nombre": "SERVICIOS EXTERNOS",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 20,
+  "fields": {
+    "codigo": "200114",
+    "nombre": "INVERSIONES",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 21,
+  "fields": {
+    "codigo": "200115",
+    "nombre": "OTROS COSTOS AGRICOLAS",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 22,
+  "fields": {
+    "codigo": "200116",
+    "nombre": "OTROS GASTOS ADMINISTRACION",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 23,
+  "fields": {
+    "codigo": "200117",
+    "nombre": "DEUDAS TEMPORADA ANTERIOR",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 24,
+  "fields": {
+    "codigo": "200118",
+    "nombre": "IVA CF PAGADO",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 25,
+  "fields": {
+    "codigo": "200119",
+    "nombre": "PAGO IMPUESTOS",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 26,
+  "fields": {
+    "codigo": "300101",
+    "nombre": "PANEL SOLAR",
+    "tipo": "FINANCIAMIENTO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 27,
+  "fields": {
+    "codigo": "300102",
+    "nombre": "CONTROL DE HELADA",
+    "tipo": "FINANCIAMIENTO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 28,
+  "fields": {
+    "codigo": "300103",
+    "nombre": "(Fogape)// RIEGO COBERTURA",
+    "tipo": "FINANCIAMIENTO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 29,
+  "fields": {
+    "codigo": "300104",
+    "nombre": "TRACTOR",
+    "tipo": "FINANCIAMIENTO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 30,
+  "fields": {
+    "codigo": "300105",
+    "nombre": "DEV. MAURO",
+    "tipo": "FINANCIAMIENTO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 31,
+  "fields": {
+    "codigo": "300106",
+    "nombre": "PAE",
+    "tipo": "FINANCIAMIENTO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 32,
+  "fields": {
+    "codigo": "300107",
+    "nombre": "NUEVO PAE",
+    "tipo": "FINANCIAMIENTO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 33,
+  "fields": {
+    "codigo": "300108",
+    "nombre": "PRESTAMO MAURO",
+    "tipo": "FINANCIAMIENTO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 34,
+  "fields": {
+    "codigo": "300109",
+    "nombre": "VENTA DE ACTIVO",
+    "tipo": "FINANCIAMIENTO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 35,
+  "fields": {
+    "codigo": "400101",
+    "nombre": "TRASPASO ENTRE CUENTAS",
+    "tipo": "EXCLUIR",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 36,
+  "fields": {
+    "codigo": "800010",
+    "nombre": "MONEY MARKET",
+    "tipo": "FINANCIAMIENTO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 37,
+  "fields": {
+    "codigo": "800100",
+    "nombre": "RECUPERACION IVA EXP",
+    "tipo": "INGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 38,
+  "fields": {
+    "codigo": "ING",
+    "nombre": "INGRESO",
+    "tipo": "INGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 39,
+  "fields": {
+    "codigo": "EGR",
+    "nombre": "EGRESO",
+    "tipo": "EGRESO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 40,
+  "fields": {
+    "codigo": "FIN",
+    "nombre": "FINANCIAMIENTO",
+    "tipo": "FINANCIAMIENTO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 41,
+  "fields": {
+    "codigo": "EXC",
+    "nombre": "EXCLUIR",
+    "tipo": "EXCLUIR",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 999999,
+  "fields": {
+    "codigo": "999999",
+    "nombre": "DIFERENCIA T/C",
+    "tipo": "FINANCIAMIENTO",
+    "activo": true
+  }
+},
+{
+  "model": "flujo.concepto",
+  "pk": 1000000,
+  "fields": {
+    "codigo": "999998",
+    "nombre": "CEREZA",
+    "tipo": "INGRESO",
+    "activo": true
+  }
+}
+]
