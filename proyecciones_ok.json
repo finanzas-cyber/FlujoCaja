@@ -1938,19 +1938,6 @@
   },
   {
     "model": "flujo.proyeccion",
-    "pk": 150,
-    "fields": {
-      "concepto": "EGR",
-      "anio": 2026,
-      "mes": 4,
-      "origen": "PROYECTADO",
-      "monto": "0.00",
-      "descripcion": "",
-      "activo": true
-    }
-  },
-  {
-    "model": "flujo.proyeccion",
     "pk": 151,
     "fields": {
       "concepto": "999999",
