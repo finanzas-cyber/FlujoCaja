@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function formatear(n) {
         return new Intl.NumberFormat("es-CL", {
-            maximumFractionDigits: 0,
-            minimumFractionDigits: 0
-        }).format(n);
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(Number(n) || 0);
     }
 
     function obtenerCsrf() {
@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function prepararInput(input) {
         var v = limpiarNumero(input.value);
-
         input.value = v === 0 ? "" : formatear(v);
         marcarNegativoElemento(input, v);
 
@@ -36,11 +35,30 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        input.addEventListener("focus", function () {
-            input.classList.remove("guardado-ok", "guardado-error");
+        input.readOnly = true;
+        input.dataset.modoExcel = "1";
+        input.style.cursor = "default";
+
+        input.addEventListener("dblclick", function (e) {
+            e.stopPropagation();
+            input.readOnly = false;
+            input.focus();
             var val = limpiarNumero(input.value);
             input.value = val === 0 ? "" : String(val);
             input.select();
+        });
+
+        input.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                input.blur();
+            }
+            if (e.key === "Escape") {
+                var val = limpiarNumero(input.value);
+                input.value = val === 0 ? "" : formatear(val);
+                input.readOnly = true;
+                input.blur();
+            }
         });
 
         input.addEventListener("blur", function () {
@@ -48,15 +66,15 @@ document.addEventListener("DOMContentLoaded", function () {
             var mes = input.dataset.mes;
             var anio = input.dataset.anio;
             var origen = input.dataset.origen;
+            var valor = limpiarNumero(input.value);
+
+            input.readOnly = true;
 
             if (!conceptoId || !mes || !anio) {
-                var valorLocal = limpiarNumero(input.value);
-                input.value = valorLocal === 0 ? "" : formatear(valorLocal);
-                marcarNegativoElemento(input, valorLocal);
+                input.value = valor === 0 ? "" : formatear(valor);
+                marcarNegativoElemento(input, valor);
                 return;
             }
-
-            var valor = limpiarNumero(input.value);
 
             var url = origen === "REAL"
                 ? "{% url 'guardar_movimiento_real' %}"
@@ -102,12 +120,13 @@ document.addEventListener("DOMContentLoaded", function () {
     function aplicarFormatoNumeros() {
         document.querySelectorAll(".js-numero").forEach(function (el) {
             var valor = limpiarNumero(el.dataset.value || el.textContent);
-            el.textContent = valor === 0 ? "0" : formatear(valor);
+            el.textContent = formatear(valor);
             marcarNegativoElemento(el, valor);
         });
 
         document.querySelectorAll(".input-proyectado").forEach(function (el) {
             var valor = limpiarNumero(el.value);
+            el.value = valor === 0 ? "" : formatear(valor);
             marcarNegativoElemento(el, valor);
         });
     }
@@ -209,11 +228,15 @@ document.addEventListener("DOMContentLoaded", function () {
     var cerrarModalBtn = document.getElementById("cerrar-modal-detalle");
 
     function cerrarModalDetalle() {
-        modal.classList.remove("abierto");
+        if (modal) {
+            modal.classList.remove("abierto");
+        }
     }
 
     function abrirModalDetalle() {
-        modal.classList.add("abierto");
+        if (modal) {
+            modal.classList.add("abierto");
+        }
     }
 
     function prepararModalDetalleReal() {
@@ -226,11 +249,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 var anio = celda.dataset.anio;
                 var mesNombre = celda.dataset.mesNombre || "";
 
-                modalTitulo.textContent = "Detalle movimientos";
-                modalSubtitulo.textContent = conceptoCodigo + " - " + conceptoNombre + " | " + mesNombre + " " + anio;
-                modalEstado.textContent = "Cargando detalle...";
-                modalTbody.innerHTML = "";
-                modalTotal.textContent = "";
+                if (modalTitulo) modalTitulo.textContent = "Detalle movimientos";
+                if (modalSubtitulo) modalSubtitulo.textContent = conceptoCodigo + " - " + conceptoNombre + " | " + mesNombre + " " + anio;
+                if (modalEstado) modalEstado.textContent = "Cargando detalle...";
+                if (modalTbody) modalTbody.innerHTML = "";
+                if (modalTotal) modalTotal.textContent = "";
                 abrirModalDetalle();
 
                 var url = "{% url 'detalle_movimientos_real' %}?" + new URLSearchParams({
@@ -246,18 +269,18 @@ document.addEventListener("DOMContentLoaded", function () {
                             throw new Error(data.error || "No se pudo cargar el detalle");
                         }
 
-                        modalTitulo.textContent = data.concepto_codigo + " - " + data.concepto_nombre;
-                        modalSubtitulo.textContent = "Mes " + data.mes + " / Año " + data.anio;
+                        if (modalTitulo) modalTitulo.textContent = data.concepto_codigo + " - " + data.concepto_nombre;
+                        if (modalSubtitulo) modalSubtitulo.textContent = "Mes " + data.mes + " / Año " + data.anio;
 
                         if (!data.movimientos || !data.movimientos.length) {
-                            modalEstado.textContent = "No hay movimientos para este período.";
-                            modalTbody.innerHTML = "";
-                            modalTotal.textContent = "Total: 0";
+                            if (modalEstado) modalEstado.textContent = "No hay movimientos para este período.";
+                            if (modalTbody) modalTbody.innerHTML = "";
+                            if (modalTotal) modalTotal.textContent = "Total: 0";
                             return;
                         }
 
-                        modalEstado.textContent = data.movimientos.length + " movimiento(s) encontrados.";
-                        modalTbody.innerHTML = "";
+                        if (modalEstado) modalEstado.textContent = data.movimientos.length + " movimiento(s) encontrados.";
+                        if (modalTbody) modalTbody.innerHTML = "";
 
                         data.movimientos.forEach(function (mov) {
                             var tr = document.createElement("tr");
@@ -286,31 +309,39 @@ document.addEventListener("DOMContentLoaded", function () {
                             tr.appendChild(tdDescripcion);
                             tr.appendChild(tdMonto);
 
-                            modalTbody.appendChild(tr);
+                            if (modalTbody) {
+                                modalTbody.appendChild(tr);
+                            }
                         });
 
                         var totalNum = Number(data.total) || 0;
-                        modalTotal.textContent = "Total: " + formatear(totalNum);
-                        marcarNegativoElemento(modalTotal, totalNum);
+                        if (modalTotal) {
+                            modalTotal.textContent = "Total: " + formatear(totalNum);
+                            marcarNegativoElemento(modalTotal, totalNum);
+                        }
                     })
                     .catch(function (error) {
-                        modalEstado.textContent = error.message || "Error al cargar el detalle.";
-                        modalTbody.innerHTML = "";
-                        modalTotal.textContent = "";
+                        if (modalEstado) modalEstado.textContent = error.message || "Error al cargar el detalle.";
+                        if (modalTbody) modalTbody.innerHTML = "";
+                        if (modalTotal) modalTotal.textContent = "";
                     });
             });
         });
 
-        cerrarModalBtn.addEventListener("click", cerrarModalDetalle);
+        if (cerrarModalBtn) {
+            cerrarModalBtn.addEventListener("click", cerrarModalDetalle);
+        }
 
-        modal.addEventListener("click", function (e) {
-            if (e.target === modal) {
-                cerrarModalDetalle();
-            }
-        });
+        if (modal) {
+            modal.addEventListener("click", function (e) {
+                if (e.target === modal) {
+                    cerrarModalDetalle();
+                }
+            });
+        }
 
         document.addEventListener("keydown", function (e) {
-            if (e.key === "Escape" && modal.classList.contains("abierto")) {
+            if (e.key === "Escape" && modal && modal.classList.contains("abierto")) {
                 cerrarModalDetalle();
             }
         });
@@ -351,11 +382,17 @@ document.addEventListener("DOMContentLoaded", function () {
         var barra = document.getElementById("barra-suma");
         if (barra) {
             barra.textContent = "Suma seleccionada: " + formatear(total);
+            barra.style.display = "block";
+            barra.style.visibility = "visible";
+            barra.style.opacity = "1";
         }
     }
 
     function prepararSumaCeldas() {
-        var tabla = document.querySelector(".tabla-contenedor table");
+        var encabezado = document.getElementById("toggle-tc");
+        if (!encabezado) return;
+
+        var tabla = encabezado.closest("table");
         if (!tabla) return;
 
         var celdas = tabla.querySelectorAll("td.semestre-col.numero");
@@ -364,15 +401,27 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         tabla.addEventListener("mousedown", function (e) {
+            var input = e.target.closest("input");
+            if (input && input.readOnly === false) return;
+
             var celda = e.target.closest("td.semestre-col.numero");
-            if (!celda) return;
+            if (!celda || !tabla.contains(celda)) return;
+
+            if (e.detail === 2) return;
 
             e.preventDefault();
-            limpiarSeleccionSuma();
+
+            if (!e.ctrlKey) {
+                limpiarSeleccionSuma();
+            }
+
             seleccionandoSuma = true;
 
-            celda.classList.add("celda-seleccionada");
-            celdasSeleccionadasSuma.push(celda);
+            if (!celdasSeleccionadasSuma.includes(celda)) {
+                celda.classList.add("celda-seleccionada");
+                celdasSeleccionadasSuma.push(celda);
+            }
+
             actualizarBarraSuma();
         });
 
@@ -380,7 +429,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!seleccionandoSuma) return;
 
             var celda = e.target.closest("td.semestre-col.numero");
-            if (!celda) return;
+            if (!celda || !tabla.contains(celda)) return;
 
             if (!celdasSeleccionadasSuma.includes(celda)) {
                 celda.classList.add("celda-seleccionada");
@@ -420,6 +469,7 @@ document.addEventListener("DOMContentLoaded", function () {
     prepararModalDetalleReal();
     prepararSumaCeldas();
     actualizarVistaPeriodos();
+    actualizarBarraSuma();
 
     window.seleccionarTodo = seleccionarTodo;
     window.limpiarSeleccion = limpiarSeleccion;
