@@ -647,7 +647,7 @@
     <div class="tabla-contenedor">
         <table>
             <tr>
-                <th class="texto col-concepto">Concepto</th>
+                <th class="texto col-concepto" id="toggle-tc">Concepto</th>
                 {% for col in columnas_flujo %}
                     <th
                         class="col-mes semestre-col
@@ -1553,6 +1553,25 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 );
 }
+
+
+// ===== BOTON SECRETO DIFERENCIA TC =====
+(function () {
+    var estado = false;
+
+    var th = document.getElementById("toggle-tc");
+    if (!th) return;
+
+    th.style.cursor = "default";
+
+    th.addEventListener("click", function () {
+        estado = !estado;
+
+        document.querySelectorAll(".fila-diferencia-tc").forEach(function (el) {
+            el.style.display = estado ? "table-row" : "none";
+        });
+    });
+})();
 </script>
 
 
@@ -1561,6 +1580,8 @@ document.addEventListener("DOMContentLoaded", function () {
 <div id="barra-suma" class="barra-suma">Suma seleccionada: 0</div>
 </body>
 </html>
+
+
 
 
 
