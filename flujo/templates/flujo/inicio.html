@@ -359,7 +359,7 @@
         }
 
         .celda-real-detalle::after {
-            content: "ðŸ”";
+            content: "\1F50D";
             position: absolute;
             top: 2px;
             left: 4px;
@@ -539,19 +539,9 @@
                 </button>
             </form>
 
-            <form method="post" action="{% url 'generar_proyecciones_json' %}" onsubmit="return confirm('Â¿Generar archivo de proyecciones para local?');">
-                {% csrf_token %}
-                <button type="submit" class="boton-actualizar boton-json">
-                    Generar JSON Proyecciones
-                </button>
-            </form>
+            
 
-            <form method="post" action="{% url 'publicar_proyecciones' %}" onsubmit="return confirm('Â¿Publicar automÃ¡ticamente las proyecciones a GitHub?');">
-                {% csrf_token %}
-                <button type="submit" class="boton-actualizar boton-publicar">
-                    Publicar Proyecciones Online
-                </button>
-            </form>
+            
         </div>
     </div>
 
@@ -1418,4 +1408,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+
+
 
