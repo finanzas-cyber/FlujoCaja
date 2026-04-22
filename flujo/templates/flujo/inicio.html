@@ -537,7 +537,14 @@
             z-index: 10000;
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.20);
         }
-    .franja-estado{display:none!important;}`r`n.franja-estado { display: none !important; }`r`n.fila-diferencia-tc { display: none; }`r`n</style>
+            .franja-estado {
+            display: none !important;
+        }
+
+        .fila-diferencia-tc {
+            display: none;
+        }
+    </style>
 <style>
 
 
@@ -564,7 +571,14 @@
             z-index: 10000;
             box-shadow: 0 6px 16px rgba(0, 0, 0, 0.20);
         }
-    .franja-estado{display:none!important;}`r`n.franja-estado { display: none !important; }`r`n.fila-diferencia-tc { display: none; }`r`n</style>
+            .franja-estado {
+            display: none !important;
+        }
+
+        .fila-diferencia-tc {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
@@ -575,7 +589,7 @@
             <div class="subtitulo-principal">CONTROL DE FLUJO 2025 S2 / 2026 S1 / 2026 S2</div>
         </div>
 
-        <div class="acciones-encabezado">`r`n<button type="button" class="boton-actualizar" onclick="toggleDiferenciaTC()">T/C</button>
+        <div class="acciones-encabezado">
             <form method="post" action="{% url 'actualizar_softland' %}" onsubmit="return confirm('Â¿Seguro que deseas actualizar desde Softland?');">
                 {% csrf_token %}
                 <button type="submit" class="boton-actualizar">
@@ -653,7 +667,7 @@
             </tr>
 
             {# â”€â”€ DIFERENCIA T/C â”€â”€ #}
-            <tr class="saldo fila-diferencia-tc">`r`n    <td class="texto">{{ fila_diferencia_tc.nombre }}</td>
+            <tr class="saldo fila-diferencia-tc">    <td class="texto">{{ fila_diferencia_tc.nombre }}</td>
                 {% for m in fila_diferencia_tc.columnas %}
                     <td
                         class="numero semestre-col
@@ -1537,10 +1551,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.limpiarSeleccion = limpiarSeleccion;
     window.actualizarVistaPeriodos = actualizarVistaPeriodos;
 });
-function toggleDiferenciaTC() {
-    document.querySelectorAll('.fila-diferencia-tc').forEach(function(el) {
-        el.style.display = (el.style.display === 'none') ? '' : 'none';
-    });
+);
 }
 </script>
 
@@ -1550,6 +1561,7 @@ function toggleDiferenciaTC() {
 <div id="barra-suma" class="barra-suma">Suma seleccionada: 0</div>
 </body>
 </html>
+
 
 
 
