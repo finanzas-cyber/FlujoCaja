@@ -511,20 +511,17 @@ def inicio(request):
     conceptos_ingresos = list(
         Concepto.objects.filter(
             activo=True,
-            tipo=Concepto.TIPO_INGRESO,
-        ).order_by("codigo")
+            tipo=Concepto.TIPO_INGRESO,`r`n        ).exclude(codigo="ING").order_by("codigo")
     )
     conceptos_egresos = list(
         Concepto.objects.filter(
             activo=True,
-            tipo=Concepto.TIPO_EGRESO,
-        ).order_by("codigo")
+            tipo=Concepto.TIPO_EGRESO,`r`n        ).exclude(codigo="EGR").order_by("codigo")
     )
     conceptos_financiamiento = list(
         Concepto.objects.filter(
             activo=True,
-            tipo=Concepto.TIPO_FINANCIAMIENTO,
-        ).exclude(codigo="999999").order_by("codigo")
+            tipo=Concepto.TIPO_FINANCIAMIENTO,`r`n        ).exclude(codigo__in=["999999","FIN"]).order_by("codigo")
     )
 
     money_market_concepto = Concepto.objects.filter(codigo="800010").first()
@@ -1020,5 +1017,6 @@ def publicar_todo(request):
         messages.error(request, f"Error: {e}")
 
     return redirect("inicio")
+
 
 
