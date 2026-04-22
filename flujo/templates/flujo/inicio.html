@@ -513,6 +513,57 @@
         .oculto-semestre {
             display: none !important;
         }
+    
+        .celda-sumable {
+            cursor: crosshair;
+            user-select: none;
+        }
+
+        .celda-seleccionada {
+            background: #fde68a !important;
+            box-shadow: inset 0 0 0 1px #f59e0b;
+        }
+
+        .barra-suma {
+            position: fixed;
+            right: 12px;
+            bottom: 12px;
+            background: #0f172a;
+            color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10000;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.20);
+        }
+    </style>
+<style>
+
+
+        .celda-sumable {
+            cursor: crosshair;
+            user-select: none;
+        }
+
+        .celda-seleccionada {
+            background: #fde68a !important;
+            box-shadow: inset 0 0 0 1px #f59e0b;
+        }
+
+        .barra-suma {
+            position: fixed;
+            right: 12px;
+            bottom: 12px;
+            background: #0f172a;
+            color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10000;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.20);
+        }
     </style>
 </head>
 <body>
@@ -1365,7 +1416,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             modalTbody.appendChild(tr);
                         });
 
-                        var totalNum = limpiarNumero(data.total);
+                        var totalNum = Number(data.total) || 0;
                         modalTotal.textContent = "Total: " + formatear(totalNum);
                         marcarNegativoElemento(modalTotal, totalNum);
                     })
@@ -1402,12 +1453,107 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.seleccionarTodo = seleccionarTodo;
     window.limpiarSeleccion = limpiarSeleccion;
+    
+    var seleccionandoSuma = false;
+    var celdasSeleccionadasSuma = [];
+
+    function limpiarSeleccionSuma() {
+        celdasSeleccionadasSuma.forEach(function (celda) {
+            celda.classList.remove("celda-seleccionada");
+        });
+        celdasSeleccionadasSuma = [];
+        actualizarBarraSuma();
+    }
+
+    function obtenerValorCeldaSuma(celda) {
+        if (!celda) return 0;
+
+        var input = celda.querySelector("input");
+        if (input) {
+            return limpiarNumero(input.value);
+        }
+
+        var span = celda.querySelector(".js-numero");
+        if (span) {
+            return limpiarNumero(span.dataset.value || span.textContent);
+        }
+
+        return limpiarNumero(celda.dataset.value || celda.textContent);
+    }
+
+    function actualizarBarraSuma() {
+        var total = celdasSeleccionadasSuma.reduce(function (acum, celda) {
+            return acum + obtenerValorCeldaSuma(celda);
+        }, 0);
+
+        var barra = document.getElementById("barra-suma");
+        if (barra) {
+            barra.textContent = "Suma seleccionada: " + formatear(total);
+        }
+    }
+
+    function prepararSumaCeldas() {
+        var tabla = document.querySelector(".tabla-contenedor table");
+        if (!tabla) return;
+
+        var celdas = tabla.querySelectorAll("td.semestre-col.numero");
+        celdas.forEach(function (celda) {
+            celda.classList.add("celda-sumable");
+        });
+
+        tabla.addEventListener("mousedown", function (e) {
+            var celda = e.target.closest("td.semestre-col.numero");
+            if (!celda) return;
+
+            e.preventDefault();
+            limpiarSeleccionSuma();
+            seleccionandoSuma = true;
+
+            celda.classList.add("celda-seleccionada");
+            celdasSeleccionadasSuma.push(celda);
+            actualizarBarraSuma();
+        });
+
+        tabla.addEventListener("mouseover", function (e) {
+            if (!seleccionandoSuma) return;
+
+            var celda = e.target.closest("td.semestre-col.numero");
+            if (!celda) return;
+
+            if (!celdasSeleccionadasSuma.includes(celda)) {
+                celda.classList.add("celda-seleccionada");
+                celdasSeleccionadasSuma.push(celda);
+                actualizarBarraSuma();
+            }
+        });
+
+        document.addEventListener("mouseup", function () {
+            seleccionandoSuma = false;
+        });
+
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") {
+                limpiarSeleccionSuma();
+            }
+        });
+    }
+    prepararSumaCeldas();
+
+    window.seleccionarTodo = seleccionarTodo;
+    window.limpiarSeleccion = limpiarSeleccion;
     window.actualizarVistaPeriodos = actualizarVistaPeriodos;
 });
 </script>
 
+
+
+
+<div id="barra-suma" class="barra-suma">Suma seleccionada: 0</div>
 </body>
 </html>
+
+
+
 
 
 
