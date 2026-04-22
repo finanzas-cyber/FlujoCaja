@@ -26,6 +26,66 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function obtenerUrlGuardado(input) {
+        return input.dataset.origen === "REAL"
+            ? "{% url 'guardar_movimiento_real' %}"
+            : "{% url 'guardar_proyeccion' %}";
+    }
+
+    function guardarValorInput(input, valor, recargarAlFinal) {
+        var conceptoId = input.dataset.conceptoId;
+        var mes = input.dataset.mes;
+        var anio = input.dataset.anio;
+
+        input.readOnly = true;
+
+        if (!conceptoId || !mes || !anio) {
+            input.value = valor === 0 ? "" : formatear(valor);
+            marcarNegativoElemento(input, valor);
+            return Promise.resolve({ ok: true, sin_guardado: true });
+        }
+
+        return fetch(obtenerUrlGuardado(input), {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-CSRFToken": obtenerCsrf(),
+            },
+            body: new URLSearchParams({
+                concepto_id: conceptoId,
+                mes: mes,
+                anio: anio,
+                monto: valor
+            }),
+        })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+            if (!data.ok) {
+                throw new Error(data.error || "Error al guardar");
+            }
+
+            input.classList.add("guardado-ok");
+            input.value = valor === 0 ? "" : formatear(valor);
+            marcarNegativoElemento(input, valor);
+
+            setTimeout(function () {
+                input.classList.remove("guardado-ok");
+            }, 800);
+
+            if (recargarAlFinal) {
+                location.reload();
+            }
+
+            return data;
+        })
+        .catch(function () {
+            input.classList.add("guardado-error");
+            input.value = valor === 0 ? "" : formatear(valor);
+            marcarNegativoElemento(input, valor);
+            throw new Error("Error al guardar");
+        });
+    }
+
     function prepararInput(input) {
         var v = limpiarNumero(input.value);
         input.value = v === 0 ? "" : formatear(v);
@@ -53,6 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 e.preventDefault();
                 input.blur();
             }
+
             if (e.key === "Escape") {
                 var val = limpiarNumero(input.value);
                 input.value = val === 0 ? "" : formatear(val);
@@ -62,58 +123,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         input.addEventListener("blur", function () {
-            var conceptoId = input.dataset.conceptoId;
-            var mes = input.dataset.mes;
-            var anio = input.dataset.anio;
-            var origen = input.dataset.origen;
             var valor = limpiarNumero(input.value);
-
-            input.readOnly = true;
-
-            if (!conceptoId || !mes || !anio) {
-                input.value = valor === 0 ? "" : formatear(valor);
-                marcarNegativoElemento(input, valor);
-                return;
-            }
-
-            var url = origen === "REAL"
-                ? "{% url 'guardar_movimiento_real' %}"
-                : "{% url 'guardar_proyeccion' %}";
-
-            fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                    "X-CSRFToken": obtenerCsrf(),
-                },
-                body: new URLSearchParams({
-                    concepto_id: conceptoId,
-                    mes: mes,
-                    anio: anio,
-                    monto: valor
-                }),
-            })
-            .then(function (r) { return r.json(); })
-            .then(function (data) {
-                if (!data.ok) {
-                    throw new Error(data.error || "Error al guardar");
-                }
-
-                input.classList.add("guardado-ok");
-                input.value = valor === 0 ? "" : formatear(valor);
-                marcarNegativoElemento(input, valor);
-
-                setTimeout(function () {
-                    input.classList.remove("guardado-ok");
-                }, 800);
-
-                location.reload();
-            })
-            .catch(function () {
-                input.classList.add("guardado-error");
-                input.value = valor === 0 ? "" : formatear(valor);
-                marcarNegativoElemento(input, valor);
-            });
+            guardarValorInput(input, valor, true).catch(function () {});
         });
     }
 
@@ -350,6 +361,23 @@ document.addEventListener("DOMContentLoaded", function () {
     var seleccionandoSuma = false;
     var celdasSeleccionadasSuma = [];
 
+    function getCellRowIndex(celda) {
+        return celda.parentElement.rowIndex;
+    }
+
+    function getCellColIndex(celda) {
+        return celda.cellIndex;
+    }
+
+    function ordenarCeldasSeleccionadas() {
+        celdasSeleccionadasSuma.sort(function (a, b) {
+            var ra = getCellRowIndex(a);
+            var rb = getCellRowIndex(b);
+            if (ra !== rb) return ra - rb;
+            return getCellColIndex(a) - getCellColIndex(b);
+        });
+    }
+
     function limpiarSeleccionSuma() {
         celdasSeleccionadasSuma.forEach(function (celda) {
             celda.classList.remove("celda-seleccionada");
@@ -381,11 +409,149 @@ document.addEventListener("DOMContentLoaded", function () {
 
         var barra = document.getElementById("barra-suma");
         if (barra) {
-            barra.textContent = "Suma seleccionada: " + formatear(total);
+            barra.textContent =
+                "Suma seleccionada: " + formatear(total) +
+                " | Celdas: " + celdasSeleccionadasSuma.length;
             barra.style.display = "block";
             barra.style.visibility = "visible";
             barra.style.opacity = "1";
         }
+    }
+
+    function construirTextoCopiado() {
+        if (!celdasSeleccionadasSuma.length) return "";
+
+        ordenarCeldasSeleccionadas();
+
+        var filas = {};
+        var filasOrden = [];
+
+        celdasSeleccionadasSuma.forEach(function (celda) {
+            var r = getCellRowIndex(celda);
+            var c = getCellColIndex(celda);
+
+            if (!filas[r]) {
+                filas[r] = {};
+                filasOrden.push(r);
+            }
+
+            filas[r][c] = obtenerValorCeldaSuma(celda);
+        });
+
+        filasOrden.sort(function (a, b) { return a - b; });
+
+        var lineas = filasOrden.map(function (r) {
+            var cols = Object.keys(filas[r]).map(Number).sort(function (a, b) { return a - b; });
+            return cols.map(function (c) {
+                return filas[r][c];
+            }).join("\t");
+        });
+
+        return lineas.join("\n");
+    }
+
+    function copiarSeleccionAlPortapapeles(e) {
+        if (!celdasSeleccionadasSuma.length) return false;
+
+        var texto = construirTextoCopiado();
+
+        if (e && e.clipboardData) {
+            e.clipboardData.setData("text/plain", texto);
+            e.preventDefault();
+            return true;
+        }
+
+        return false;
+    }
+
+    function obtenerMatrizDesdeTexto(texto) {
+        return texto
+            .trim()
+            .split(/\r?\n/)
+            .map(function (linea) {
+                return linea.split("\t").map(function (v) {
+                    return limpiarNumero(v);
+                });
+            });
+    }
+
+    function pegarValoresDesdeTexto(texto) {
+        if (!texto || !celdasSeleccionadasSuma.length) return;
+
+        ordenarCeldasSeleccionadas();
+
+        var matriz = obtenerMatrizDesdeTexto(texto);
+        if (!matriz.length) return;
+
+        var filas = matriz.length;
+        var cols = Math.max.apply(null, matriz.map(function (r) { return r.length; }));
+
+        var anchor = celdasSeleccionadasSuma[0];
+        var tabla = anchor.closest("table");
+        if (!tabla) return;
+
+        var rowStart = anchor.parentElement.rowIndex;
+        var colStart = anchor.cellIndex;
+
+        var promesas = [];
+
+        for (var r = 0; r < filas; r++) {
+            var tr = tabla.rows[rowStart + r];
+            if (!tr) continue;
+
+            for (var c = 0; c < cols; c++) {
+                var td = tr.cells[colStart + c];
+                if (!td) continue;
+
+                var input = td.querySelector("input");
+                if (!input) continue;
+
+                if (input.hasAttribute("readonly") && !input.dataset.modoExcel) continue;
+
+                var valor = (matriz[r] && matriz[r][c] !== undefined) ? matriz[r][c] : 0;
+
+                input.readOnly = false;
+                input.value = valor === 0 ? "" : String(valor);
+
+                promesas.push(
+                    guardarValorInput(input, valor, false).catch(function () {})
+                );
+            }
+        }
+
+        Promise.all(promesas).then(function () {
+            if (promesas.length) {
+                location.reload();
+            }
+        });
+    }
+
+    function eliminarCeldasSeleccionadas() {
+        if (!celdasSeleccionadasSuma.length) return;
+
+        ordenarCeldasSeleccionadas();
+
+        var promesas = [];
+
+        celdasSeleccionadasSuma.forEach(function (celda) {
+            var input = celda.querySelector("input");
+            if (!input) return;
+
+            if (input.hasAttribute("readonly") && !input.dataset.modoExcel) return;
+
+            input.readOnly = false;
+            input.value = "";
+
+            promesas.push(
+                guardarValorInput(input, 0, false).catch(function () {})
+            );
+        });
+
+        Promise.all(promesas).then(function () {
+            if (promesas.length) {
+                location.reload();
+            }
+        });
     }
 
     function prepararSumaCeldas() {
@@ -445,7 +611,32 @@ document.addEventListener("DOMContentLoaded", function () {
         document.addEventListener("keydown", function (e) {
             if (e.key === "Escape") {
                 limpiarSeleccionSuma();
+                return;
             }
+
+            if (e.key === "Delete" || e.key === "Backspace") {
+                var activo = document.activeElement;
+                var editandoInput = activo && activo.tagName === "INPUT" && activo.readOnly === false;
+                if (editandoInput) return;
+
+                if (!celdasSeleccionadasSuma.length) return;
+
+                e.preventDefault();
+                eliminarCeldasSeleccionadas();
+                return;
+            }
+        });
+
+        document.addEventListener("copy", function (e) {
+            copiarSeleccionAlPortapapeles(e);
+        });
+
+        document.addEventListener("paste", function (e) {
+            if (!celdasSeleccionadasSuma.length) return;
+            var texto = e.clipboardData ? e.clipboardData.getData("text/plain") : "";
+            if (!texto) return;
+            e.preventDefault();
+            pegarValoresDesdeTexto(texto);
         });
     }
 
