@@ -511,17 +511,20 @@ def inicio(request):
     conceptos_ingresos = list(
         Concepto.objects.filter(
             activo=True,
-            tipo=Concepto.TIPO_INGRESO,`r`n        ).exclude(codigo="ING").order_by("codigo")
+            tipo=Concepto.TIPO_INGRESO,
+        ).exclude(codigo="ING").order_by("codigo")
     )
     conceptos_egresos = list(
         Concepto.objects.filter(
             activo=True,
-            tipo=Concepto.TIPO_EGRESO,`r`n        ).exclude(codigo="EGR").order_by("codigo")
+            tipo=Concepto.TIPO_EGRESO,
+        ).exclude(codigo="EGR").order_by("codigo")
     )
     conceptos_financiamiento = list(
         Concepto.objects.filter(
             activo=True,
-            tipo=Concepto.TIPO_FINANCIAMIENTO,`r`n        ).exclude(codigo__in=["999999","FIN"]).order_by("codigo")
+            tipo=Concepto.TIPO_FINANCIAMIENTO,
+        ).exclude(codigo__in=["999999", "FIN"]).order_by("codigo")
     )
 
     money_market_concepto = Concepto.objects.filter(codigo="800010").first()
@@ -542,7 +545,7 @@ def inicio(request):
 
     money_market_real_mensual = {}
     money_market_proyectado_mensual = {}
-    diferencia_tc_valores = {}  # dict con origen
+    diferencia_tc_valores = {}
 
     for anio_columna, mes_numero, _ in meses_base:
         clave_periodo = (anio_columna, mes_numero)
@@ -573,7 +576,10 @@ def inicio(request):
         }
         money_market_real_mensual[clave_periodo] = Decimal("0")
         money_market_proyectado_mensual[clave_periodo] = Decimal("0")
-        diferencia_tc_valores[clave_periodo] = {ORIGEN_REAL: Decimal("0"), ORIGEN_PROYECTADO: Decimal("0")}
+        diferencia_tc_valores[clave_periodo] = {
+            ORIGEN_REAL: Decimal("0"),
+            ORIGEN_PROYECTADO: Decimal("0"),
+        }
 
     periodos_validos = {(anio_columna, mes_numero) for anio_columna, mes_numero, _ in meses_base}
 
@@ -721,9 +727,27 @@ def inicio(request):
 
         return filas
 
-    filas_ingresos = construir_filas(conceptos_ingresos, "ingreso")
-    filas_egresos = construir_filas(conceptos_egresos, "egreso")
-    filas_financiamiento = construir_filas(conceptos_financiamiento, "financiamiento")
+    filas_ingresos = [
+        fila for fila in construir_filas(conceptos_ingresos, "ingreso")
+        if not (
+            str(fila.get("codigo", "")).strip().upper() == "ING"
+            and str(fila.get("nombre", "")).strip().upper() == "INGRESO"
+        )
+    ]
+    filas_egresos = [
+        fila for fila in construir_filas(conceptos_egresos, "egreso")
+        if not (
+            str(fila.get("codigo", "")).strip().upper() == "EGR"
+            and str(fila.get("nombre", "")).strip().upper() == "EGRESO"
+        )
+    ]
+    filas_financiamiento = [
+        fila for fila in construir_filas(conceptos_financiamiento, "financiamiento")
+        if not (
+            str(fila.get("codigo", "")).strip().upper() == "FIN"
+            and str(fila.get("nombre", "")).strip().upper() == "FINANCIAMIENTO"
+        )
+    ]
 
     total_ingresos_fila = {"nombre": "TOTAL INGRESOS", "tipo_fila": "ingreso", "columnas": [], "total": Decimal("0")}
     total_egresos_fila = {"nombre": "TOTAL EGRESOS OPERACIONALES", "tipo_fila": "egreso", "columnas": [], "total": Decimal("0")}
@@ -780,11 +804,9 @@ def inicio(request):
         neto_financiamiento_mes = financiamiento_mes + diferencia_tc_mes
         neto_total_mes = neto_operacional_mes + neto_financiamiento_mes
 
-        # guardar base antes de abril REAL
         if columna["es_mes_actual"] and columna["origen"] == ORIGEN_REAL:
             saldo_base_mes_actual = saldo_actual
 
-        # usar misma base para PROY abril
         if columna["es_mes_actual"] and columna["origen"] == ORIGEN_PROYECTADO and saldo_base_mes_actual is not None:
             saldo_inicial_mes = saldo_base_mes_actual
         else:
@@ -792,7 +814,6 @@ def inicio(request):
 
         saldo_disponible_banco_mes = saldo_inicial_mes + neto_total_mes
 
-        # no avanzar saldo en PROY del mes actual
         if not (columna["es_mes_actual"] and columna["origen"] == ORIGEN_PROYECTADO):
             saldo_actual = saldo_disponible_banco_mes
 
@@ -958,11 +979,6 @@ def inicio(request):
     })
 
 
-
-
-
-
-
 def publicar_todo(request):
     if request.method != "POST":
         return redirect("inicio")
@@ -987,27 +1003,26 @@ def publicar_todo(request):
         raw = ruta_json.read_bytes()
         try:
             text = raw.decode("utf-8")
-        except:
+        except Exception:
             text = raw.decode("cp1252", errors="ignore")
 
         ruta_json.write_text(text, encoding="utf-8")
 
         subprocess.run(["git", "add", "."], cwd=repo_root, check=True)
-                # DETECTAR CAMBIOS
+
         diff = subprocess.run(
             ["git", "diff", "--cached", "--quiet"],
-            cwd=repo_root
+            cwd=repo_root,
         )
 
         if diff.returncode == 0:
             messages.success(request, "No habia cambios para publicar.")
             return redirect("inicio")
 
-        # COMMIT
         subprocess.run(
             ["git", "commit", "-m", "Snapshot FULL"],
             cwd=repo_root,
-            check=True
+            check=True,
         )
         subprocess.run(["git", "push"], cwd=repo_root, check=True)
 
@@ -1017,9 +1032,3 @@ def publicar_todo(request):
         messages.error(request, f"Error: {e}")
 
     return redirect("inicio")
-
-
-
-
-
-
