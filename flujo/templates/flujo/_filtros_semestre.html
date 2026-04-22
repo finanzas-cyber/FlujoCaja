@@ -1,0 +1,443 @@
+﻿
+
+<div class="bloque">
+    
+
+    <div class="barra-semestres">
+        <button type="button" class="boton-semestre" onclick="seleccionarTodo()">Ver todo</button>
+        <button type="button" class="boton-semestre" onclick="limpiarSeleccion()">Ocultar todo</button>
+
+        <label class="grupo-check">
+            <input type="checkbox" id="check-2025s2" checked onchange="actualizarVistaPeriodos()">
+            <span>2025 S2</span>
+        </label>
+
+        <label class="grupo-check">
+            <input type="checkbox" id="check-2026s1" checked onchange="actualizarVistaPeriodos()">
+            <span>2026 S1</span>
+        </label>
+
+        <label class="grupo-check">
+            <input type="checkbox" id="check-2026s2" checked onchange="actualizarVistaPeriodos()">
+            <span>2026 S2</span>
+        </label>
+    </div>
+
+    <div class="nota-semestres">
+        Puedes combinar bloques: por ejemplo 2026 S1 + 2026 S2, o 2025 S2 + 2026 S1.
+    </div>
+
+    <div class="tabla-contenedor">
+        <table>
+            <tr>
+                <th class="texto col-concepto" id="toggle-tc">Concepto</th>
+                {% for col in columnas_flujo %}
+                    <th
+                        class="col-mes semestre-col
+                        {% if col.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if col.es_mes_actual %}abril-bloque abril-superior{% endif %}
+                        {% if col.es_mes_actual and col.origen == 'REAL' %}abril-inicio{% endif %}
+                        {% if col.es_mes_actual and col.origen == 'PROYECTADO' %}abril-fin{% endif %}
+                        "
+                        data-mes="{{ col.mes_numero }}"
+                        data-anio="{{ col.anio }}"
+                    >
+                        {{ col.mes_nombre }}<br>
+                        <small>{{ col.etiqueta }}</small>
+                    </th>
+                {% endfor %}
+                <th class="col-total">Total</th>
+            </tr>
+
+            {# â”€â”€ DIFERENCIA T/C â”€â”€ #}
+            <tr class="saldo fila-diferencia-tc">    <td class="texto">{{ fila_diferencia_tc.nombre }}</td>
+                {% for m in fila_diferencia_tc.columnas %}
+                    <td
+                        class="numero semestre-col
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.es_mes_actual %}abril-bloque{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'PROYECTADO' %}abril-fin{% endif %}
+                        "
+                        data-mes="{{ m.mes_numero }}"
+                        data-anio="{{ m.anio }}"
+                    >
+                        <input
+                            type="text"
+                            class="input-proyectado input-comodin"
+                            data-concepto-id="{{ diferencia_tc_concepto_id }}"
+                            data-mes="{{ m.mes_numero }}"
+                            data-anio="{{ m.anio }}"
+                            data-origen="{{ m.origen }}"
+                            value="{{ m.monto }}"
+                        >
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ fila_diferencia_tc.total }}">{{ fila_diferencia_tc.total }}</td>
+            </tr>
+
+            {# â”€â”€ SALDO INICIAL â”€â”€ #}
+            <tr class="saldo">
+                <td class="texto">{{ saldo_inicial_fila.nombre }}</td>
+                {% for m in saldo_inicial_fila.columnas %}
+                    <td
+                        class="numero semestre-col
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.es_mes_actual %}abril-bloque{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'PROYECTADO' %}abril-fin{% endif %}
+                        "
+                        data-mes="{{ m.mes_numero }}"
+                        data-anio="{{ m.anio }}"
+                        data-value="{{ m.monto }}"
+                    >
+                        {% if m.origen == 'REAL' %}
+                            <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                        {% else %}
+                            <input
+                                type="text"
+                                class="input-proyectado"
+                                data-concepto-id=""
+                                data-anio="{{ m.anio }}"
+                                data-origen="PROYECTADO"
+                                value="{{ m.monto }}"
+                                readonly
+                            >
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                <td></td>
+            </tr>
+
+            {# â”€â”€ INGRESOS â”€â”€ #}
+            <tr class="seccion">
+                <td colspan="{{ columnas_flujo|length|add:'2' }}">
+                    <button type="button" class="boton-grupo" data-group="ingresos" aria-expanded="true">-</button>
+                    Ingresos
+                </td>
+            </tr>
+
+            {% for fila in filas_ingresos %}
+            <tr class="detalle-grupo" data-group="ingresos">
+                <td class="texto">{{ fila.codigo }} - {{ fila.nombre }}</td>
+                {% for m in fila.columnas %}
+                    <td
+                        class="numero semestre-col
+                        {% if m.origen == 'REAL' %}real{% if not fila.es_manual %} celda-real-detalle{% endif %}{% else %}proyectado{% endif %}
+                        {% if m.es_mes_actual %}abril-bloque{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'PROYECTADO' %}abril-fin{% endif %}
+                        "
+                        data-mes="{{ m.mes_numero }}"
+                        data-anio="{{ m.anio }}"
+                        {% if m.origen == 'REAL' and not fila.es_manual %}
+                            data-detalle-real="1"
+                            data-concepto-id="{{ fila.id }}"
+                            data-concepto-codigo="{{ fila.codigo }}"
+                            data-concepto-nombre="{{ fila.nombre }}"
+                            data-mes-nombre="{{ m.mes_nombre }}"
+                        {% endif %}
+                    >
+                        {% if m.origen == 'REAL' and not fila.es_manual %}
+                            <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                        {% else %}
+                            <input
+                                type="text"
+                                class="input-proyectado{% if fila.es_manual and m.origen == 'REAL' %} input-cereza-real{% endif %}"
+                                data-concepto-id="{{ fila.id }}"
+                                data-mes="{{ m.mes_numero }}"
+                                data-anio="{{ m.anio }}"
+                                data-origen="{{ m.origen }}"
+                                value="{{ m.monto }}"
+                            >
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ fila.total }}">{{ fila.total }}</td>
+            </tr>
+            {% endfor %}
+
+            <tr class="total">
+                <td class="texto">{{ total_ingresos_fila.nombre }}</td>
+                {% for m in total_ingresos_fila.columnas %}
+                    <td
+                        class="numero semestre-col
+                        {% if m.es_mes_actual %}abril-bloque{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'PROYECTADO' %}abril-fin{% endif %}
+                        "
+                        data-mes="{{ m.mes_numero }}"
+                        data-anio="{{ m.anio }}"
+                    >
+                        <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ total_ingresos_fila.total }}">{{ total_ingresos_fila.total }}</td>
+            </tr>
+
+            {# â”€â”€ EGRESOS â”€â”€ #}
+            <tr class="seccion">
+                <td colspan="{{ columnas_flujo|length|add:'2' }}">
+                    <button type="button" class="boton-grupo" data-group="egresos" aria-expanded="true">-</button>
+                    Egresos
+                </td>
+            </tr>
+
+            {% for fila in filas_egresos %}
+            <tr class="detalle-grupo" data-group="egresos">
+                <td class="texto">{{ fila.codigo }} - {{ fila.nombre }}</td>
+                {% for m in fila.columnas %}
+                    <td
+                        class="numero semestre-col
+                        {% if m.origen == 'REAL' %}real{% if not fila.es_manual %} celda-real-detalle{% endif %}{% else %}proyectado{% endif %}
+                        {% if m.es_mes_actual %}abril-bloque{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'PROYECTADO' %}abril-fin{% endif %}
+                        "
+                        data-mes="{{ m.mes_numero }}"
+                        data-anio="{{ m.anio }}"
+                        {% if m.origen == 'REAL' and not fila.es_manual %}
+                            data-detalle-real="1"
+                            data-concepto-id="{{ fila.id }}"
+                            data-concepto-codigo="{{ fila.codigo }}"
+                            data-concepto-nombre="{{ fila.nombre }}"
+                            data-mes-nombre="{{ m.mes_nombre }}"
+                        {% endif %}
+                    >
+                        {% if m.origen == 'REAL' and not fila.es_manual %}
+                            <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                        {% else %}
+                            <input
+                                type="text"
+                                class="input-proyectado{% if fila.es_manual and m.origen == 'REAL' %} input-cereza-real{% endif %}"
+                                data-concepto-id="{{ fila.id }}"
+                                data-mes="{{ m.mes_numero }}"
+                                data-anio="{{ m.anio }}"
+                                data-origen="{{ m.origen }}"
+                                value="{{ m.monto }}"
+                            >
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ fila.total }}">{{ fila.total }}</td>
+            </tr>
+            {% endfor %}
+
+            <tr class="total">
+                <td class="texto">{{ total_egresos_fila.nombre }}</td>
+                {% for m in total_egresos_fila.columnas %}
+                    <td
+                        class="numero semestre-col
+                        {% if m.es_mes_actual %}abril-bloque{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'PROYECTADO' %}abril-fin{% endif %}
+                        "
+                        data-mes="{{ m.mes_numero }}"
+                        data-anio="{{ m.anio }}"
+                    >
+                        <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ total_egresos_fila.total }}">{{ total_egresos_fila.total }}</td>
+            </tr>
+
+            <tr class="resultado">
+                <td class="texto">{{ flujo_operacional_fila.nombre }}</td>
+                {% for m in flujo_operacional_fila.columnas %}
+                    <td
+                        class="numero semestre-col
+                        {% if m.es_mes_actual %}abril-bloque{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'PROYECTADO' %}abril-fin{% endif %}
+                        "
+                        data-mes="{{ m.mes_numero }}"
+                        data-anio="{{ m.anio }}"
+                    >
+                        <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ flujo_operacional_fila.total }}">{{ flujo_operacional_fila.total }}</td>
+            </tr>
+
+            {# â”€â”€ FINANCIAMIENTO â”€â”€ #}
+            <tr class="seccion">
+                <td colspan="{{ columnas_flujo|length|add:'2' }}">
+                    <button type="button" class="boton-grupo" data-group="financiamiento" aria-expanded="true">-</button>
+                    Financiamiento
+                </td>
+            </tr>
+
+            {% for fila in filas_financiamiento %}
+            <tr class="detalle-grupo" data-group="financiamiento">
+                <td class="texto">{{ fila.codigo }} - {{ fila.nombre }}</td>
+                {% for m in fila.columnas %}
+                    <td
+                        class="numero semestre-col
+                        {% if m.origen == 'REAL' %}real{% if not fila.es_manual %} celda-real-detalle{% endif %}{% else %}proyectado{% endif %}
+                        {% if m.es_mes_actual %}abril-bloque{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'PROYECTADO' %}abril-fin{% endif %}
+                        "
+                        data-mes="{{ m.mes_numero }}"
+                        data-anio="{{ m.anio }}"
+                        {% if m.origen == 'REAL' and not fila.es_manual %}
+                            data-detalle-real="1"
+                            data-concepto-id="{{ fila.id }}"
+                            data-concepto-codigo="{{ fila.codigo }}"
+                            data-concepto-nombre="{{ fila.nombre }}"
+                            data-mes-nombre="{{ m.mes_nombre }}"
+                        {% endif %}
+                    >
+                        {% if m.origen == 'REAL' and not fila.es_manual %}
+                            <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                        {% else %}
+                            <input
+                                type="text"
+                                class="input-proyectado{% if fila.es_manual and m.origen == 'REAL' %} input-cereza-real{% endif %}"
+                                data-concepto-id="{{ fila.id }}"
+                                data-mes="{{ m.mes_numero }}"
+                                data-anio="{{ m.anio }}"
+                                data-origen="{{ m.origen }}"
+                                value="{{ m.monto }}"
+                            >
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ fila.total }}">{{ fila.total }}</td>
+            </tr>
+            {% endfor %}
+
+            <tr class="total">
+                <td class="texto">{{ flujo_financiamiento_fila.nombre }}</td>
+                {% for m in flujo_financiamiento_fila.columnas %}
+                    <td
+                        class="numero semestre-col
+                        {% if m.es_mes_actual %}abril-bloque{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'PROYECTADO' %}abril-fin{% endif %}
+                        "
+                        data-mes="{{ m.mes_numero }}"
+                        data-anio="{{ m.anio }}"
+                    >
+                        <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ flujo_financiamiento_fila.total }}">{{ flujo_financiamiento_fila.total }}</td>
+            </tr>
+
+            <tr class="resultado">
+                <td class="texto">{{ total_mes_fila.nombre }}</td>
+                {% for m in total_mes_fila.columnas %}
+                    <td
+                        class="numero semestre-col
+                        {% if m.es_mes_actual %}abril-bloque{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'PROYECTADO' %}abril-fin{% endif %}
+                        "
+                        data-mes="{{ m.mes_numero }}"
+                        data-anio="{{ m.anio }}"
+                    >
+                        <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                    </td>
+                {% endfor %}
+                <td class="numero js-numero" data-value="{{ total_mes_fila.total }}">{{ total_mes_fila.total }}</td>
+            </tr>
+
+            {# â”€â”€ SALDO DISPONIBLE BANCO â”€â”€ #}
+            <tr class="saldo-final">
+                <td class="texto">{{ saldo_disponible_banco_fila.nombre }}</td>
+                {% for m in saldo_disponible_banco_fila.columnas %}
+                    <td
+                        class="numero semestre-col
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.es_mes_actual %}abril-bloque{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'PROYECTADO' %}abril-fin{% endif %}
+                        "
+                        data-mes="{{ m.mes_numero }}"
+                        data-anio="{{ m.anio }}"
+                    >
+                        {% if m.origen == 'REAL' %}
+                            <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                        {% else %}
+                            <input
+                                type="text"
+                                class="input-proyectado"
+                                data-concepto-id=""
+                                data-anio="{{ m.anio }}"
+                                data-origen="PROYECTADO"
+                                value="{{ m.monto }}"
+                                readonly
+                            >
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                <td></td>
+            </tr>
+
+            {# â”€â”€ MONEY MARKET ACUMULADO â”€â”€ #}
+            <tr class="money-market">
+                <td class="texto">{{ money_market_acumulado_fila.nombre }}</td>
+                {% for m in money_market_acumulado_fila.columnas %}
+                    <td
+                        class="numero semestre-col
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.es_mes_actual %}abril-bloque{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'PROYECTADO' %}abril-fin{% endif %}
+                        "
+                        data-mes="{{ m.mes_numero }}"
+                        data-anio="{{ m.anio }}"
+                    >
+                        {% if m.origen == 'REAL' %}
+                            <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                        {% else %}
+                            <input
+                                type="text"
+                                class="input-proyectado"
+                                data-concepto-id=""
+                                data-anio="{{ m.anio }}"
+                                data-origen="PROYECTADO"
+                                value="{{ m.monto }}"
+                                readonly
+                            >
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                <td></td>
+            </tr>
+
+            {# â”€â”€ SALDO TOTAL TESORERIA â”€â”€ #}
+            <tr class="saldo-total">
+                <td class="texto">{{ saldo_total_tesoreria_fila.nombre }}</td>
+                {% for m in saldo_total_tesoreria_fila.columnas %}
+                    <td
+                        class="numero semestre-col
+                        {% if m.origen == 'REAL' %}real{% else %}proyectado{% endif %}
+                        {% if m.es_mes_actual %}abril-bloque abril-inferior{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'REAL' %}abril-inicio{% endif %}
+                        {% if m.es_mes_actual and m.origen == 'PROYECTADO' %}abril-fin{% endif %}
+                        "
+                        data-mes="{{ m.mes_numero }}"
+                        data-anio="{{ m.anio }}"
+                    >
+                        {% if m.origen == 'REAL' %}
+                            <span class="js-numero" data-value="{{ m.monto }}">{{ m.monto }}</span>
+                        {% else %}
+                            <input
+                                type="text"
+                                class="input-proyectado"
+                                data-concepto-id=""
+                                data-anio="{{ m.anio }}"
+                                data-origen="PROYECTADO"
+                                value="{{ m.monto }}"
+                                readonly
+                            >
+                        {% endif %}
+                    </td>
+                {% endfor %}
+                <td></td>
+            </tr>
+        </table>
+    </div>
+</div>

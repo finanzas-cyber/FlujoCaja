@@ -1,0 +1,543 @@
+﻿<style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 10px;
+            color: #1e293b;
+            background: #eef1f5;
+        }
+
+        h1, h2, h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .bloque {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        .encabezado {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .acciones-encabezado {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .titulo-principal {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: #0f172a;
+        }
+
+        .subtitulo-principal {
+            margin: 2px 0 0 0;
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+
+        .boton-actualizar {
+            background: #1e40af;
+            color: #fff;
+            border: 0;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .boton-actualizar:hover {
+            background: #1e3a8a;
+        }
+
+        .boton-json {
+            background: #047857;
+        }
+
+        .boton-json:hover {
+            background: #065f46;
+        }
+
+        .boton-publicar {
+            background: #7c3aed;
+        }
+
+        .boton-publicar:hover {
+            background: #6d28d9;
+        }
+
+        .mensaje {
+            padding: 8px 10px;
+            margin-top: 8px;
+            border: 1px solid #d0d0d0;
+            background: #f8f9fa;
+            font-size: 12px;
+        }
+
+        .mensaje.success {
+            background: #e8f5e9;
+            border-color: #b7dfb9;
+        }
+
+        .mensaje.error {
+            background: #ffebee;
+            border-color: #f0b7bd;
+        }
+
+        .tabla-contenedor {
+            overflow: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #ffffff;
+            table-layout: fixed;
+        }
+
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 4px 5px;
+            font-size: 11px;
+        }
+
+        th {
+            background: #e5e7eb;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .texto {
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .numero {
+            text-align: right;
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .col-concepto {
+            width: 210px;
+        }
+
+        .col-total {
+            width: 90px;
+        }
+
+        .col-mes {
+            width: 64px;
+        }
+
+        .seccion td {
+            background: #cbd5e1;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .total td {
+            background: #e2e8f0;
+            font-weight: bold;
+        }
+
+        .resultado td {
+            background: #dbe7df;
+            font-weight: bold;
+        }
+
+        .saldo td {
+            background: #f1f5f9;
+            font-weight: bold;
+        }
+
+        .saldo-final td {
+            background: #cbd5e1;
+            font-weight: bold;
+        }
+
+        .money-market td {
+            background: #e0f2fe;
+            font-weight: bold;
+        }
+
+        .saldo-total td {
+            background: #dbeafe;
+            font-weight: bold;
+        }
+
+        .real {
+            background: #dbeafe;
+        }
+
+        .proyectado {
+            background: #e5e7eb;
+        }
+
+        th.real, td.real {
+            border-color: #93c5fd;
+        }
+
+        th.proyectado, td.proyectado {
+            border-color: #9ca3af;
+        }
+
+        .abril-bloque {
+            background: #cfd8e3 !important;
+        }
+
+        .abril-inicio {
+            border-left: 3px solid #334155 !important;
+        }
+
+        .abril-fin {
+            border-right: 3px solid #334155 !important;
+        }
+
+        .abril-superior {
+            border-top: 3px solid #334155 !important;
+        }
+
+        .abril-inferior {
+            border-bottom: 3px solid #334155 !important;
+        }
+
+        .franja-estado {
+            background: #e2e8f0;
+            border: 1px solid #94a3b8;
+            color: #1e293b;
+            padding: 8px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .franja-estado span {
+            display: block;
+            font-size: 11px;
+            font-weight: normal;
+            margin-top: 3px;
+            color: #475569;
+        }
+
+        .negativo {
+            color: #b91c1c;
+            font-weight: bold;
+        }
+
+        .filtro-columna {
+            width: 100%;
+            margin-top: 2px;
+            box-sizing: border-box;
+            font-size: 11px;
+            padding: 2px 4px;
+        }
+
+        .muted {
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .input-proyectado {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #94a3b8;
+            background: #ffffff;
+            text-align: right;
+            font-size: 11px;
+            padding: 2px 4px;
+            min-width: 0;
+        }
+
+        .input-cereza-real {
+            border: none !important;
+            background: transparent !important;
+            padding: 0;
+            color: inherit;
+        }
+
+        .input-cereza-real:focus {
+            background: transparent !important;
+            border: none !important;
+            padding: 0;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .input-proyectado:focus {
+            outline: none;
+            border-color: #1d4ed8;
+            background: #eff6ff;
+        }
+
+        .input-proyectado.negativo {
+            color: #b91c1c;
+            font-weight: bold;
+        }
+
+        .input-comodin {
+            border: none !important;
+            background: transparent !important;
+            width: 100%;
+            text-align: right;
+            font-size: 11px;
+            padding: 0;
+            color: inherit;
+        }
+
+        .input-comodin:focus {
+            outline: none;
+            border: 1px solid #94a3b8 !important;
+            padding: 2px 4px;
+        }
+
+        .guardado-ok {
+            border-color: #15803d !important;
+            background: #f0fdf4 !important;
+        }
+
+        .guardado-error {
+            border-color: #b91c1c !important;
+            background: #fef2f2 !important;
+        }
+
+        .boton-grupo {
+            width: 18px;
+            height: 18px;
+            padding: 0;
+            margin-right: 6px;
+            border: 1px solid #64748b;
+            background: #ffffff;
+            color: #0f172a;
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 16px;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        .boton-grupo:hover {
+            background: #f8fafc;
+        }
+
+        .detalle-oculto {
+            display: none;
+        }
+
+        .celda-real-detalle {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .celda-real-detalle:hover {
+            background: #bfdbfe !important;
+        }
+
+        .celda-real-detalle::after {
+            content: "\1F50D";
+            position: absolute;
+            top: 2px;
+            left: 4px;
+            font-size: 6px;
+            opacity: 0.7;
+        }
+
+        .modal-detalle {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            z-index: 9999;
+            padding: 12px;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+
+        .modal-detalle.abierto {
+            display: block;
+        }
+
+        .modal-detalle-contenido {
+            background: #ffffff;
+            width: min(1100px, 98vw);
+            max-height: calc(100vh - 24px);
+            margin: 0 auto;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .modal-detalle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border-bottom: 1px solid #cbd5e1;
+            background: #eff6ff;
+        }
+
+        .modal-detalle-subtitulo {
+            font-size: 12px;
+            color: #475569;
+        }
+
+        .modal-detalle-cerrar {
+            border: 0;
+            background: #dc2626;
+            color: #ffffff;
+            font-weight: bold;
+            padding: 6px 10px;
+            cursor: pointer;
+        }
+
+        .modal-detalle-cerrar:hover {
+            background: #b91c1c;
+        }
+
+        .modal-detalle-body {
+            padding: 12px 14px;
+            overflow: auto;
+        }
+
+        .modal-detalle-estado {
+            font-size: 12px;
+            margin-bottom: 10px;
+            color: #334155;
+        }
+
+        .modal-detalle-total {
+            margin-top: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .tabla-modal {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: auto;
+        }
+
+        .tabla-modal th,
+        .tabla-modal td {
+            border: 1px solid #cbd5e1;
+            padding: 6px;
+            font-size: 12px;
+        }
+
+        .tabla-modal th {
+            background: #e2e8f0;
+            text-align: center;
+        }
+
+        .tabla-modal td {
+            background: #ffffff;
+        }
+
+        .barra-semestres {
+            margin-bottom: 8px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .boton-semestre {
+            background: #ffffff;
+            border: 1px solid #94a3b8;
+            color: #0f172a;
+            padding: 6px 10px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .boton-semestre:hover {
+            background: #f8fafc;
+        }
+
+        .grupo-check {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 6px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .grupo-check input[type="checkbox"] {
+            margin: 0;
+            width: 14px;
+            height: 14px;
+            cursor: pointer;
+        }
+
+        .nota-semestres {
+            margin-bottom: 8px;
+            font-size: 12px;
+            color: #475569;
+        }
+
+        .oculto-semestre {
+            display: none !important;
+        }
+    
+        .celda-sumable {
+            cursor: crosshair;
+            user-select: none;
+        }
+
+        .celda-seleccionada {
+            background: #fde68a !important;
+            box-shadow: inset 0 0 0 1px #f59e0b;
+        }
+
+        .barra-suma {
+            position: fixed;
+            right: 12px;
+            bottom: 12px;
+            background: #0f172a;
+            color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10000;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.20);
+        }
+            .franja-estado {
+            display: none !important;
+        }
+
+        
+            .fila-diferencia-tc {
+            display: none;
+        }
+    </style>

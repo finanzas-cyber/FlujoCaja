@@ -1,0 +1,37 @@
+﻿{# â”€â”€ TABLA MOVIMIENTOS â”€â”€ #}
+<div class="bloque">
+    <h2>Movimientos</h2>
+
+    <div class="tabla-contenedor">
+        <table class="tabla-movimientos">
+            <thead>
+                <tr>
+                    <th>Fecha<br><input class="filtro-columna" data-col="0"></th>
+                    <th>Comprobante<br><input class="filtro-columna" data-col="1"></th>
+                    <th>Cuenta<br><input class="filtro-columna" data-col="2"></th>
+                    <th>Concepto<br><input class="filtro-columna" data-col="3"></th>
+                    <th>Descripción<br><input class="filtro-columna" data-col="4"></th>
+                    <th>Monto<br><input class="filtro-columna" data-col="5"></th>
+                </tr>
+            </thead>
+
+            <tbody id="tbody-movimientos">
+                {% for m in movimientos %}
+                <tr>
+                    <td>{{ m.fecha }}</td>
+                    <td>{{ m.cpbnum }}</td>
+                    <td>{{ m.cuenta_banco.codigo }}</td>
+                    <td>
+                        {% if m.concepto %}
+                            {{ m.concepto.codigo }}
+                        {% else %}
+                            <span class="muted">sin concepto</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ m.descripcion }}</td>
+                    <td class="numero js-numero" data-value="{{ m.monto }}">{{ m.monto }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>

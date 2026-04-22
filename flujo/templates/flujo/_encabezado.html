@@ -1,0 +1,34 @@
+﻿<div class="bloque">
+    <div class="encabezado">
+        <div>
+            <h1 class="titulo-principal">FLUJO CAJA TORREON</h1>
+            <div class="subtitulo-principal">CONTROL DE FLUJO 2025 S2 / 2026 S1 / 2026 S2</div>
+        </div>
+
+        <div class="acciones-encabezado">
+            <form method="post" action="{% url 'actualizar_softland' %}" onsubmit="return confirm('¿Seguro que deseas actualizar desde Softland?');">
+                {% csrf_token %}
+                <button type="submit" class="boton-actualizar">
+                    Actualizar Softland
+                </button>
+</form>
+
+            <form method="post" action="{% url 'publicar_todo' %}">
+                {% csrf_token %}
+                <button type="submit" class="boton-actualizar boton-publicar">
+                    PUBLICAR TODO
+                </button>
+            </form>
+
+            
+
+            
+        </div>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="mensaje {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+</div>

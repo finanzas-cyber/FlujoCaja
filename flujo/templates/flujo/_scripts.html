@@ -1,0 +1,428 @@
+﻿<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    function limpiarNumero(v) {
+        return Number(String(v || "").replace(/\./g, "").replace(",", ".")) || 0;
+    }
+
+    function formatear(n) {
+        return new Intl.NumberFormat("es-CL", {
+            maximumFractionDigits: 0,
+            minimumFractionDigits: 0
+        }).format(n);
+    }
+
+    function obtenerCsrf() {
+        var tokenInput = document.querySelector('[name=csrfmiddlewaretoken]');
+        return tokenInput ? tokenInput.value : "";
+    }
+
+    function marcarNegativoElemento(elemento, valor) {
+        if (!elemento) return;
+        if (Number(valor) < 0) {
+            elemento.classList.add("negativo");
+        } else {
+            elemento.classList.remove("negativo");
+        }
+    }
+
+    function prepararInput(input) {
+        var v = limpiarNumero(input.value);
+
+        input.value = v === 0 ? "" : formatear(v);
+        marcarNegativoElemento(input, v);
+
+        if (input.hasAttribute("readonly")) {
+            return;
+        }
+
+        input.addEventListener("focus", function () {
+            input.classList.remove("guardado-ok", "guardado-error");
+            var val = limpiarNumero(input.value);
+            input.value = val === 0 ? "" : String(val);
+            input.select();
+        });
+
+        input.addEventListener("blur", function () {
+            var conceptoId = input.dataset.conceptoId;
+            var mes = input.dataset.mes;
+            var anio = input.dataset.anio;
+            var origen = input.dataset.origen;
+
+            if (!conceptoId || !mes || !anio) {
+                var valorLocal = limpiarNumero(input.value);
+                input.value = valorLocal === 0 ? "" : formatear(valorLocal);
+                marcarNegativoElemento(input, valorLocal);
+                return;
+            }
+
+            var valor = limpiarNumero(input.value);
+
+            var url = origen === "REAL"
+                ? "{% url 'guardar_movimiento_real' %}"
+                : "{% url 'guardar_proyeccion' %}";
+
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "X-CSRFToken": obtenerCsrf(),
+                },
+                body: new URLSearchParams({
+                    concepto_id: conceptoId,
+                    mes: mes,
+                    anio: anio,
+                    monto: valor
+                }),
+            })
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+                if (!data.ok) {
+                    throw new Error(data.error || "Error al guardar");
+                }
+
+                input.classList.add("guardado-ok");
+                input.value = valor === 0 ? "" : formatear(valor);
+                marcarNegativoElemento(input, valor);
+
+                setTimeout(function () {
+                    input.classList.remove("guardado-ok");
+                }, 800);
+
+                location.reload();
+            })
+            .catch(function () {
+                input.classList.add("guardado-error");
+                input.value = valor === 0 ? "" : formatear(valor);
+                marcarNegativoElemento(input, valor);
+            });
+        });
+    }
+
+    function aplicarFormatoNumeros() {
+        document.querySelectorAll(".js-numero").forEach(function (el) {
+            var valor = limpiarNumero(el.dataset.value || el.textContent);
+            el.textContent = valor === 0 ? "0" : formatear(valor);
+            marcarNegativoElemento(el, valor);
+        });
+
+        document.querySelectorAll(".input-proyectado").forEach(function (el) {
+            var valor = limpiarNumero(el.value);
+            marcarNegativoElemento(el, valor);
+        });
+    }
+
+    function obtenerGrupoPeriodo(anio, mes) {
+        anio = Number(anio);
+        mes = Number(mes);
+
+        if (anio === 2025 && mes >= 7 && mes <= 12) return "2025s2";
+        if (anio === 2026 && mes >= 1 && mes <= 6) return "2026s1";
+        if (anio === 2026 && mes >= 7 && mes <= 12) return "2026s2";
+        return "";
+    }
+
+    function actualizarVistaPeriodos() {
+        var mostrar2025s2 = document.getElementById("check-2025s2").checked;
+        var mostrar2026s1 = document.getElementById("check-2026s1").checked;
+        var mostrar2026s2 = document.getElementById("check-2026s2").checked;
+
+        document.querySelectorAll(".semestre-col").forEach(function (el) {
+            var grupo = obtenerGrupoPeriodo(el.dataset.anio, el.dataset.mes);
+            var visible = true;
+
+            if (grupo === "2025s2") visible = mostrar2025s2;
+            if (grupo === "2026s1") visible = mostrar2026s1;
+            if (grupo === "2026s2") visible = mostrar2026s2;
+
+            el.classList.toggle("oculto-semestre", !visible);
+        });
+    }
+
+    function seleccionarTodo() {
+        document.getElementById("check-2025s2").checked = true;
+        document.getElementById("check-2026s1").checked = true;
+        document.getElementById("check-2026s2").checked = true;
+        actualizarVistaPeriodos();
+    }
+
+    function limpiarSeleccion() {
+        document.getElementById("check-2025s2").checked = false;
+        document.getElementById("check-2026s1").checked = false;
+        document.getElementById("check-2026s2").checked = false;
+        actualizarVistaPeriodos();
+    }
+
+    function prepararGrupos() {
+        document.querySelectorAll(".boton-grupo").forEach(function (boton) {
+            boton.addEventListener("click", function () {
+                var group = boton.dataset.group;
+                var expandido = boton.getAttribute("aria-expanded") === "true";
+                var nuevoEstado = !expandido;
+
+                document.querySelectorAll('.detalle-grupo[data-group="' + group + '"]').forEach(function (fila) {
+                    fila.classList.toggle("detalle-oculto", !nuevoEstado);
+                });
+
+                boton.setAttribute("aria-expanded", nuevoEstado ? "true" : "false");
+                boton.textContent = nuevoEstado ? "-" : "+";
+            });
+        });
+    }
+
+    function prepararFiltrosMovimientos() {
+        var filtros = Array.from(document.querySelectorAll(".filtro-columna"));
+        var filas = Array.from(document.querySelectorAll("#tbody-movimientos tr"));
+
+        function aplicarFiltros() {
+            filas.forEach(function (fila) {
+                var visible = true;
+
+                filtros.forEach(function (input) {
+                    if (!visible) return;
+
+                    var col = Number(input.dataset.col);
+                    var valor = (input.value || "").trim().toLowerCase();
+                    var celda = fila.cells[col];
+                    var texto = celda ? celda.textContent.trim().toLowerCase() : "";
+
+                    if (valor && texto.indexOf(valor) === -1) {
+                        visible = false;
+                    }
+                });
+
+                fila.style.display = visible ? "" : "none";
+            });
+        }
+
+        filtros.forEach(function (input) {
+            input.addEventListener("input", aplicarFiltros);
+        });
+    }
+
+    var modal = document.getElementById("modal-detalle-real");
+    var modalTitulo = document.getElementById("modal-detalle-titulo");
+    var modalSubtitulo = document.getElementById("modal-detalle-subtitulo");
+    var modalEstado = document.getElementById("modal-detalle-estado");
+    var modalTbody = document.getElementById("modal-detalle-tbody");
+    var modalTotal = document.getElementById("modal-detalle-total");
+    var cerrarModalBtn = document.getElementById("cerrar-modal-detalle");
+
+    function cerrarModalDetalle() {
+        modal.classList.remove("abierto");
+    }
+
+    function abrirModalDetalle() {
+        modal.classList.add("abierto");
+    }
+
+    function prepararModalDetalleReal() {
+        document.querySelectorAll("[data-detalle-real='1']").forEach(function (celda) {
+            celda.addEventListener("click", function () {
+                var conceptoId = celda.dataset.conceptoId;
+                var conceptoCodigo = celda.dataset.conceptoCodigo || "";
+                var conceptoNombre = celda.dataset.conceptoNombre || "";
+                var mes = celda.dataset.mes;
+                var anio = celda.dataset.anio;
+                var mesNombre = celda.dataset.mesNombre || "";
+
+                modalTitulo.textContent = "Detalle movimientos";
+                modalSubtitulo.textContent = conceptoCodigo + " - " + conceptoNombre + " | " + mesNombre + " " + anio;
+                modalEstado.textContent = "Cargando detalle...";
+                modalTbody.innerHTML = "";
+                modalTotal.textContent = "";
+                abrirModalDetalle();
+
+                var url = "{% url 'detalle_movimientos_real' %}?" + new URLSearchParams({
+                    concepto_id: conceptoId,
+                    mes: mes,
+                    anio: anio
+                }).toString();
+
+                fetch(url)
+                    .then(function (r) { return r.json(); })
+                    .then(function (data) {
+                        if (!data.ok) {
+                            throw new Error(data.error || "No se pudo cargar el detalle");
+                        }
+
+                        modalTitulo.textContent = data.concepto_codigo + " - " + data.concepto_nombre;
+                        modalSubtitulo.textContent = "Mes " + data.mes + " / Año " + data.anio;
+
+                        if (!data.movimientos || !data.movimientos.length) {
+                            modalEstado.textContent = "No hay movimientos para este período.";
+                            modalTbody.innerHTML = "";
+                            modalTotal.textContent = "Total: 0";
+                            return;
+                        }
+
+                        modalEstado.textContent = data.movimientos.length + " movimiento(s) encontrados.";
+                        modalTbody.innerHTML = "";
+
+                        data.movimientos.forEach(function (mov) {
+                            var tr = document.createElement("tr");
+
+                            var tdFecha = document.createElement("td");
+                            tdFecha.textContent = mov.fecha || "";
+
+                            var tdCpb = document.createElement("td");
+                            tdCpb.textContent = mov.cpbnum || "";
+
+                            var tdCuenta = document.createElement("td");
+                            tdCuenta.textContent = mov.cuenta || "";
+
+                            var tdDescripcion = document.createElement("td");
+                            tdDescripcion.textContent = mov.descripcion || "";
+
+                            var tdMonto = document.createElement("td");
+                            tdMonto.className = "numero";
+                            var montoNum = limpiarNumero(mov.monto);
+                            tdMonto.textContent = formatear(montoNum);
+                            marcarNegativoElemento(tdMonto, montoNum);
+
+                            tr.appendChild(tdFecha);
+                            tr.appendChild(tdCpb);
+                            tr.appendChild(tdCuenta);
+                            tr.appendChild(tdDescripcion);
+                            tr.appendChild(tdMonto);
+
+                            modalTbody.appendChild(tr);
+                        });
+
+                        var totalNum = Number(data.total) || 0;
+                        modalTotal.textContent = "Total: " + formatear(totalNum);
+                        marcarNegativoElemento(modalTotal, totalNum);
+                    })
+                    .catch(function (error) {
+                        modalEstado.textContent = error.message || "Error al cargar el detalle.";
+                        modalTbody.innerHTML = "";
+                        modalTotal.textContent = "";
+                    });
+            });
+        });
+
+        cerrarModalBtn.addEventListener("click", cerrarModalDetalle);
+
+        modal.addEventListener("click", function (e) {
+            if (e.target === modal) {
+                cerrarModalDetalle();
+            }
+        });
+
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape" && modal.classList.contains("abierto")) {
+                cerrarModalDetalle();
+            }
+        });
+    }
+
+    var seleccionandoSuma = false;
+    var celdasSeleccionadasSuma = [];
+
+    function limpiarSeleccionSuma() {
+        celdasSeleccionadasSuma.forEach(function (celda) {
+            celda.classList.remove("celda-seleccionada");
+        });
+        celdasSeleccionadasSuma = [];
+        actualizarBarraSuma();
+    }
+
+    function obtenerValorCeldaSuma(celda) {
+        if (!celda) return 0;
+
+        var input = celda.querySelector("input");
+        if (input) {
+            return limpiarNumero(input.value);
+        }
+
+        var span = celda.querySelector(".js-numero");
+        if (span) {
+            return limpiarNumero(span.dataset.value || span.textContent);
+        }
+
+        return limpiarNumero(celda.dataset.value || celda.textContent);
+    }
+
+    function actualizarBarraSuma() {
+        var total = celdasSeleccionadasSuma.reduce(function (acum, celda) {
+            return acum + obtenerValorCeldaSuma(celda);
+        }, 0);
+
+        var barra = document.getElementById("barra-suma");
+        if (barra) {
+            barra.textContent = "Suma seleccionada: " + formatear(total);
+        }
+    }
+
+    function prepararSumaCeldas() {
+        var tabla = document.querySelector(".tabla-contenedor table");
+        if (!tabla) return;
+
+        var celdas = tabla.querySelectorAll("td.semestre-col.numero");
+        celdas.forEach(function (celda) {
+            celda.classList.add("celda-sumable");
+        });
+
+        tabla.addEventListener("mousedown", function (e) {
+            var celda = e.target.closest("td.semestre-col.numero");
+            if (!celda) return;
+
+            e.preventDefault();
+            limpiarSeleccionSuma();
+            seleccionandoSuma = true;
+
+            celda.classList.add("celda-seleccionada");
+            celdasSeleccionadasSuma.push(celda);
+            actualizarBarraSuma();
+        });
+
+        tabla.addEventListener("mouseover", function (e) {
+            if (!seleccionandoSuma) return;
+
+            var celda = e.target.closest("td.semestre-col.numero");
+            if (!celda) return;
+
+            if (!celdasSeleccionadasSuma.includes(celda)) {
+                celda.classList.add("celda-seleccionada");
+                celdasSeleccionadasSuma.push(celda);
+                actualizarBarraSuma();
+            }
+        });
+
+        document.addEventListener("mouseup", function () {
+            seleccionandoSuma = false;
+        });
+
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") {
+                limpiarSeleccionSuma();
+            }
+        });
+    }
+
+    var encabezadoConcepto = document.getElementById("toggle-tc");
+    if (encabezadoConcepto) {
+        encabezadoConcepto.style.cursor = "default";
+
+        encabezadoConcepto.addEventListener("click", function () {
+            document.querySelectorAll(".fila-diferencia-tc").forEach(function (fila) {
+                var visible = window.getComputedStyle(fila).display !== "none";
+                fila.style.display = visible ? "none" : "table-row";
+            });
+        });
+    }
+
+    document.querySelectorAll(".input-proyectado, .input-real").forEach(prepararInput);
+
+    aplicarFormatoNumeros();
+    prepararGrupos();
+    prepararFiltrosMovimientos();
+    prepararModalDetalleReal();
+    prepararSumaCeldas();
+    actualizarVistaPeriodos();
+
+    window.seleccionarTodo = seleccionarTodo;
+    window.limpiarSeleccion = limpiarSeleccion;
+    window.actualizarVistaPeriodos = actualizarVistaPeriodos;
+});
+</script>

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿ï»¿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8">
@@ -345,7 +345,7 @@
         }
 
         .celda-real-detalle::after {
-            content: "👁";
+            content: "ðŸ‘";
             position: absolute;
             top: 2px;
             left: 4px;
@@ -511,21 +511,21 @@
         </div>
 
         <div class="acciones-encabezado">
-            <form method="post" action="{% url 'actualizar_softland' %}" onsubmit="return confirm('¿Seguro que deseas actualizar desde Softland?');">
+            <form method="post" action="{% url 'actualizar_softland' %}" onsubmit="return confirm('Â¿Seguro que deseas actualizar desde Softland?');">
                 {% csrf_token %}
                 <button type="submit" class="boton-actualizar">
                     Actualizar Softland
                 </button>
             </form>
 
-            <form method="post" action="{% url 'generar_proyecciones_json' %}" onsubmit="return confirm('¿Generar archivo de proyecciones para local?');">
+            <form method="post" action="{% url 'generar_proyecciones_json' %}" onsubmit="return confirm('Â¿Generar archivo de proyecciones para local?');">
                 {% csrf_token %}
                 <button type="submit" class="boton-actualizar boton-json">
                     Generar JSON Proyecciones
                 </button>
             </form>
 
-            <form method="post" action="{% url 'publicar_proyecciones' %}" onsubmit="return confirm('¿Publicar automáticamente las proyecciones a GitHub?');">
+            <form method="post" action="{% url 'publicar_proyecciones' %}" onsubmit="return confirm('Â¿Publicar automÃ¡ticamente las proyecciones a GitHub?');">
                 {% csrf_token %}
                 <button type="submit" class="boton-actualizar boton-publicar">
                     Publicar Proyecciones Online
@@ -992,7 +992,7 @@
                     <th>Comprobante<br><input class="filtro-columna" data-col="1"></th>
                     <th>Cuenta<br><input class="filtro-columna" data-col="2"></th>
                     <th>Concepto<br><input class="filtro-columna" data-col="3"></th>
-                    <th>Descripción<br><input class="filtro-columna" data-col="4"></th>
+                    <th>DescripciÃ³n<br><input class="filtro-columna" data-col="4"></th>
                     <th>Monto<br><input class="filtro-columna" data-col="5"></th>
                 </tr>
             </thead>
@@ -1039,7 +1039,7 @@
                             <th>Fecha</th>
                             <th>Comprobante</th>
                             <th>Cuenta</th>
-                            <th>Descripción</th>
+                            <th>DescripciÃ³n</th>
                             <th>Monto</th>
                         </tr>
                     </thead>
@@ -1308,10 +1308,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
 
                         modalTitulo.textContent = data.concepto_codigo + " - " + data.concepto_nombre;
-                        modalSubtitulo.textContent = "Mes " + data.mes + " / Año " + data.anio;
+                        modalSubtitulo.textContent = "Mes " + data.mes + " / AÃ±o " + data.anio;
 
                         if (!data.movimientos || !data.movimientos.length) {
-                            modalEstado.textContent = "No hay movimientos para este período.";
+                            modalEstado.textContent = "No hay movimientos para este perÃ­odo.";
                             modalTbody.innerHTML = "";
                             modalTotal.textContent = "Total: 0";
                             return;
