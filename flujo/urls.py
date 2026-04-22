@@ -11,4 +11,5 @@ urlpatterns = [
     path("generar-proyecciones-json/", views.generar_proyecciones_json, name="generar_proyecciones_json"),
     path("publicar-proyecciones/", views.publicar_proyecciones, name="publicar_proyecciones"),
     path("detalle-movimientos-real/", views.detalle_movimientos_real, name="detalle_movimientos_real"),
+    path("publicar-todo/", views.publicar_todo, name="publicar_todo"),
 ]

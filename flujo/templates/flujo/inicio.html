@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8">
@@ -359,7 +359,7 @@
         }
 
         .celda-real-detalle::after {
-            content: "🔍";
+            content: "ðŸ”";
             position: absolute;
             top: 2px;
             left: 4px;
@@ -525,21 +525,28 @@
         </div>
 
         <div class="acciones-encabezado">
-            <form method="post" action="{% url 'actualizar_softland' %}" onsubmit="return confirm('¿Seguro que deseas actualizar desde Softland?');">
+            <form method="post" action="{% url 'actualizar_softland' %}" onsubmit="return confirm('Â¿Seguro que deseas actualizar desde Softland?');">
                 {% csrf_token %}
                 <button type="submit" class="boton-actualizar">
                     Actualizar Softland
                 </button>
+</form>
+
+            <form method="post" action="{% url 'publicar_todo' %}">
+                {% csrf_token %}
+                <button type="submit" class="boton-actualizar boton-publicar">
+                    PUBLICAR TODO
+                </button>
             </form>
 
-            <form method="post" action="{% url 'generar_proyecciones_json' %}" onsubmit="return confirm('¿Generar archivo de proyecciones para local?');">
+            <form method="post" action="{% url 'generar_proyecciones_json' %}" onsubmit="return confirm('Â¿Generar archivo de proyecciones para local?');">
                 {% csrf_token %}
                 <button type="submit" class="boton-actualizar boton-json">
                     Generar JSON Proyecciones
                 </button>
             </form>
 
-            <form method="post" action="{% url 'publicar_proyecciones' %}" onsubmit="return confirm('¿Publicar automáticamente las proyecciones a GitHub?');">
+            <form method="post" action="{% url 'publicar_proyecciones' %}" onsubmit="return confirm('Â¿Publicar automÃ¡ticamente las proyecciones a GitHub?');">
                 {% csrf_token %}
                 <button type="submit" class="boton-actualizar boton-publicar">
                     Publicar Proyecciones Online
@@ -609,7 +616,7 @@
                 <th class="col-total">Total</th>
             </tr>
 
-            {# ── DIFERENCIA T/C ── #}
+            {# â”€â”€ DIFERENCIA T/C â”€â”€ #}
             <tr class="saldo">
                 <td class="texto">{{ fila_diferencia_tc.nombre }}</td>
                 {% for m in fila_diferencia_tc.columnas %}
@@ -637,7 +644,7 @@
                 <td class="numero js-numero" data-value="{{ fila_diferencia_tc.total }}">{{ fila_diferencia_tc.total }}</td>
             </tr>
 
-            {# ── SALDO INICIAL ── #}
+            {# â”€â”€ SALDO INICIAL â”€â”€ #}
             <tr class="saldo">
                 <td class="texto">{{ saldo_inicial_fila.nombre }}</td>
                 {% for m in saldo_inicial_fila.columnas %}
@@ -670,7 +677,7 @@
                 <td></td>
             </tr>
 
-            {# ── INGRESOS ── #}
+            {# â”€â”€ INGRESOS â”€â”€ #}
             <tr class="seccion">
                 <td colspan="{{ columnas_flujo|length|add:'2' }}">
                     <button type="button" class="boton-grupo" data-group="ingresos" aria-expanded="true">-</button>
@@ -736,7 +743,7 @@
                 <td class="numero js-numero" data-value="{{ total_ingresos_fila.total }}">{{ total_ingresos_fila.total }}</td>
             </tr>
 
-            {# ── EGRESOS ── #}
+            {# â”€â”€ EGRESOS â”€â”€ #}
             <tr class="seccion">
                 <td colspan="{{ columnas_flujo|length|add:'2' }}">
                     <button type="button" class="boton-grupo" data-group="egresos" aria-expanded="true">-</button>
@@ -820,7 +827,7 @@
                 <td class="numero js-numero" data-value="{{ flujo_operacional_fila.total }}">{{ flujo_operacional_fila.total }}</td>
             </tr>
 
-            {# ── FINANCIAMIENTO ── #}
+            {# â”€â”€ FINANCIAMIENTO â”€â”€ #}
             <tr class="seccion">
                 <td colspan="{{ columnas_flujo|length|add:'2' }}">
                     <button type="button" class="boton-grupo" data-group="financiamiento" aria-expanded="true">-</button>
@@ -904,7 +911,7 @@
                 <td class="numero js-numero" data-value="{{ total_mes_fila.total }}">{{ total_mes_fila.total }}</td>
             </tr>
 
-            {# ── SALDO DISPONIBLE BANCO ── #}
+            {# â”€â”€ SALDO DISPONIBLE BANCO â”€â”€ #}
             <tr class="saldo-final">
                 <td class="texto">{{ saldo_disponible_banco_fila.nombre }}</td>
                 {% for m in saldo_disponible_banco_fila.columnas %}
@@ -936,7 +943,7 @@
                 <td></td>
             </tr>
 
-            {# ── MONEY MARKET ACUMULADO ── #}
+            {# â”€â”€ MONEY MARKET ACUMULADO â”€â”€ #}
             <tr class="money-market">
                 <td class="texto">{{ money_market_acumulado_fila.nombre }}</td>
                 {% for m in money_market_acumulado_fila.columnas %}
@@ -968,7 +975,7 @@
                 <td></td>
             </tr>
 
-            {# ── SALDO TOTAL TESORERIA ── #}
+            {# â”€â”€ SALDO TOTAL TESORERIA â”€â”€ #}
             <tr class="saldo-total">
                 <td class="texto">{{ saldo_total_tesoreria_fila.nombre }}</td>
                 {% for m in saldo_total_tesoreria_fila.columnas %}
@@ -1003,7 +1010,7 @@
     </div>
 </div>
 
-{# ── TABLA MOVIMIENTOS ── #}
+{# â”€â”€ TABLA MOVIMIENTOS â”€â”€ #}
 <div class="bloque">
     <h2>Movimientos</h2>
 
@@ -1015,7 +1022,7 @@
                     <th>Comprobante<br><input class="filtro-columna" data-col="1"></th>
                     <th>Cuenta<br><input class="filtro-columna" data-col="2"></th>
                     <th>Concepto<br><input class="filtro-columna" data-col="3"></th>
-                    <th>Descripción<br><input class="filtro-columna" data-col="4"></th>
+                    <th>DescripciÃ³n<br><input class="filtro-columna" data-col="4"></th>
                     <th>Monto<br><input class="filtro-columna" data-col="5"></th>
                 </tr>
             </thead>
@@ -1042,7 +1049,7 @@
     </div>
 </div>
 
-{# ── MODAL DETALLE REAL ── #}
+{# â”€â”€ MODAL DETALLE REAL â”€â”€ #}
 <div id="modal-detalle-real" class="modal-detalle">
     <div class="modal-detalle-contenido">
         <div class="modal-detalle-header">
@@ -1063,7 +1070,7 @@
                             <th>Fecha</th>
                             <th>Comprobante</th>
                             <th>Cuenta</th>
-                            <th>Descripción</th>
+                            <th>DescripciÃ³n</th>
                             <th>Monto</th>
                         </tr>
                     </thead>
@@ -1326,10 +1333,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
 
                         modalTitulo.textContent = data.concepto_codigo + " - " + data.concepto_nombre;
-                        modalSubtitulo.textContent = "Mes " + data.mes + " / Año " + data.anio;
+                        modalSubtitulo.textContent = "Mes " + data.mes + " / AÃ±o " + data.anio;
 
                         if (!data.movimientos || !data.movimientos.length) {
-                            modalEstado.textContent = "No hay movimientos para este período.";
+                            modalEstado.textContent = "No hay movimientos para este perÃ­odo.";
                             modalTbody.innerHTML = "";
                             modalTotal.textContent = "Total: 0";
                             return;
@@ -1411,3 +1418,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </body>
 </html>
+

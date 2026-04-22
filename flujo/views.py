@@ -964,3 +964,61 @@ def inicio(request):
 
 
 
+
+
+def publicar_todo(request):
+    if request.method != "POST":
+        return redirect("inicio")
+
+    try:
+        repo_root = Path(__file__).resolve().parent.parent
+        ruta_json = repo_root / "data_full.json"
+
+        call_command(
+            "dumpdata",
+            "flujo.Concepto",
+            "flujo.CuentaBanco",
+            "flujo.Movimiento",
+            "flujo.Proyeccion",
+            "flujo.ConfiguracionFlujo",
+            indent=2,
+            natural_foreign=True,
+            natural_primary=True,
+            output=str(ruta_json),
+        )
+
+        raw = ruta_json.read_bytes()
+        try:
+            text = raw.decode("utf-8")
+        except:
+            text = raw.decode("cp1252", errors="ignore")
+
+        ruta_json.write_text(text, encoding="utf-8")
+
+        subprocess.run(["git", "add", "."], cwd=repo_root, check=True)
+                # DETECTAR CAMBIOS
+        diff = subprocess.run(
+            ["git", "diff", "--cached", "--quiet"],
+            cwd=repo_root
+        )
+
+        if diff.returncode == 0:
+            messages.success(request, "No habia cambios para publicar.")
+            return redirect("inicio")
+
+        # COMMIT
+        subprocess.run(
+            ["git", "commit", "-m", "Snapshot FULL"],
+            cwd=repo_root,
+            check=True
+        )
+        subprocess.run(["git", "push"], cwd=repo_root, check=True)
+
+        messages.success(request, "Publicado correctamente")
+
+    except Exception as e:
+        messages.error(request, f"Error: {e}")
+
+    return redirect("inicio")
+
+
